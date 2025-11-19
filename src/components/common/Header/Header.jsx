@@ -12,6 +12,10 @@ function Header(){
     //#region
     //#endregion
 
+    //#region 宣告等待狀態
+    const [isLoading, setIsLoading] = useState(true);
+    //#endregion
+
     //宣告動畫群組方便控制
     const groupRef = useRef(null);
     const group2Ref = useRef(null);
