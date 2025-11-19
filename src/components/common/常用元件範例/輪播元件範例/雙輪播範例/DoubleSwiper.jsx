@@ -43,7 +43,9 @@ export default function DoubleSwiper() {
             {/* 大圖輪播 */}
             <Swiper
                 className="thumbsSwiper"
-                onSwiper={setVideoSwiper}
+                onSwiper={(swiper) => {
+                    setVideoSwiper(swiper);
+                }}
                 loop={true} 
                 slidesPerView={1.5}
                 spaceBetween={10}
@@ -91,7 +93,9 @@ export default function DoubleSwiper() {
                     <Swiper
                         className="thumbsThumbnailSwiper"
                         modules={[Navigation]}
-                        onSwiper={setMainSwiper}
+                        onSwiper={(swiper) => {
+                            setMainSwiper(swiper);
+                        }}
                         spaceBetween={16}                 
                         loop={true}                       
                         navigation={{

@@ -4,105 +4,445 @@
 /* 元件最外圍 */
 .navbar.navBg-set{ 
     width: 100%;
+    height: 75px;
     position: fixed;
     top: 0;
     z-index: 100;
-
+    padding: 0px;
     /*背景*/
-    background:linear-gradient(90deg, #000000, #60003A);
+    background:#1d1d1d;
     /*背景*/
+    @media (max-width: 576px){
+        height: 50px;
+    }
 
-    /*邊框設定*/
-    border-bottom: 5px solid;
-    border-image: linear-gradient(90deg, #ffb3f7 0%, #40003a 30%,#f93b5c 100%) 1;
-    /*邊框設定*/
-    padding: 8px 0px;
+    /*navbar背景圖案*/
+    .navBgImgSet{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        // z-index: 101;
+        pointer-events: none;
+        .navBgImg{
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: auto;
+            right: 0;
+            // z-index: 102;
+            pointer-events: none;
+        }
+    }
+    /*navbar背景圖案*/
 
     /*內容本體區塊*/
     .navbar-box{
         width: 100%;
+        height: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        @media (max-width: 576px){
+            padding: 0px 12px;
+        }
+        
         /* 左上角 Logo */
         .navbarLogo-box{
-            width: 185px;
+            width: 20%;
             height: auto;
-            .navbarLogoImg-set{
-                max-width: 100%;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+
+            @media (max-width: 576px){
+                width: 100%;
+            }
+            .navbarLogoImgBox{
+                margin-left: 80px;
+                width: 75px;
                 height: auto;
-                object-fit: cover;
+                aspect-ratio: 120 / 85;
+                @media (max-width: 576px){
+                    margin-left: 0px;
+                    width: 60px;
+                }
+                .navbarLogoImg-set{
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                }
             }
         }
         /* 左上角 Logo */
 
         /* lg 以上選項區塊 */
         .navbarItem-box{
+            position: relative;
+            width: 60%;
+            height: 100%;
             justify-content: center;
             align-items: center;
-            gap: 24px;
-            // link選項
-            .navbarItem-set{
-                font-size: 16px;
-                padding: 12px 8px 9px 8px;
-                border-bottom:3px solid transparent;
-                color: #ffffff;
+            gap: 0px;
 
-                &:hover{
-                    border-bottom:3px solid #E22288;
-                }
-
-                &.active{
-                    border-bottom:3px solid #E22288;
-                }
-            }
-            // link選項
-        }
-        /* lg 以上選項區塊 */
-
-        /* lg 以上會員頭像 */
-        .userImg-box{
-            width: 48px;
-            height: 48px;
-            border: none;
-            padding: 0px;
-            background-color: transparent;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .userImg-set{
+            /* 遮罩 */
+            .navbarItemMask{
+                position: absolute;
                 width: 100%;
-                height: auto;
-                object-fit: cover;
-                border-radius:50%;
+                height: 100%;
+                top: 0%;
+                left: 0%;
+                z-index: 1;
+                background-color: #1d1d1d;
             }
-        }
-        /* lg 以上會員頭像 */
+            /* 遮罩 */
 
-        /* lg 以下的右上角：漢堡選單按鈕 */
-        .navbarMenuIcon-box{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .MenuIconBtn-set{
-                width: 48px;
-                height: 48px;
-                border: none;
-                background-color: transparent;
-                .MenuIconImg-set{
-                    max-width: 100%;
-                    height: auto;
-                    object-fit: cover;
-                    color: #ffffff;
-                    animation: spin 10s linear infinite;
+            // link選項
+            .navbarItemBoxSet{
+                position: relative;
+                z-index: 2;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .navbarItem-set{
+                    width: 100%;
+                    max-width: 160px;
+                    aspect-ratio: 240 / 40;
+                    background-color: transparent;
+                    background-position: center 0;      /* 左上角 */
+                    background-size: 100% 300%;    /* 寬度填滿，高度等比 */
+                    background-repeat: no-repeat;
+                    border: none;
+                    padding: 0px;
+                    transition: transform 0.2s ease;
+                    &:hover {
+                        background-position-y: 50%;
+                    }
 
-                    /* 旋轉動畫 */
-                    @keyframes spin {
-                    to { transform: rotate(360deg); }
+                    &.active {
+                        background-position-y: 100%;
+                    }
+                    &.indexPage{
+                        background-image: url('/images/header/headerNav1.png');
+                    }
+                    &.character{
+                        background-image: url('/images/header/headerNav2.png');
+                    }
+                    &.information{
+                        background-image: url('/images/header/headerNav3.png');
+                    }
+                    &.world{
+                        background-image: url('/images/header/headerNav4.png');
+                    }
+                    &.city{
+                        background-image: url('/images/header/headerNav5.png');
                     }
                 }
             }
+            
+            // link選項
+
+            /* 動畫群組01 */
+            .animationGroup{
+                position: absolute;
+                top: 0%;
+                left: 0%;
+                width: 20%;
+                height: 100%;
+                z-index: 1;
+                overflow: hidden;
+
+                /* 動畫細項 */
+                .animationItem01,.animationItem02,.animationItem03,.animationItem04{
+                    position: absolute;
+                    top: 0%;
+                    left: 0%;
+                    opacity: 1;
+                    transform: translateY(0);
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .animationItem01{ 
+                    z-index: 4; 
+                }
+                .animationItem02{ 
+                    z-index: 3; 
+                }
+                .animationItem03{ 
+                    z-index: 2; 
+                }
+                .animationItem04{ 
+                    z-index: 1; 
+                }
+                /* 動畫細項 */
+
+                /* 按鈕觸發時，在 .animationGroup 上加 .play */
+                &.play {
+                    overflow: visible;
+                    /* 動畫細項 */
+                    .animationItem01 {
+                        animation: drop 1s ease forwards;
+                        //動畫時間1s
+                        animation-delay: 0s;
+                    }
+                    .animationItem02 {
+                        
+                        animation: drop 1s ease forwards;
+                        animation-delay: 0.1s;
+                    }
+                    .animationItem03 {
+                        
+                        animation: drop 1s ease forwards;
+                        animation-delay: 0.2s;
+                    }
+                    .animationItem04 {
+                    
+                        animation: drop 1s ease forwards;
+                        animation-delay: 0.3s;
+                    }
+                    /* 動畫細項 */
+                }
+                /* 按鈕觸發時，在 .animationGroup 上加 .play */
+
+                /* 位置移動設定 */
+                &.shiftRight01 {
+                    transform: translateX(0%);
+                }
+                &.shiftRight02 {
+                    transform: translateX(100%);
+                }
+                &.shiftRight03 {
+                    transform: translateX(200%);
+                }
+                &.shiftRight04 {
+                    transform: translateX(300%);
+                }
+                &.shiftRight05 {
+                    transform: translateX(400%);
+                }
+                /* 位置移動設定 */
+            }
+            /* 動畫群組01 */
+
+            /* 動畫群組02 */
+            .animationGroup2{
+                position: absolute;
+                top: 0%;
+                left: calc(0% + 5px);
+                width: 20%;
+                height: 100%;
+                z-index: 0;
+                overflow: hidden;
+
+                /* 動畫細項 */
+                .animationItem05,.animationItem06,.animationItem07,.animationItem08{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    opacity: 1;
+                    transform: translateY(0);
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .animationItem05{ 
+                    z-index: 4; 
+                }
+                .animationItem06{ 
+                    z-index: 3; 
+                }
+                .animationItem07{ 
+                    z-index: 2; 
+                }
+                .animationItem08{ 
+                    z-index: 1; 
+                }
+                /* 動畫細項 */
+
+                /* 按鈕觸發時，在 .animationGroup 上加 .play */
+                &.play {
+                    overflow: visible;
+
+                    /* 動畫細項 */
+                    .animationItem05 {
+                        
+                        animation: drop 0.6s ease forwards;
+                        //動畫時間1s
+                        animation-delay: 0s;
+                    }
+                    .animationItem06 {
+                        
+                        animation: drop 0.7s ease forwards;
+                        animation-delay: 0.1s;
+                    }
+                    .animationItem07 {
+                    
+                        animation: drop 0.8s ease forwards;
+                        animation-delay: 0.1s;
+                    }
+                    .animationItem08 {
+                        
+                        animation: drop 1s ease forwards;
+                        animation-delay: 0.1s;
+                    }
+                    /* 動畫細項 */
+                }
+                /* 按鈕觸發時，在 .animationGroup 上加 .play */
+
+                /* 位置移動設定 */
+                &.shiftRight01 {
+                    transform: translateX(0%);
+                }
+                &.shiftRight02 {
+                    transform: translateX(100%);
+                }
+                &.shiftRight03 {
+                    transform: translateX(200%);
+                }
+                &.shiftRight04 {
+                    transform: translateX(300%);
+                }
+                &.shiftRight05 {
+                    transform: translateX(400%);
+                }
+                /* 位置移動設定 */
+            }
+            /* 動畫群組02 */
+
+            // 動畫設置
+            @keyframes drop {
+                0%   { transform: translateY(0%); opacity: 0;}
+                /* 先比目標再多一點點（往下超過） */
+                50%  { transform: translateY(100%); opacity: 1;}
+                /* 最終定位在目標 */
+                100% { transform: translateY(90%); opacity: 1;}
+                //若沒設定 --rebound，就用預設 4px
+            }
+            // 動畫設置
         }
+        /* lg 以上選項區塊 */
+
+        /* lg 以上navbarRightBox */
+        .navbarRightBox{
+            width: 20%;
+            height: auto;
+            padding: 0px 20px;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            gap: 20px;
+            .loginBox{
+                width: 120px;
+                height: auto;
+                aspect-ratio: 184 / 66;
+                background-color: transparent;
+                background-image: url('/images/header/headerYYBtn.png');
+                background-position: center 0;      /* 左上角 */
+                background-size: 100% 200%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                border: none;
+                padding: 0px;
+                transition: transform 0.2s ease;
+                &:hover {
+                    background-position-y: 100%;
+                }
+
+                &.active {
+                    background-position-y: 100%;
+                }
+            }
+
+            .musicBox{
+                width: 45px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                background-color: transparent;
+                background-image: url('/images/header/bgMusicSwitch.png');
+                background-position: 0% 0%;      
+                background-size: 200% 100%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                border: none;
+                padding: 0px;
+                transition: transform 0.2s ease;
+                &:hover {
+                    background-position-x: 100%;
+                }
+
+                &.active {
+                    background-position-x: 100%;
+                }
+            }
+        }
+        /* lg 以上navbarRightBox */
+
+        /* lg 以下選項區塊 */
+        .navbarMbBox{
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            .loginBox{
+                width: 110px;
+                height: auto;
+                aspect-ratio: 217 / 45;
+                background-color: transparent;
+                background-image: url('/images/header/Mobile/header_yyBtn.png');
+                background-position: center 0;      /* 左上角 */
+                background-size: 100% 200%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                border: none;
+                padding: 0px;
+                transition: transform 0.2s ease;
+                &.active {
+                    background-position-y: 100%;
+                }
+            }
+
+            .musicBox{
+                width: 35px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                background-color: transparent;
+                background-image: url('/images/header/bgMusicSwitch.png');
+                background-position: 0% 0%;      
+                background-size: 200% 100%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                border: none;
+                padding: 0px;
+                transition: transform 0.2s ease;
+                &:hover {
+                    background-position-x: 100%;
+                }
+
+                &.active {
+                    background-position-x: 100%;
+                }
+            }
+
+            .MenuIconBtn-set{
+                width: 35px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                border: none;
+                padding: 0px;
+                background-color: transparent;
+                background-image: url('/images/header/Mobile/header_menu.png');
+                background-position: center 0;      /* 左上角 */
+                background-size: 100% 200%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                border: none;
+                transition: transform 0.2s ease;
+
+                &.active {
+                    background-position-y: 100%;
+                }
+                
+            }
+        }
+        /* lg 以下選項區塊 */
     }
     /*內容本體區塊*/
 

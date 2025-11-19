@@ -1,0 +1,39 @@
+
+
+
+.leftSide{
+    position: absolute;
+    z-index: 2;
+    top: 75px;
+    left: 0;
+    width: auto;
+    height: calc(100% - 75px);
+    aspect-ratio: 626 / 1440;
+    background-color: transparent;
+    transform: translate(-60%, 0);
+    background-position: center 0;      /* 左上角 */
+    background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+    background-repeat: no-repeat;
+    background-image: url('/images/character/aside_yy.png');
+    pointer-events: none;
+
+    .leftSideBtn{
+        position: absolute;
+        top:11.5%;
+        left:auto;
+        right:12%;
+        border: none;
+        padding: 0px;
+        width: 21%;
+        aspect-ratio: 144 / 341;
+        background-color: transparent;
+        background-position: 0 0;      /* 左上角 */
+        background-size: 200% 100%;    /* 寬度填滿，高度等比 */
+        background-repeat: no-repeat;
+        background-image: url('/images/character/aside_yyBtn.png');
+        pointer-events: auto;
+        &:hover {
+            background-position-x: 100%;
+        }
+    }
+}

@@ -1,0 +1,136 @@
+
+
+
+.footer{
+    width: 100%;
+    height: 140px;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    /*背景*/
+    background:transparent;
+    /*背景*/
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    @media (max-width: 576px){
+        height: 100%;
+    }
+
+    .footerBgImgSet{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .footerContentBox{
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 0px 20px;
+        z-index: 1;
+        @media (max-width: 576px){
+            height: 100%;
+            padding: 0px;
+            justify-content: end;
+            align-items: start;
+            
+        }
+        .logoBox{
+            width: 60px;
+            height: auto;
+            aspect-ratio: 94 / 43;
+            .logoImgSet{
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+        }
+        .iconBox{
+            margin-right: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            @media (max-width: 576px){
+                flex-direction: column;
+                margin-right: 0px;
+                margin-top: 60px;
+            }
+            .iconSet{
+                width: 42px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                background-color: transparent;
+                background-image: url('/images/footer/otherPlatform.png');
+                background-position-y: 0%;
+                background-position-x: 0%;      /* 左上角 */
+                background-size: 1200% 200%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                border: none;
+                padding: 0px;
+                transition: transform 0.2s ease;
+                &:hover {
+                    background-position-y: 100%;
+                }
+                @media (max-width: 576px){
+                    width: 33px;
+                    background-image: url('/images/footer/Mobile/otherPlatform2.png');
+                }
+
+                &.active {
+                    background-position-y: 100%;
+                }
+                &.X{
+                    background-position-x: 0%;
+                }
+                &.faceBook{
+                    background-position-x: 11%;
+                }
+                &.youtube{
+                    background-position-x: 22%;
+                }
+                &.discord{
+                    background-position-x: 33%;
+                }
+                &.reddit{
+                    background-position-x: 44.5%;
+                }
+                &.instagram{
+                    background-position-x: 55.5%;
+                }
+                &.playStation{
+                    background-position-x: 66.5%;
+                }
+                &.line{
+                    background-position-x: 78%;
+                }
+                &.netFlix{
+                    background-position-x: 89%;
+                }
+                &.kakaoTalk{
+                    background-position-x: 100%;
+                }
+            }
+        }
+        .titleBox{
+            width: 422px;
+            height: auto;
+            aspect-ratio: 662 / 43;
+            .titleImgSet{
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+        }
+    }
+}

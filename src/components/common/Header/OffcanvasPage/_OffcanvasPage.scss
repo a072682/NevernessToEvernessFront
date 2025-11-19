@@ -1,0 +1,174 @@
+/* 背景遮罩 */
+.offcanvas-backdropSet{
+    position: fixed;
+    width: 100%;
+    height: calc(100vh - 50px);
+    inset: 50px 0 0 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+}
+
+/* 左側滑出面板 */
+.offcanvas-panel {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    right:0;
+    left: auto;
+    width: 100%;
+    height: calc(100vh - 50px);
+    background-color: rgba(29, 29, 29, 0.97);
+    box-shadow: 3px 0 12px rgba(0, 0, 0, 0.2);
+    z-index: 1050;
+    
+    .offcanvasBgImgSet{
+        position: absolute;
+        top:auto;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        aspect-ratio: 750 / 216;
+        background-image: url('/images/header/Mobile/menu_bottom.png');
+        background-position: center 0;      /* 左上角 */
+        background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+        background-repeat: no-repeat;
+        z-index: 1;
+    }
+  
+
+    /* Offcanvas 內部樣式調整（建議追加） */
+    .offcanvas-box{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background:rgba(29, 29, 29, 0.97);
+        z-index: 2;
+
+        .offcanvas-bodySet{
+            width: 100%;
+            padding: 40px 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            gap: 12px;
+            .offcanvasItem-set{
+                width: 100%;
+                max-width: 180px;
+                aspect-ratio: 180 / 65;
+                border-bottom: 1px solid #777474;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .imgSet{
+                    width: 100%;
+                    max-width: 130px;
+                    height: auto;
+                    aspect-ratio: 240 / 40;
+                    background-position: center 50%;      /* 左上角 */
+                    background-size: 100% 300%;    /* 寬度填滿，高度等比 */
+                    background-repeat: no-repeat;
+                    background-color: transparent;
+
+                    &.indexPage{
+                        background-image: url('/images/header/headerNav1.png');
+                    }
+                    &.character{
+                        background-image: url('/images/header/headerNav2.png');
+                    }
+                    &.information{
+                        background-image: url('/images/header/headerNav3.png');
+                    }
+                    &.world{
+                        background-image: url('/images/header/headerNav4.png');
+                    }
+                    &.city{
+                        background-image: url('/images/header/headerNav5.png');
+                    }
+                }
+            }
+        }
+
+        .offcanvasIconBox{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            .offcanvasIconSet{
+                width: 33px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                background-color: transparent;
+                background-image: url('/images/footer/otherPlatform.png');
+                background-position-y: 0%;
+                background-position-x: 0%;      /* 左上角 */
+                background-size: 1200% 200%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                border: none;
+                padding: 0px;
+                transition: transform 0.2s ease;
+                &:hover {
+                    background-position-y: 100%;
+                }
+
+                &.active {
+                    background-position-y: 100%;
+                }
+                &.X{
+                    background-position-x: 0%;
+                }
+                &.faceBook{
+                    background-position-x: 11%;
+                }
+                &.youtube{
+                    background-position-x: 22%;
+                }
+                &.discord{
+                    background-position-x: 33%;
+                }
+                &.reddit{
+                    background-position-x: 44.5%;
+                }
+                &.instagram{
+                    background-position-x: 55.5%;
+                }
+                &.playStation{
+                    background-position-x: 66.5%;
+                }
+                &.line{
+                    background-position-x: 78%;
+                }
+                &.netFlix{
+                    background-position-x: 89%;
+                }
+                &.kakaoTalk{
+                    background-position-x: 100%;
+                }
+            }
+        }
+    }
+
+    
+}
+
+/* 動畫 */
+// @keyframes slideIn {
+//   from {
+//     transform: translateX(100%);
+//     //左側-100%
+//     //右側100%
+//   }
+//   to {
+//     transform: translateX(0);
+//   }
+// }
+
+
+
+
+
+
+
+

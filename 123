@@ -1,0 +1,122 @@
+{/* 大圖輪播 */}
+<Swiper
+    className="bgSwiper"
+    modules={[EffectFade]}
+    onSwiper={(swiper) => {
+        videoSwipers.current[index] = swiper;
+    }}
+    loop={true} 
+    slidesPerView={1}
+    effect="fade"                                   //啟用淡入淡出
+    fadeEffect={{ crossFade: true }}                // 可選：交錯漸變更順
+    speed={600}                                     // 可選：動畫時間(毫秒)
+    spaceBetween={10}
+    centeredSlides
+>
+    {
+        item.swiperData?.map((itemIn, i) => {
+            return(
+                <SwiperSlide key={itemIn.id} className='swiperSlide'>
+                    {/* 背景輪播 */}
+                    {/* <div className="videoSet">
+                        <video
+                            className="bgVideo"
+                            autoPlay //載入後自動播放（行動裝置要搭配 muted 才會生效）
+                            muted //把影片靜音（多數瀏覽器要求靜音才允許自動播放）
+                            loop //播完自動重頭再播
+                            playsInline //在手機上「行內播放」，不會跳全螢幕
+                            preload="auto" //盡量預先載入影片（加快開始播放的速度）
+                            poster="" //影片尚未播放或載入時顯示的封面圖
+                        >
+                            <source src={src.video} type="video/mp4" />
+                            您的瀏覽器不支援影片
+                        </video>
+                    </div> */}
+                    {/* 背景輪播 */}
+
+                    {/* 角色說明最外圍 */}
+                    <div className='profileBox'>
+                        <div className="container h-100">
+                            <div className="row h-100">
+                                <div className="col-8 h-100">
+                                    <div className='profileContentBox'>
+
+                                        <div className='profileImgBox'>
+                                            <img className='imgSet' src={itemIn.imgSm} alt="" />
+                                        </div>
+
+                                        <div className='textBox mb-48'>
+                                            <p className='textSet'> 
+                                                古董店「伊波恩」的一號台柱，橋間地最有名望的家族老大，<br />
+                                                海特洛市前途無量的異能者之星！<br />
+                                                穩重威嚴，慷慨仁慈，睿智冷靜。<br />
+                                                曾參與「團三郎的復仇」「棉絨絨魔王對決」「V級暴怒GR雲危機」等多起大型異象收容、泯除行動，以一招「柯林斯終極幽魂暗影裂空霆焰魔拳」掃蕩四方，從無敗績！
+                                            </p>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/* 角色說明最外圍 */}
+                </SwiperSlide>
+            )
+        })
+    }
+</Swiper>
+{/* 大圖輪播 */}
+
+
+
+
+{/* 控制欄位 */}
+<div className='characterThumbSwiperBox'>
+    <button className='ThumbPrevBtn'
+            ref={(prevBtn) => (PrevBtn.current[index] = prevBtn)} 
+            onClick={() => videoSwipers.current[index]?.slidePrev()}></button>
+    <div className='characterThumbSwiper'>
+        {/* 縮圖輪播 */}
+        <Swiper
+            key={`thumb-${item.key}`}
+            className="thumbsSwiper"
+            modules={[Navigation]}
+            onSwiper={(swiper) => {
+                // 寫入swiper
+                mainSwipers.current[index] = swiper;
+
+                // 綁定 navigation
+                swiper.params.navigation.prevEl = PrevBtn.current[index];
+                swiper.params.navigation.nextEl = NextBtn.current[index];
+
+                // 重新初始化 navigation（重要）
+                swiper.navigation.init();
+                swiper.navigation.update();
+            }}
+            spaceBetween={8}                 
+            loop={true}                       
+            slidesPerView={3}
+            centeredSlides
+        >
+            {item.swiperData.map((src, i) => (
+                <SwiperSlide    className='swiperSlide'
+                                key={i}
+                                onClick={() => {
+                                    mainSwipers.current[index]?.slideToLoop(i);
+                                    videoSwipers.current[index]?.slideToLoop(i);}}
+                                //onClick={() => {mainSwiper?.slideTo(i);videoSwiper?.slideTo(i);}}
+                >
+                    <button     type="button" className='imgBox'
+                                style={{ backgroundImage: `url(${src.imgSm})` }}
+                    />
+                </SwiperSlide>
+            ))}
+        </Swiper>
+        {/* 縮圖輪播 */}
+    </div>
+    <button className='ThumbNextBtn' 
+            ref={(nextBtn) => (NextBtn.current[index] = nextBtn)}
+            onClick={() => videoSwipers.current[index]?.slideNext()}>
+    </button>
+</div>
+{/* 控制欄位 */}

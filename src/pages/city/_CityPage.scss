@@ -1,0 +1,238 @@
+
+.cityPage{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-position: center 0;      /* 左上角 */
+    background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+    background-repeat: no-repeat;
+    background-image: url('/images/city/bg.jpg');
+    display: flex;
+    justify-content: end;
+    align-items: end;
+
+    .mainBox{
+        width: calc(100% - 146px);
+        height: calc(100vh - 75px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .basicBox{
+            width: 60%;
+            height: auto;
+            aspect-ratio: 888 / 415;
+            // background-color: red;
+            position: relative;
+            .viewBox{
+                position: absolute;
+                z-index: 3;
+                width: 100%;
+                height: 100%;
+                top: 0%;
+                left: 20%;
+                border: 4.5px solid #767676;
+                background-color: #313131;
+                background-image: url('/images/city/bg.jpg');
+
+                /* 元件最外圍 */
+                .swiper{
+                    width: 100%;
+                    height: 100%;
+                    //輪播本體
+                    .swiper-slide.swiperSlide{
+
+                        /* 輪播片內容 */
+                        .slide-item {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                        /* 輪播片內容 */
+                    }
+                    //輪播本體
+                    
+                    
+                    
+                }
+                /* 元件最外圍 */
+
+                .prevBtn,.nextBtn{
+                    position:absolute;
+                    background-color: transparent;
+                    border: none;
+                    padding: 0px;
+                    width: 5%;
+                    height: auto;
+                    aspect-ratio: 71 / 278;
+                    transform: translate(-50%,-50%);
+                    top: 50%;
+                    background-position: 0 0;      /* 左上角 */
+                    background-size: 200% 100%;    /* 寬度填滿，高度等比 */
+                    background-repeat: no-repeat;
+                    &:hover{
+                        background-position-x: 100%;
+                    }
+                }
+                .prevBtn{
+                    left: -4%;
+                    background-image: url('/images/city/citySlidePrev.png');
+                }
+                .nextBtn{
+                    left: 104%;
+                    background-image: url('/images/city/citySlideNext.png');
+                }
+                .textImgBasicBox{
+                    position:absolute;
+                    width: calc(100% + 9px); 
+                    height: auto;
+                    aspect-ratio: 888 / 70;
+                    top: calc(105% + 4.5px);
+                    left: calc(0% - 4.5px);
+                    // background-color: red;
+                    .textImgBox{
+                        position:absolute;
+                        background-color: transparent;
+                        width: auto;
+                        height: 100%;
+                        top: 0%;
+                        left: 0%;
+                        background-position: 0 0;      /* 左上角 */
+                        background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                        background-repeat: no-repeat;
+
+                        &.first{
+                            aspect-ratio: 1205 / 110;
+                            background-image: url('/images/city/citySlideTit1.png');
+                        }
+                        &.second{
+                            aspect-ratio: 843 / 110;
+                            background-image: url('/images/city/citySlideTit2.png');
+                        }
+                        &.third{
+                            aspect-ratio: 1053 / 110;
+                            background-image: url('/images/city/citySlideTit3.png');
+                        }
+                        &.fourth{
+                            aspect-ratio: 1132 / 110;
+                            background-image: url('/images/city/citySlideTit4.png');
+                        }
+                        &.fifth{
+                            aspect-ratio: 1145 / 110;
+                            background-image: url('/images/city/citySlideTit5.png');
+                        }
+                        &.sixth{
+                            aspect-ratio: 933 / 110;
+                            background-image: url('/images/city/citySlideTit6.png');
+                        }
+
+                        
+                    }
+
+                    .paginationBox{
+                        position:absolute;
+                        width: 50%; 
+                        height: 20%;
+                        top: 130%;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        //background-color: blue;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 6%;
+                        .swiper-pagination-bullet {
+                            width: 3%;
+                            height: auto;
+                            aspect-ratio: 1 / 1;
+                            border-radius: 50%;
+                            background-color: #616161;
+                            opacity: 1;
+                            cursor: pointer;
+                        }
+                        .swiper-pagination-bullet-active {
+                            background-color: #fff;
+                        }
+                    }
+                }
+                .numBox{
+                    position:absolute;
+                    background-color: transparent;
+                    width: 20%;
+                    height: auto;
+                    top: 100%;
+                    left: -40%;
+                    background-position: 0 0;      /* 左上角 */
+                    background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                    background-repeat: no-repeat;
+                    transform: translate(-50%,-50%);
+                    aspect-ratio: 293 / 84;
+                    
+
+                    &.first{
+                        background-image: url('/images/city/citySlideNum1.png');
+                    }
+                    &.second{
+                        background-image: url('/images/city/citySlideNum2.png');
+                    }
+                    &.third{
+                        background-image: url('/images/city/citySlideNum3.png');
+                    }
+                    &.fourth{
+                        background-image: url('/images/city/citySlideNum4.png');
+                    }
+                    &.fifth{
+                        background-image: url('/images/city/citySlideNum5.png');
+                    }
+                    &.sixth{
+                        background-image: url('/images/city/citySlideNum6.png');
+                    }
+                }
+            }
+            .viewBoxBgImg01,.viewBoxBgImg02{
+                position: absolute;
+                z-index: 2;
+                width: 30%;
+                height: auto;
+                transform: translate(-50%,-50%);
+                background-position: center 0;      /* 左上角 */
+                background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+            }
+            .viewBoxBgImg01{
+                top: 5%;
+                left: 80%;
+                aspect-ratio: 441 / 313;
+                background-image: url('/images/city/spray1.png');
+            }
+            .viewBoxBgImg02{
+                top: 50%;
+                left: 20%;
+                aspect-ratio: 419 / 483;
+                background-image: url('/images/city/spray2.png');
+            }
+
+            .backBox{
+                position: absolute;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                top: -20%;
+                left: -30%;
+                border: 4.5px solid #767676;
+                background-color: #313131;
+                background-position: center 0;      /* 左上角 */
+                background-size: 100% 200%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                background-image: url('/images/city/browser.png');
+
+                &.first{
+                    background-position-y: 0%;
+                }
+                &.second{
+                    background-position-y: 100%;
+                }
+            }
+        }
+    }
+}
