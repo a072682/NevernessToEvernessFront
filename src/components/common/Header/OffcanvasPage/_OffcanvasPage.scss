@@ -2,8 +2,8 @@
 .offcanvas-backdropSet{
     position: fixed;
     width: 100%;
-    height: calc(100vh - 50px);
-    inset: 50px 0 0 0;
+    height: calc(100vh - 9%);
+    inset: 9% 0 0 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1040;
 }
@@ -16,7 +16,7 @@
     right:0;
     left: auto;
     width: 100%;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 9%);
     background-color: rgba(29, 29, 29, 0.97);
     box-shadow: 3px 0 12px rgba(0, 0, 0, 0.2);
     z-index: 1050;
@@ -47,23 +47,24 @@
 
         .offcanvas-bodySet{
             width: 100%;
-            padding: 40px 0px;
+            height: 60%;
+            padding: 5% 0 2% 0;
             display: flex;
             flex-direction: column;
             justify-content: start;
             align-items: center;
             gap: 12px;
             .offcanvasItem-set{
-                width: 100%;
-                max-width: 180px;
-                aspect-ratio: 180 / 65;
+                width: 50%;
+                height: 100%;
                 border-bottom: 1px solid #777474;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                // border: 2px solid red;
                 .imgSet{
                     width: 100%;
-                    max-width: 130px;
+                    max-width: 240px;
                     height: auto;
                     aspect-ratio: 240 / 40;
                     background-position: center 50%;      /* 左上角 */

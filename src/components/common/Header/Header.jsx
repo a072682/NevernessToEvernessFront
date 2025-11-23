@@ -150,11 +150,15 @@ function Header(){
                     {/* lg 以下選項區塊 */}
                     <div className="navbarMbBox d-flex d-lg-none">
                         {/* lg 以下按鈕區塊 */}
-                        
+                            
+                            
                             <button className="loginBox"></button>
+                        
                             <button className="musicBox"></button>
-                            <button className={`MenuIconBtn-set ${onOpen?("active"):("")}`} onClick={()=>{setOnOpen(!onOpen)}}>
-                            </button>
+                        
+                            <button className={`MenuIconBtn-set ${onOpen?("active"):("")}`} onClick={()=>{setOnOpen(!onOpen)}}></button>
+                            
+                            
                         
                         {/* lg 以下按鈕區塊 */}
                     </div>

@@ -3,513 +3,1001 @@
 
 /* 元件最外圍 */
 .WorldPage{
-    position: relative;
     width: 100%;
     height: 100vh;
-    display: flex;
-    justify-content: end;
-    align-items: end;
-    overflow: hidden;
 
-    .WorldPageBg{
-        position: absolute;
-        top:0;
-        left: 0;
+    // 桌面板
+    .WorldPagePC{
+        position: relative;
         width: 100%;
         height: 100%;
-        z-index: 0;
-    }
-
-    .mainBox{
-        z-index: 1;
-        width: calc(100% - 146px);
-        height: calc(100vh - 75px);
+        background-color: #202020;
+        overflow: hidden;
         display: flex;
-        justify-content: start;
+        justify-content: end;
         align-items: end;
-        .lefBox{
-            width: 20%;
-            height: calc(100% - 15%);
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            align-items: center;
 
-            .titleBox{
-                width: 100%;
-                height: 10%;
-                
-                .titleImgSet{
-                    width: auto;
-                    height: 100%;
-                    
-                    background-position: center 0;      /* 左上角 */
-                    background-size: 100% 100%;    /* 寬度填滿，高度等比 */
-                    background-repeat: no-repeat;
-                    
-                    &.fitst{
-                        aspect-ratio: 242 / 102;
-                        background-image: url('/images/world/plateTit1.png');
-                    }
-                    &.second{
-                        aspect-ratio: 260 / 102;
-                        background-image: url('/images/world/plateTit2.png');
-                    }
-                    &.third{
-                        aspect-ratio: 281 / 102;
-                        background-image: url('/images/world/plateTit3.png');
-                    }
-                    &.fourth{
-                        aspect-ratio: 356 / 102;
-                        background-image: url('/images/world/plateTit4.png');
-                    }
-                }
-            }
-
-            .textBox{
-                margin: 12px auto 0 0;
-                width: 100%;
-                height: auto;
-                aspect-ratio: 285 / 100;
-                overflow-y: auto;   // ← 讓右側捲軸出現
-                overflow-x: hidden; // ← 水平不要捲軸
-                flex-shrink: 0;
-
-                // 捲軸的寬度
-                &::-webkit-scrollbar {
-                    width: 8px;
-                }
-
-                // 捲軸的軌道（背景）
-                &::-webkit-scrollbar-track {
-                    background: transparent;
-                    border-radius: 4px;
-                }
-
-                // 捲軸本體（可以拉動的部分）
-                &::-webkit-scrollbar-thumb {
-                    background: #999;
-                    border-radius: 4px;
-                }
-
-                // 滑鼠 hover 在捲軸上
-                &::-webkit-scrollbar-thumb:hover {
-                    background: #999;
-                }
-                .textSet{
-                    color: #999;
-                    font-size: 16px;
-                }
-            }
-
-            .tabImgBox{
-                position: relative;
-                margin-top: 24px;
-                width: 50%;
-                height: auto;
-                aspect-ratio: 130 / 460;
-                .tabImgSet{
-                    position: absolute;
-                    z-index: 0;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-position: center 0;      /* 左上角 */
-                    background-size: 100% 100%;    /* 寬度填滿，高度等比 */
-                    background-repeat: no-repeat;
-                    background-image: url('/images/world/guidepost.png');
-
-                    .numImgSet{
-                        position: absolute;
-                        top: 9%;
-                        left: 50%;
-                        transform: translate(-50%,-50%);
-                        width: 40%;
-                        // max-width: 55px;
-                        height: auto;
-                        aspect-ratio: 83 / 66;
-                        background-position: center 0;      /* 左上角 */
-                        background-size: 100% 100%;    /* 寬度填滿，高度等比 */
-                        background-repeat: no-repeat;
-                        
-
-                        &.fitst{
-                            background-image: url('/images/world/01.png');
-                        }
-
-                        &.second{
-                            background-image: url('/images/world/02.png');
-                        }
-                        &.third{
-                            background-image: url('/images/world/03.png');
-                        }
-                        &.fourth{
-                            background-image: url('/images/world/04.png');
-                        }
-                    }
-                }
-                
-                .tabLink{
-                    position: absolute;
-                    z-index: 1;
-                    width: 120%;
-                    height: auto;
-                    aspect-ratio: 250 / 64;
-                    background-position: center 0;      /* 左上角 */
-                    background-size: 100% 200%;    /* 寬度填滿，高度等比 */
-                    background-repeat: no-repeat;
-
-                    &:hover {
-                        background-position-y: 100%;
-                    }
-
-                    &.active {
-                        background-position-y: 100%;
-
-                        .arrowImgSet{
-                            display: block;
-                        }
-                    }
-
-                    &.fitst{
-                        top: 20%;
-                        left: -40%;
-                        background-image: url('/images/world/plate1.png');
-                    }
-
-                    &.second{
-                        top: 30%;
-                        left: 0%;
-                        background-image: url('/images/world/plate2.png');
-                    }
-                    &.third{
-                        top: 40%;
-                        left: -40%;
-                        background-image: url('/images/world/plate3.png');
-                    }
-                    &.fourth{
-                        top: 50%;
-                        left: 0%;
-                        background-image: url('/images/world/plate4.png');
-                    }
-
-                    .arrowImgSet{
-                        display: none;
-                        position: absolute;
-                        top: 0%;
-                        left: 105%;
-                        transform: translate(-50%,-50%);
-                        width: 30%;
-                        //max-width: 50px;
-                        height: auto;
-                        aspect-ratio: 77 / 54;
-                        background-position: center 0;      /* 左上角 */
-                        background-size: 100% 100%;    /* 寬度填滿，高度等比 */
-                        background-repeat: no-repeat;
-                        background-image: url('/images/world/plateActive.png');
-                    }
-                }
-            }
-
-            .tabImgBox02{
-                position: relative;
-                width: 50%;
-                height: 50%;
-                background-position: center 0;      /* 左上角 */
-                background-size: 100% 100%;    /* 寬度填滿，高度等比 */
-                background-repeat: no-repeat;
-                background-image: url('/images/world/guidepost2.png');
-            }
+        .WorldPageBg{
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
 
-        
-
-        .rightBox{
-            width: 70%;
-            height: calc(100% - 10%);
-            position: relative;
-            .tabViewBox{
-                position: relative;
-                z-index: 1;
-                width: 100%;
-                height: auto;
-                aspect-ratio: 1570 / 1174;
-                .tabViewBoxBg{
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    z-index: 0;
-                }
-
-                .tabViewImgSet{
-                    position: absolute;
-                    z-index: 1;
-                    top: 36%;
-                    left: 51%;
-                    transform: translate(-50%,-50%);
-                    width: 86%;
-                    height: auto;
-                    aspect-ratio: 1400 / 640;
-                    background-color: rgb(83, 83, 83);
-
-                    /* ─ 內容區（React-Bootstrap 的 .tab-content） ─ */
-                    .tab-content {
-
-                        /* 內容外層（.tab-pane） */
-                        .tab-pane {
-                           
-                            /* 元件最外圍 */
-                            .swiper{
-                                width: 100%;
-                                height: 100%;
-                                //輪播本體
-                                .swiper-slide.swiperSlide{
-
-                                    /* 輪播片內容 */
-                                    .slide-item {
-                                        width: 100%;
-                                        height: 100%;
-                                        background-color: red;
-                                    }
-                                    /* 輪播片內容 */
-                                }
-                                //輪播本體
-
-                                
-                            }
-                            /* 元件最外圍 */
-                        }
-                    }
-                }
-
-                .prevBtn,.nextBtn{
-                    display: none;
-                    position: absolute;
-                    z-index: 2;
-                    width: 10%;
-                    // max-width: 90px;
-                    height: auto;
-                    aspect-ratio: 135 / 58;
-                    transform: translate(-50%,-50%);
-                    background-position: center 0;      /* 左上角 */
-                    background-size: 100% 200%;    /* 寬度填滿，高度等比 */
-                    background-repeat: no-repeat;
-                    &:hover {
-                        background-position-y: 100%;
-                    }
-                    &.active{
-                        display: block;
-                    }
-                }
-
-                .prevBtn{
-                    top: 67%;
-                    left: 13%;
-                    background-image: url('/images/world/brandPrev.png');
-                }
-
-                .nextBtn{
-                    top: 67%;
-                    left: 88%;
-                    background-image: url('/images/world/brandNext.png');
-                }
-
-                .worldPaginationBox{
-                    position: absolute;
-                    z-index: 2;
-                    width: 50%;
-                    height: 5%;
-                    top: 67%;
-                    left: 50%;
-                    transform: translate(-50%,-50%);
-                    // background-color: red;
-                    display: none;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 24px;
-
-                    &.active{
-                        display: flex;
-                        .swiper-pagination-bullet{
-                            display: block;
-                            &.swiper-pagination-bullet-active{
-                                background-color: #4fe5fb;
-                            }
-                        }
-                    }
-
-                    .swiper-pagination-bullet {
-                        display: none;
-                        width: 12px;
-                        height: auto;
-                        aspect-ratio: 1 / 1;
-                        border-radius: 50%;
-                        background-color: #616161;
-                        opacity: 1;
-                        border: 1 solid #000;
-                        cursor: pointer;
-                    }
-                    // .swiper-pagination-bullet-active {
-                        
-                    // }
-                }
-            }
-
-            .tabViewBox02{
-                position: absolute;
-                top: auto;
-                bottom: 0%;
-                left: 0;
-                z-index: 0;
-                width: 100%;
-                height: 50%;
-                background-position: center 0;      /* 左上角 */
-                background-size: 100% 100%;    /* 寬度填滿，高度等比 */
-                background-repeat: no-repeat;
-                background-image: url('/images/world/brand2.png');
-            }
-
-            .utilityPoleBox{
-                position: absolute;
-                top: 0;
-                left: 85%;
-                z-index: 2;
+        .mainBox{
+            z-index: 1;
+            width: calc(100% - 146px);
+            height: calc(100vh - 75px);
+            display: flex;
+            justify-content: start;
+            align-items: end;
+            .lefBox{
                 width: 20%;
-                height: auto;
-                aspect-ratio: 349 / 1186;
-                background-position: center 0;      /* 左上角 */
-                background-size: 100% 100%;    /* 寬度填滿，高度等比 */
-                background-repeat: no-repeat;
-                background-image: url('/images/world/trafficSign.png');
-                pointer-events: none; // 避免擋到前景點擊
+                height: calc(100% - 15%);
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
 
-                .stopLightImgSet{
-                    position: absolute;
-                    top: 22%;
-                    left: 74%;
-                    width: 20%;
+                .titleBox{
+                    width: 100%;
                     height: auto;
-                    aspect-ratio: 1 / 1;
-                    background-color: #616161;
-                    border-radius: 8px;
-                    padding: 5px;
+                    aspect-ratio: 3 / 1;
+                    
+                    .titleImgSet{
+                        width: auto;
+                        height: 100%;
+                        max-width: 100%;
+                        max-height: 100%;
+                        
+                        background-position: center 0;      /* 左上角 */
+                        background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                        background-repeat: no-repeat;
+                        
+                        &.fitst{
+                            // aspect-ratio: 242 / 102;
+                            background-image: url('/images/world/plateTit1.png');
+                        }
+                        &.second{
+                            // aspect-ratio: 260 / 102;
+                            background-image: url('/images/world/plateTit2.png');
+                        }
+                        &.third{
+                            // aspect-ratio: 281 / 102;
+                            background-image: url('/images/world/plateTit3.png');
+                        }
+                        &.fourth{
+                            // aspect-ratio: 356 / 102;
+                            background-image: url('/images/world/plateTit4.png');
+                        }
+                    }
+                }
 
-                    .LightImgSet{
+                .textBox{
+                    margin: 12px auto 0 0;
+                    width: 100%;
+                    height: auto;
+                    aspect-ratio: 285 / 100;
+                    overflow-y: auto;   // ← 讓右側捲軸出現
+                    overflow-x: hidden; // ← 水平不要捲軸
+                    flex-shrink: 0;
+
+                    // 捲軸的寬度
+                    &::-webkit-scrollbar {
+                        width: 8px;
+                    }
+
+                    // 捲軸的軌道（背景）
+                    &::-webkit-scrollbar-track {
+                        background: transparent;
+                        border-radius: 4px;
+                    }
+
+                    // 捲軸本體（可以拉動的部分）
+                    &::-webkit-scrollbar-thumb {
+                        background: #999;
+                        border-radius: 4px;
+                    }
+
+                    // 滑鼠 hover 在捲軸上
+                    &::-webkit-scrollbar-thumb:hover {
+                        background: #999;
+                    }
+                    .textSet{
+                        color: #999;
+                        font-size: 16px;
+                    }
+                }
+
+                .tabImgBox{
+                    position: relative;
+                    margin-top: 24px;
+                    width: 50%;
+                    height: auto;
+                    aspect-ratio: 130 / 460;
+                    .tabImgSet{
+                        position: absolute;
+                        z-index: 0;
+                        top: 0;
+                        left: 0;
                         width: 100%;
                         height: 100%;
-                        border: 1px solid #000000;
-                        border-radius: 8px;
+                        background-position: center 0;      /* 左上角 */
+                        background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                        background-repeat: no-repeat;
+                        background-image: url('/images/world/guidepost.png');
+
+                        .numImgSet{
+                            position: absolute;
+                            top: 9%;
+                            left: 50%;
+                            transform: translate(-50%,-50%);
+                            width: 40%;
+                            // max-width: 55px;
+                            height: auto;
+                            aspect-ratio: 83 / 66;
+                            background-position: center 0;      /* 左上角 */
+                            background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                            background-repeat: no-repeat;
+                            
+
+                            &.fitst{
+                                background-image: url('/images/world/01.png');
+                            }
+
+                            &.second{
+                                background-image: url('/images/world/02.png');
+                            }
+                            &.third{
+                                background-image: url('/images/world/03.png');
+                            }
+                            &.fourth{
+                                background-image: url('/images/world/04.png');
+                            }
+                        }
+                    }
+                    
+                    .tabLink{
+                        position: absolute;
+                        z-index: 1;
+                        width: 120%;
+                        height: auto;
+                        aspect-ratio: 250 / 64;
                         background-position: center 0;      /* 左上角 */
                         background-size: 100% 200%;    /* 寬度填滿，高度等比 */
                         background-repeat: no-repeat;
-                        animation: bgCycle 6s infinite linear;
-                        // 
 
-                        @keyframes bgCycle {
+                        &:hover {
+                            background-position-y: 100%;
+                        }
 
-                            /* ---- RED ---- */
-                            0% {
-                                background-image: url('/images/world/red.png');
-                                background-color:#fd5997;
-                                background-position-y:100%;
-                            }
+                        &.active {
+                            background-position-y: 100%;
 
-                            11.10% {
-                                background-position-y:100%;
-                            }
-                            11.11% {
-                                background-position-y:0%;
-                            }
-
-                            22.21% {
-                                background-position-y:0%;
-                            }
-                            22.22% {
-                                background-position-y:100%;
-                            }
-
-                            33.32% {
-                                background-position-y:100%;
-                            }
-                            33.33% {
-                                background-position-y:0%;
-                            }
-
-                            44.43% {
-                                background-position-y:0%;
-                            }
-                            44.44% {
-                                background-image: url('/images/world/red.png');
-                                background-color:#fd5997;
-                                background-position-y:100%;
-                            }
-
-                            /* ---- GREEN ---- */
-                            55.54% {
-                                background-image: url('/images/world/red.png');
-                                background-color:#fd5997;
-                                background-position-y:100%;
-                            }
-                            55.55% {
-                                background-image: url('/images/world/green.png');
-                                background-color:#4fe5fb;
-                                background-position-y:0%;
-                            }
-
-                            66.65% {
-                                background-position-y:0%;
-                            }
-                            66.66% {
-                                background-position-y:100%;
-                            }
-
-                            77.76% {
-                                background-position-y:100%;
-                            }
-                            77.77% {
-                                background-position-y:0%;
-                            }
-
-                            88.87% {
-                                background-position-y:0%;
-                            }
-                            88.88% {
-                                background-position-y:100%;
-                            }
-
-                            99.99% {
-                                background-position-y:100%;
-                            }
-                            100% {
-                                background-image: url('/images/world/green.png');
-                                background-color:#4fe5fb;
-                                background-position-y:0%;
+                            .arrowImgSet{
+                                display: block;
                             }
                         }
 
+                        &.fitst{
+                            top: 20%;
+                            left: -40%;
+                            background-image: url('/images/world/plate1.png');
+                        }
 
-                        
+                        &.second{
+                            top: 30%;
+                            left: 0%;
+                            background-image: url('/images/world/plate2.png');
+                        }
+                        &.third{
+                            top: 40%;
+                            left: -40%;
+                            background-image: url('/images/world/plate3.png');
+                        }
+                        &.fourth{
+                            top: 50%;
+                            left: 0%;
+                            background-image: url('/images/world/plate4.png');
+                        }
+
+                        .arrowImgSet{
+                            display: none;
+                            position: absolute;
+                            top: 0%;
+                            left: 105%;
+                            transform: translate(-50%,-50%);
+                            width: 30%;
+                            //max-width: 50px;
+                            height: auto;
+                            aspect-ratio: 77 / 54;
+                            background-position: center 0;      /* 左上角 */
+                            background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                            background-repeat: no-repeat;
+                            background-image: url('/images/world/plateActive.png');
+                        }
                     }
                 }
+
+                .tabImgBox02{
+                    width: 50%;
+                    height: 50%;
+                }
             }
-            .utilityPoleBox02{
-                position: absolute;
-                top: auto;
-                bottom: 0%;
-                left: 85%;
-                z-index: 0;
-                width: 20%;
-                height: 50%;
-                background-position: center 0;      /* 左上角 */
-                background-size: 100% 100%;    /* 寬度填滿，高度等比 */
-                background-repeat: no-repeat;
-                background-image: url('/images/world/trafficSign2.png');
-                pointer-events: none; // 避免擋到前景點擊
+
+            
+
+            .rightBox{
+                width: 70%;
+                height: calc(100% - 10%);
+                position: relative;
+                .tabViewBox{
+                    position: relative;
+                    z-index: 1;
+                    width: 100%;
+                    height: auto;
+                    aspect-ratio: 1570 / 1174;
+                    .tabViewBoxBg{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 0;
+                    }
+
+                    .tabViewImgSet{
+                        position: absolute;
+                        z-index: 1;
+                        top: 36%;
+                        left: 51%;
+                        transform: translate(-50%,-50%);
+                        width: 86%;
+                        height: auto;
+                        aspect-ratio: 1400 / 640;
+                        background-color: rgb(83, 83, 83);
+
+                        /* ─ 內容區（React-Bootstrap 的 .tab-content） ─ */
+                        .tab-content {
+
+                            /* 內容外層（.tab-pane） */
+                            .tab-pane {
+                            
+                                /* 元件最外圍 */
+                                .swiper{
+                                    width: 100%;
+                                    height: 100%;
+                                    //輪播本體
+                                    .swiper-slide.swiperSlide{
+
+                                        /* 輪播片內容 */
+                                        .slide-item {
+                                            width: 100%;
+                                            height: 100%;
+                                            background-color: red;
+                                        }
+                                        /* 輪播片內容 */
+                                    }
+                                    //輪播本體
+
+                                    
+                                }
+                                /* 元件最外圍 */
+                            }
+                        }
+                    }
+
+                    .prevBtn,.nextBtn{
+                        display: none;
+                        position: absolute;
+                        z-index: 2;
+                        width: 10%;
+                        // max-width: 90px;
+                        height: auto;
+                        aspect-ratio: 135 / 58;
+                        transform: translate(-50%,-50%);
+                        background-position: center 0;      /* 左上角 */
+                        background-size: 100% 200%;    /* 寬度填滿，高度等比 */
+                        background-repeat: no-repeat;
+                        &:hover {
+                            background-position-y: 100%;
+                        }
+                        &.active{
+                            display: block;
+                        }
+                    }
+
+                    .prevBtn{
+                        top: 67%;
+                        left: 13%;
+                        background-image: url('/images/world/brandPrev.png');
+                    }
+
+                    .nextBtn{
+                        top: 67%;
+                        left: 88%;
+                        background-image: url('/images/world/brandNext.png');
+                    }
+
+                    .worldPaginationBox{
+                        position: absolute;
+                        z-index: 2;
+                        width: 50%;
+                        height: 5%;
+                        top: 67%;
+                        left: 50%;
+                        transform: translate(-50%,-50%);
+                        // background-color: red;
+                        display: none;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 24px;
+
+                        &.active{
+                            display: flex;
+                            .swiper-pagination-bullet{
+                                display: block;
+                                &.swiper-pagination-bullet-active{
+                                    background-color: #4fe5fb;
+                                }
+                            }
+                        }
+
+                        .swiper-pagination-bullet {
+                            display: none;
+                            width: 12px;
+                            height: auto;
+                            aspect-ratio: 1 / 1;
+                            border-radius: 50%;
+                            background-color: #616161;
+                            opacity: 1;
+                            border: 1 solid #000;
+                            cursor: pointer;
+                        }
+                        // .swiper-pagination-bullet-active {
+                            
+                        // }
+                    }
+                }
+
+                .tabViewBox02{
+                    position: absolute;
+                    top: auto;
+                    bottom: 0%;
+                    left: 0;
+                    z-index: 0;
+                    width: 100%;
+                    height: 50%;
+                }
+
+                .utilityPoleBox{
+                    position: absolute;
+                    top: 0;
+                    left: 85%;
+                    z-index: 2;
+                    width: 20%;
+                    height: auto;
+                    aspect-ratio: 349 / 1186;
+                    background-position: center 0;      /* 左上角 */
+                    background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                    background-repeat: no-repeat;
+                    background-image: url('/images/world/trafficSign.png');
+                    pointer-events: none; // 避免擋到前景點擊
+
+                    .stopLightImgSet{
+                        position: absolute;
+                        top: 22%;
+                        left: 74%;
+                        width: 20%;
+                        height: auto;
+                        aspect-ratio: 1 / 1;
+                        background-color: #616161;
+                        border-radius: 8px;
+                        padding: 1.5%;
+
+                        .LightImgSet{
+                            width: 100%;
+                            height: 100%;
+                            border: 1px solid #000000;
+                            border-radius: 8px;
+                            background-position: center 0;      /* 左上角 */
+                            background-size: 100% 200%;    /* 寬度填滿，高度等比 */
+                            background-repeat: no-repeat;
+                            animation: bgCycle 6s infinite linear;
+                            // 
+
+                            @keyframes bgCycle {
+
+                                /* ---- RED ---- */
+                                0% {
+                                    background-image: url('/images/world/red.png');
+                                    background-color:#fd5997;
+                                    background-position-y:100%;
+                                }
+
+                                11.10% {
+                                    background-position-y:100%;
+                                }
+                                11.11% {
+                                    background-position-y:0%;
+                                }
+
+                                22.21% {
+                                    background-position-y:0%;
+                                }
+                                22.22% {
+                                    background-position-y:100%;
+                                }
+
+                                33.32% {
+                                    background-position-y:100%;
+                                }
+                                33.33% {
+                                    background-position-y:0%;
+                                }
+
+                                44.43% {
+                                    background-position-y:0%;
+                                }
+                                44.44% {
+                                    background-image: url('/images/world/red.png');
+                                    background-color:#fd5997;
+                                    background-position-y:100%;
+                                }
+
+                                /* ---- GREEN ---- */
+                                55.54% {
+                                    background-image: url('/images/world/red.png');
+                                    background-color:#fd5997;
+                                    background-position-y:100%;
+                                }
+                                55.55% {
+                                    background-image: url('/images/world/green.png');
+                                    background-color:#4fe5fb;
+                                    background-position-y:0%;
+                                }
+
+                                66.65% {
+                                    background-position-y:0%;
+                                }
+                                66.66% {
+                                    background-position-y:100%;
+                                }
+
+                                77.76% {
+                                    background-position-y:100%;
+                                }
+                                77.77% {
+                                    background-position-y:0%;
+                                }
+
+                                88.87% {
+                                    background-position-y:0%;
+                                }
+                                88.88% {
+                                    background-position-y:100%;
+                                }
+
+                                99.99% {
+                                    background-position-y:100%;
+                                }
+                                100% {
+                                    background-image: url('/images/world/green.png');
+                                    background-color:#4fe5fb;
+                                    background-position-y:0%;
+                                }
+                            }
+
+
+                            
+                        }
+                    }
+                }
+                .utilityPoleBox02{
+                    position: absolute;
+                    top: auto;
+                    bottom: 0%;
+                    left: 85%;
+                    z-index: 0;
+                    width: 20%;
+                    height: 50%;
+                    pointer-events: none; // 避免擋到前景點擊
+                }
             }
         }
     }
+    // 桌面板
+    
+    // 手機板
+    .WorldPageMB{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: #202020;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+
+        .WorldPageBg{
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .mainBox{
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: calc(100% - 75px);
+            @media (max-width: 576px){
+                height: calc(100% - 50px);
+            }
+
+            .titleBox{
+                width: 100%;
+                height: 8%;
+                flex-shrink: 1;//如果空間不夠，允許縮小
+                display: flex;
+                justify-content: end;
+                align-items: center;
+                .titleImgSet{
+                    width: auto;
+                    height: 100%;
+                    aspect-ratio: 220 / 89;
+                }
+            }
+
+            .containerBox{
+                width: 100%;
+                height: calc(100% - 8%);
+
+                .allProportionBox{
+                    margin-top: 2%;
+                    width: 100%;
+                    height: auto;
+                    flex-shrink: 1;//如果空間不夠，允許縮小
+                    aspect-ratio: 656 / 869;
+                    max-width: 100%;
+                    max-height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .allLimitBox{
+                        width: auto;
+                        height: 100%;
+                        aspect-ratio: 656 / 869;
+                        max-width: 100%;
+                        max-height: 100%;
+                        .contentBox{
+                            width: 100%;
+                            height: 100%;
+                            max-width: 100%;
+                            max-height: 100%;
+                            display: flex;
+                            justify-content: start;
+                            align-items: center;
+                            .proportionBox{
+                                width: 87%;
+                                height: 100%;
+                            
+                                max-width: 100%;
+                                max-height: 100%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                .viewImgBox{
+                                    position: relative;
+                                    width: 100%;
+                                    height: 100%;
+                                    
+                                    max-width: 100%;
+                                    max-height: 100%;
+                                    padding: 1.5% 18% 46% 11%;
+                                    
+                                    .viweImgSet{
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        z-index: 1;
+                                        width: 100%;
+                                        height: 100%;
+                                    }
+
+                                    .viewBox{
+                                        //border: 2px solid red;
+                                        position: relative;
+                                        z-index: 2;
+                                        width: 100%;
+                                        height: 100%;
+
+                                        /* 元件最外圍 */
+                                        .viewSwiper{
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100%;
+                                            height: 100%;
+                                            //輪播本體
+                                            .swiperSlide{
+
+                                                /* 輪播片內容 */
+                                                .slide-item {
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    position: relative;
+                                                    
+                                                    /* 內層swiper元件最外圍 */
+                                                    .wordSwiper{
+                                                        position: absolute;
+                                                        top: 0;
+                                                        left: 0;
+                                                        width: 100%;
+                                                        height: 100%;
+                                                        //輪播本體
+                                                        .swiperSlide{
+
+                                                            /* 輪播片內容 */
+                                                            .slide-item {
+                                                                width: 100%;
+                                                                height: 100%;
+                                                                max-width: 100%;
+                                                                max-height: 100%;
+                                                                position: relative;
+                                                                .imgSet{
+                                                                    position: absolute;
+                                                                    top: 0;
+                                                                    left: 0;
+                                                                    width: 100%;
+                                                                    height: 100%;
+                                                                }
+                                                            }
+                                                            /* 輪播片內容 */
+                                                        }
+                                                        //輪播本體
+                                                    }
+                                                    /* 內層swiper元件最外圍 */
+
+                                                }
+                                                /* 輪播片內容 */
+                                            }
+                                            //輪播本體
+                                        }
+                                        /* 元件最外圍 */
+                                    }
+                                
+                                    .wordPaginationBox{
+                                        position: absolute;
+                                        top: 73%;
+                                        left: 10%;
+                                        width: 73%;
+                                        height: 4.5%;
+                                        z-index: 3;
+                                        transform: translateY(-50%);
+
+                                        .wordPagination{
+                                            width: 100%;
+                                            height: 100%;
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            gap: 7%;
+                                            .swiper-pagination-bullet {
+                                                width: 4.5%;
+                                                height: auto;
+                                                aspect-ratio: 1 / 1;
+                                                border-radius: 100px;
+                                                background-color: #616161;
+                                                opacity: 1;
+                                                cursor: pointer;
+                                                // flex-shrink: 0; // 防止被壓扁
+                                                // display: block;
+                                            }
+                                            .swiper-pagination-bullet-active {
+                                                background-color: #4fe5fb;
+                                            }
+                                        }
+                                    }
+
+                                    .utilityPoleBox{
+                                        position: absolute;
+                                        top: auto;
+                                        bottom: 0%;
+                                        left: 98%;
+                                        
+                                        z-index: 2;
+                                        width: 30%;
+                                        height: auto;
+                                        aspect-ratio: 192 / 776;
+                                        max-width: 100%;
+                                        max-height: 100%;
+                                        transform: translateX(-50%);
+
+                                        .utilityPoleImgSet{
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100%;
+                                            height: 100%;
+
+                                            
+                                        }
+
+                                        .stopLightImgSet{
+                                            position: absolute;
+                                            top: 20%;
+                                            left: 74%;
+                                            width: 27%;
+                                            height: auto;
+                                            aspect-ratio: 1 / 1;
+                                            background-color: #616161;
+                                            border-radius: 8px;
+                                            padding: 1.5%;
+
+                                            .LightImgSet{
+                                                width: 100%;
+                                                height: 100%;
+                                                border: 1px solid #000000;
+                                                border-radius: 8px;
+                                                background-position: center 0;      /* 左上角 */
+                                                background-size: 100% 200%;    /* 寬度填滿，高度等比 */
+                                                background-repeat: no-repeat;
+                                                animation: bgCycle 6s infinite linear;
+                                                // 
+
+                                                @keyframes bgCycle {
+
+                                                    /* ---- RED ---- */
+                                                    0% {
+                                                        background-image: url('/images/world/red.png');
+                                                        background-color:#fd5997;
+                                                        background-position-y:100%;
+                                                    }
+
+                                                    11.10% {
+                                                        background-position-y:100%;
+                                                    }
+                                                    11.11% {
+                                                        background-position-y:0%;
+                                                    }
+
+                                                    22.21% {
+                                                        background-position-y:0%;
+                                                    }
+                                                    22.22% {
+                                                        background-position-y:100%;
+                                                    }
+
+                                                    33.32% {
+                                                        background-position-y:100%;
+                                                    }
+                                                    33.33% {
+                                                        background-position-y:0%;
+                                                    }
+
+                                                    44.43% {
+                                                        background-position-y:0%;
+                                                    }
+                                                    44.44% {
+                                                        background-image: url('/images/world/red.png');
+                                                        background-color:#fd5997;
+                                                        background-position-y:100%;
+                                                    }
+
+                                                    /* ---- GREEN ---- */
+                                                    55.54% {
+                                                        background-image: url('/images/world/red.png');
+                                                        background-color:#fd5997;
+                                                        background-position-y:100%;
+                                                    }
+                                                    55.55% {
+                                                        background-image: url('/images/world/green.png');
+                                                        background-color:#4fe5fb;
+                                                        background-position-y:0%;
+                                                    }
+
+                                                    66.65% {
+                                                        background-position-y:0%;
+                                                    }
+                                                    66.66% {
+                                                        background-position-y:100%;
+                                                    }
+
+                                                    77.76% {
+                                                        background-position-y:100%;
+                                                    }
+                                                    77.77% {
+                                                        background-position-y:0%;
+                                                    }
+
+                                                    88.87% {
+                                                        background-position-y:0%;
+                                                    }
+                                                    88.88% {
+                                                        background-position-y:100%;
+                                                    }
+
+                                                    99.99% {
+                                                        background-position-y:100%;
+                                                    }
+                                                    100% {
+                                                        background-image: url('/images/world/green.png');
+                                                        background-color:#4fe5fb;
+                                                        background-position-y:0%;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }  
+                        }
+                        
+                    }
+                }
+                
+                
+            }
+
+            .controlBox{
+                position: absolute;
+                z-index: 2;
+                top: auto;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 10%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .controlBoxImg{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1;
+                }
+
+                .nextBtnBox,.prevBtnBox{
+                    border: none;
+                    padding: 0px;
+                    background-color: transparent;
+                    position: absolute;
+                    top: 50%;
+                    z-index: 2;
+                    width: auto;
+                    height: 70%;
+                    aspect-ratio: 56 / 75;
+                    transform: translateY(-50%);
+                }
+
+                .nextBtnBox{
+                    left: auto;
+                    right:7.5%;
+                    .nextBtnImgSet{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .prevBtnBox{
+                    left: 7.5%;
+                    .prevBtnImgSet{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                .nameSwiperViewBox{
+                    width: 65%;
+                    height: 80%;
+
+                    /* 元件最外圍 */
+                    .nameSwiper{
+                        width: 100%;
+                        height: 100%;
+                        //輪播本體
+                        .swiperSlide{
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            /* 輪播片內容 */
+                            .slide-item {
+                                
+                                &.imgBox{
+                                    width: auto;
+                                    height: 70%;
+                                    max-width: 100%;
+                                    max-height: 100%;
+                                    .imgSet{
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                    }
+                                }
+                            }
+                            /* 輪播片內容 */
+                        }
+                        //輪播本體
+                        
+                        //頁碼按鈕
+                        .swiper-pagination {
+                            position:absolute;
+                            width: 100%;
+                            height: auto;
+                            bottom: 66px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            display: flex;
+                            gap: 8px;
+                            z-index: 15;
+                            justify-content: center;
+                            align-items: center;
+
+                            .swiper-pagination-bullet {
+                                width: 24px;
+                                height: 8px;
+                                border-radius: 100px;
+                                background-color: #ff0000;
+                                opacity: 1;
+                                cursor: pointer;
+                                // flex-shrink: 0; // 防止被壓扁
+                                // display: block;
+                            }
+                            .swiper-pagination-bullet-active {
+                                background-color: #007bff;
+                            }
+                        }
+
+                        
+
+                        //左右頁按鈕
+                        .swiper-button-prev,
+                        .swiper-button-next {
+                            position: absolute;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            width: 56px;
+                            height: 56px;
+                            background-color: #ffffff;
+                            color:#0068ff ;
+                            border-radius: 12px;
+                            z-index: 10;
+                            &:hover{
+                                background-color: #0068ff;
+                                color:#ffffff ;
+                            }
+                        }
+
+                        .swiper-button-prev {
+                            left: 20px;
+                        }
+
+                        .swiper-button-next {
+                            right: 20px;
+                        }
+                    }
+                    /* 元件最外圍 */
+                }
+            }
+        }
+    }
+    // 手機板
 }
 /* 元件最外圍 */

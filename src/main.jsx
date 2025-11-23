@@ -13,9 +13,9 @@ import './assets/styles/all.scss'//客製化scss檔案
 
 createRoot(document.getElementById('root')).render(
 
-  <StrictMode>
+  	<StrictMode>
 		<Provider store={store}>
-		  <RouterProvider router={router}/>
+			<RouterProvider router={router}/>
 		</Provider>
 	</StrictMode>
   
