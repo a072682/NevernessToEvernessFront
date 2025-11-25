@@ -9,3 +9,5 @@ react-redux
 react-router-dom
 framer-motion
 swiper
+
+全局modal功能增加

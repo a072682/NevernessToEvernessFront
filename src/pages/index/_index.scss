@@ -1,128 +1,142 @@
 
 
 .index{
-    position: relative;
+    
     width: 100%;
     height: 100vh;
     background-color: rgb(104, 104, 104);
     display: flex;
     justify-content: center;
-    align-items: center;
-    /* lg以上背景影片 */
-    .bgVideo {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        inset: 0;
-        object-fit: cover; // 跟背景圖 cover 一樣，充滿且裁切
-        pointer-events: none; // 避免擋到前景點擊
-        z-index: 0;
-    }
-    /* lg以上背景影片 */
-    
-    /* lg以下背景圖片 */
-    .BgImg{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        inset: 0;
-        object-fit: cover; // 跟背景圖 cover 一樣，充滿且裁切
-        pointer-events: none; // 避免擋到前景點擊
-        z-index: 0;
-    }
-    /* lg以下背景圖片 */
+    align-items: end;
 
-    /* 右下角PS按鈕 */
-    .playStationBtnSet{
-        position: absolute;
-        top:auto;
-        bottom: 10%;
-        left: auto;
-        right: 3%;
-        z-index: 2;
-        width: 110px;
-        height: auto;
-        aspect-ratio: 300 / 380;
-        border: none;
-        background-color: transparent;
-        padding: 0px;
-        animation: floatY 2.5s ease-in-out infinite;
-        @media (max-width: 576px){
-            width: 75px;
-            bottom: 35%;
-        }
-        /* 動畫設定 */
-            /* 上下浮動動畫 */
-            @keyframes floatY {
-                0%   { transform: translateY(0px); }
-                50%  { transform: translateY(-10px); }  /* 上移 */
-                100% { transform: translateY(0px); }    /* 回來 */
-            }
-        /* 動畫設定 */
-        .playStationImgSet{
-            max-width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-    }
-    /* 右下角PS按鈕 */
-
-    /* 中央按鈕 */
-    .contentBox{
-        z-index: 1;
-        margin-top: 20%;
+    // 混合版
+    .indexPage{
+        position: relative;
+        width: 100%;
+        height: calc(100% - 9%);
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 70px;
-        @media (max-width: 576px){
-            margin-top: 60%;
-            gap: 40px;
-        }
-        .indexBtn01{
-            width: 75px;
-            aspect-ratio: 1 / 1;
-            background-color: transparent;
-            background-image: url('/images/index/indexVideoBtn.png');
-            background-position: center 0;      /* 左上角 */
-            background-size: 100% 200%;    /* 寬度填滿，高度等比 */
-            background-repeat: no-repeat;
-            border: none;
-            padding: 0px;
-            transition: transform 0.2s ease;
-            &:hover {
-                background-position-y: 100%;
-            }
-            @media (max-width: 576px){
-                width: 56.5px;
-            }
-        }
 
-        .indexBtn02{
-            width: 300px;
-            aspect-ratio: 300 / 115;
-            background-color: transparent;
-            background-image: url('/images/index/indexYYBtn.png');
-            background-position: center 0;      /* 左上角 */
-            background-size: 100% 300%;    /* 寬度填滿，高度等比 */
-            background-repeat: no-repeat;
+        /* lg以上背景影片 */
+        .bgVideo {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            object-fit: cover; // 跟背景圖 cover 一樣，充滿且裁切
+            pointer-events: none; // 避免擋到前景點擊
+            z-index: 0;
+        }
+        /* lg以上背景影片 */
+        
+        /* lg以下背景圖片 */
+        .BgImg{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            object-fit: cover; // 跟背景圖 cover 一樣，充滿且裁切
+            pointer-events: none; // 避免擋到前景點擊
+            z-index: 0;
+        }
+        /* lg以下背景圖片 */
+
+        /* 右下角PS按鈕 */
+        .playStationBtnSet{
+            position: absolute;
+            top:auto;
+            bottom: 10%;
+            left: auto;
+            right: 3%;
+            z-index: 2;
+            width: 110px;
+            height: auto;
+            aspect-ratio: 300 / 380;
             border: none;
+            background-color: transparent;
             padding: 0px;
-            transition: transform 0.2s ease;
-            &:hover {
-                background-position-y: 50%;
-                transform: translateY(5%); 
-            }
+            animation: floatY 2.5s ease-in-out infinite;
             @media (max-width: 576px){
-                width: 170px;
-                background-image: url('/images/index/Mobile/indexYYBtn.png');
-                background-size: 100% 200%;
+                width: 75px;
+                bottom: 35%;
+            }
+            /* 動畫設定 */
+                /* 上下浮動動畫 */
+                @keyframes floatY {
+                    0%   { transform: translateY(0px); }
+                    50%  { transform: translateY(-10px); }  /* 上移 */
+                    100% { transform: translateY(0px); }    /* 回來 */
+                }
+            /* 動畫設定 */
+            .playStationImgSet{
+                max-width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+        }
+        /* 右下角PS按鈕 */
+
+        /* 中央按鈕 */
+        .contentBox{
+            position: relative;
+            z-index: 2;
+            margin-top: 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 70px;
+            @media (max-width: 576px){
+                gap: 40px;
+            }
+            .indexBtn01{
+                width: 75px;
+                aspect-ratio: 1 / 1;
+                background-color: transparent;
+                background-image: url('/images/index/indexVideoBtn.png');
+                background-position: center 0;      /* 左上角 */
+                background-size: 100% 200%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                border: none;
+                padding: 0px;
+                transition: transform 0.2s ease;
                 &:hover {
                     background-position-y: 100%;
                 }
+                @media (max-width: 576px){
+                    width: 56.5px;
+                }
+            }
+
+            .indexBtn02{
+                width: 300px;
+                aspect-ratio: 300 / 115;
+                background-color: transparent;
+                background-image: url('/images/index/indexYYBtn.png');
+                background-position: center 0;      /* 左上角 */
+                background-size: 100% 300%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                border: none;
+                padding: 0px;
+                transition: transform 0.2s ease;
+                &:hover {
+                    background-position-y: 50%;
+                    transform: translateY(5%); 
+                }
+                @media (max-width: 576px){
+                    width: 170px;
+                    background-image: url('/images/index/Mobile/indexYYBtn.png');
+                    background-size: 100% 200%;
+                    &:hover {
+                        background-position-y: 100%;
+                    }
+                }
             }
         }
+        /* 中央按鈕 */
     }
-    /* 中央按鈕 */
+    // 混合版
+
+    
 }

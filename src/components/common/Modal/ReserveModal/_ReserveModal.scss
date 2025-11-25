@@ -1,0 +1,344 @@
+.ReserveModal{
+    width: 100%;
+    min-height: 100dvh;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;   /* 覆蓋視窗 */
+    inset: 0;          /* top/right/bottom/left: 0 */
+    z-index: 2000;     /* 確保比 header 等都高；> 1055 即可 */
+    display: flex;     /* 用 flex 置中內容（不依賴 bootstrap 的 class） */
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;             /* 🔥 遮罩本身可上下滾動 */
+    -webkit-overflow-scrolling: touch; /* iOS 慣性滾動 */
+    &.Reserve{
+        //定位效果
+        .modalDialog{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // model整體元件
+            .modalContent{
+                width: 40%;
+                height: auto;
+                aspect-ratio: 760 / 973;
+                background-color: transparent;
+                background-image: url('/images/modal/popCont1_ZRRPZRBDRPTJKTTJ.png');
+                background-position: center 0;      /* 左上角 */
+                background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                color: #ffffff;
+                @media (max-width: 992px){
+                    width: 60%;
+                    aspect-ratio: 760 / 1150;
+                    background-image: url('/images/modal/手機板/popCont1_ZRRPZRBDRPTJKTTJ2.png');
+                }
+                @media (max-width: 576px){
+                    width: 90%;
+                }
+                //model本體設定
+                .LoginModalBodySet{
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: start;
+                    // 關閉按鈕
+                    .cloneBtn{
+                        border: none;
+                        padding: 0px;
+                        background-color: transparent;
+                        position: absolute;
+                        top: 5%;
+                        left: 90%;
+                        width: 8%;
+                        height: auto;
+                        aspect-ratio: 1 / 1;
+                        transform: translate(-50%,-50%);
+                        background-color: transparent;
+                        background-image: url('/images/modal/手機板/popClose.png');
+                        background-position: center 0;      /* 左上角 */
+                        background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                        background-repeat: no-repeat;
+                    }
+                    // 關閉按鈕
+
+                    // 內容區塊
+                    .contentBox{
+                        margin-top: 20%;
+                        width: 80%;
+                        height: 80%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        flex-direction: column;
+                        
+                        // 內容群組01
+                        .topBox{
+                            width: 100%;
+                            height: auto;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            gap: 12px;
+                            // 標題外圍
+                            .titleImgBox{
+                                width: 70%;
+                                height: auto;
+                                aspect-ratio: 356 / 81;
+
+                                // 標題圖片
+                                .imgSet{
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
+                                // 標題圖片
+                            }
+                            // 標題外圍
+
+                            // 電話input群組
+                            .inputGroup {
+
+                                &.phone{
+                                    width: 100%;
+                                    height: 36px;
+                                    border-radius: 40px;
+                                    background-color: #1d1d1d;
+                                    display: flex;
+                                    justify-content: start;
+                                    align-items: center;
+
+                                    // 元件最外層
+                                    .CustomDropdown{
+                                        width: 100%;
+                                        max-width: 30%;
+                                        height: 100%;
+                                        /* 元件標頭 */
+                                        .DropdownHeader{
+                                            width: 100%;
+                                            height: 100%;
+                                            //移除小箭頭
+                                            &.dropdown-toggle::after{
+                                                content: "";
+                                                display: none;
+                                            }
+                                            //移除小箭頭
+
+                                            //自訂義label標題
+                                            .label {
+                                                width: 100%;
+                                                height: 100%;
+                                                display: flex;
+                                                justify-content: center;
+                                                align-items: center;
+                                                font-size: 16px;
+                                                font-weight: 600;
+                                                color: #ffffff;
+                                            }
+                                            //自訂義label標題
+                                        }
+                                        
+                                        /* 下拉元件範圍 */
+                                        .dropdownMenuSet{
+                                            //寬度以元件最外層為準
+                                            width: 100%;
+                                            //position以元件最外層為準
+                                            min-width:0px;
+                                            padding: 0px;
+                                            display: none;
+                                            background-color: rgb(0, 0, 0);
+                                            &.show{
+                                                display: flex;
+                                                flex-direction: column;
+                                                justify-content: start;
+                                                align-items: start;
+                                                row-gap: 2px;
+                                            }
+                                            /* 內部選項設定 */
+                                            .menuItemSet {
+                                                border: none;
+                                                width: 100%;
+                                                background-color: rgb(0, 0, 0);
+                                                color: #ffffff;
+                                                font-size: 16px;
+                                                border-radius: 8px;
+                                                cursor: pointer;
+                                                padding: 2% 0;
+                                                    &:hover {
+                                                        background-color: #f0f0f0;
+                                                        color: #000000;
+                                                    }
+                                            }
+                                        }
+                                        /* 下拉元件範圍 */
+                                    }
+                                    // 元件最外層
+
+                                    
+
+                                   
+
+                                    //自訂義input
+                                    .input{
+                                        width: 60%;
+                                        height: 80%;
+                                        padding: 0 0 0 8%;
+                                        border: none;
+                                        border-left: 2px solid #a8a8a8;
+                                        background-color: transparent;
+                                        color: #ffffff;
+                                        //input的placeholder字體顏色
+                                        &::placeholder{
+                    
+                                        }
+                                        //input的placeholder字體顏色
+
+                                        //點擊input時觸發的樣式
+                                        &:focus{
+                                            box-shadow: none;
+                                            outline: none;
+                                        }
+                                        //點擊input時觸發的樣式
+                                    }
+                                    //自訂義input
+                                }
+                                
+                            }
+                            // 電話input群組
+
+                            //合約確認input群組
+                            .inputGroup {
+
+                                &.checkBox{
+                                    width: 100%;
+                                    height: auto;
+                                    display: flex;
+                                    justify-content: start;
+                                    align-items: center;
+                                    gap: 5px;
+                                    //check本體
+                                    .input{
+                                        width: 5%;
+                                        height: auto;
+                                        aspect-ratio: 1 / 1;
+                                        border-radius: 12px;
+                                        accent-color: rgb(0, 0, 0);//打勾時背景色
+                                    }
+                                    //check本體
+
+                                    //標題
+                                    .label {
+                                        font-size: 12px;
+                                        color: #000000;
+                                        cursor: pointer;
+                                    }
+                                    //標題
+
+                                    
+                                }
+                                
+                            }
+                            //自訂義input群組
+                        }
+                        // 內容群組01
+                        
+                        // 內容群組02
+                        .bottomBox{
+                            width: 100%;
+                            height: auto;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            row-gap: 12px;
+                            //文字設定
+                            .textSet{
+                                font-size: 12px;
+                                color: #ffffff;
+                            }
+                            //文字設定
+                            
+                            // 圖片群組
+                            .imgBox{
+                                width: 100%;
+                                height: auto;
+                                display: flex;
+                                flex-wrap: wrap;
+                                justify-content: center;
+                                align-items: center;
+                                gap: 12px;
+                                
+                                .imgSet{
+                                    border: none;
+                                    padding: 0px;
+                                    width: calc(50% - 6px);
+                                    height: auto;
+                                    aspect-ratio: 250 / 64;
+                                    object-fit: cover;
+                                    background-color: transparent;
+                                    background-position: center 0;      /* 左上角 */
+                                    background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                                    background-repeat: no-repeat;
+
+                                    &.ios{
+                                        background-image: url('/images/modal/手機板/btn_ios_off.png');
+                                    }
+                                    &.android{
+                                        background-image: url('/images/modal/手機板/btn_Android_off.png');
+                                    }
+                                    &.pc{
+                                        background-image: url('/images/modal/手機板/btn_pc_off.png');
+                                    }
+                                    &.ps{
+                                        background-image: url('/images/modal/手機板/btn_ps_off.png');
+                                    }
+
+                                    &.active{
+
+                                        &.ios{
+                                            background-image: url('/images/modal/手機板/btn_ios_on.png');
+                                        }
+                                        &.android{
+                                            background-image: url('/images/modal/手機板/btn_Android_on.png');
+                                        }
+                                        &.pc{
+                                            background-image: url('/images/modal/手機板/btn_pc_on.png');
+                                        }
+                                        &.ps{
+                                            background-image: url('/images/modal/手機板/btn_ps_on.png');
+                                        }
+                                    }
+                                }
+                            }
+                            // 圖片群組
+                            
+                            // 送出按鈕設定
+                            .btnSet{
+                                border: none;
+                                padding: 0px;
+                                width: 100%;
+                                height: auto;
+                                aspect-ratio: 504 / 77;
+                                background-color: transparent;
+                                background-image: url('/images/modal/手機板/yySubmit.png');
+                                background-position: center 0;      /* 左上角 */
+                                background-size: 100% 200%;    /* 寬度填滿，高度等比 */
+                                background-repeat: no-repeat;
+                                &:hover {
+                                    background-position-y: 100%;
+                                }
+                            }
+                            // 送出按鈕設定
+
+                        }
+                        // 內容群組02
+                        
+                    }
+                    // 內容區塊
+
+                    
+                }
+            }
+        }
+    }  
+}
