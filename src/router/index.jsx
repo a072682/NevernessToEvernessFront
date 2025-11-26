@@ -10,6 +10,8 @@ import CityPage from '../pages/city/CityPage';
 import NotFound from '../pages/NotFound';
 import Page0 from '../pages/Page0';
 import Page1 from '../pages/Page1';
+import ReservePage from '../pages/reserve/reservePage';
+
 
 
 
@@ -42,6 +44,10 @@ const router = createHashRouter([ //createHashRouter為建立router的方法
             {
                 path: "city",
                 element: <CityPage />,
+            },
+            {
+                path: "reserve",
+                element: <ReservePage />,
             },
 			{
                 path: "Page0",

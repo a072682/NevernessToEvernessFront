@@ -303,29 +303,36 @@ function CharacterPage (){
                             {/* 側邊面板 */}
 
                             {/* 側邊tab選項 */}
-                            <div className='tabCircleImg'>
-                                {/* Tab 選單區 */}
-                                <Nav className='tab-box'>
+                            <div className='tabCircleImgShowBox'>
+                                <div className='widthBox'>
+                                    <div className='heightBox'>
+                                        <div className='tabCircleImg'>
+                                            {/* Tab 選單區 */}
+                                            <Nav className='tab-box'>
+                                            
+                                                {/* 選項按鈕外層 */}
+                                                <Nav.Item className='tab-item'>
+                                                    {
+                                                        tabData?.map((item)=>{
+                                                            return(
+                                                                //{/* 選項按鈕本體 */}
+                                                                <Nav.Link   key={item.key}
+                                                                            className={`tab-link ${item.class}`}
+                                                                            aria-disabled="true"
+                                                                            eventKey={item.key}>
+                                                                </Nav.Link>
+                                                                //{/* 選項按鈕本體 */}
+                                                            )
+                                                        }) 
+                                                    }
+                                                </Nav.Item>
+                                                {/* 選項按鈕外層 */}
+                                            </Nav>
+                                            {/* Tab 選單區 */}
+                                        </div>
+                                    </div>
+                                </div>
                                 
-                                    {/* 選項按鈕外層 */}
-                                    <Nav.Item className='tab-item'>
-                                        {
-                                            tabData?.map((item)=>{
-                                                return(
-                                                    //{/* 選項按鈕本體 */}
-                                                    <Nav.Link   key={item.key}
-                                                                className={`tab-link ${item.class}`}
-                                                                aria-disabled="true"
-                                                                eventKey={item.key}>
-                                                    </Nav.Link>
-                                                    //{/* 選項按鈕本體 */}
-                                                )
-                                            }) 
-                                        }
-                                    </Nav.Item>
-                                    {/* 選項按鈕外層 */}
-                                </Nav>
-                                {/* Tab 選單區 */}
                             </div>
                             {/* 側邊tab選項 */}
 
@@ -385,25 +392,28 @@ function CharacterPage (){
                                                                                     {/* 角色說明最外圍 */}
                                                                                     {/* 背景 */}
                                                                                     <div className='profileBox'>
-                                                                                        <div className='profileContentBox'>
-
-                                                                                            <div className='profileImgBox'>
-                                                                                                <img className='imgSet' src={itemIn.role} alt="" />
+                                                                                        <div className='profileContentShowBox'>
+                                                                                            <div className='widthBox'>
+                                                                                                <div className='heightBox'>
+                                                                                                    <div className='profileContentBox'>
+                                                                                                        <div className='profileImgBox'>
+                                                                                                            <img className='imgSet' src={itemIn.role} alt="" />
+                                                                                                        </div>
+                                                                                                        <div className='textBox'>
+                                                                                                            {
+                                                                                                                itemIn?.profile.map((text,index)=>{
+                                                                                                                    return(
+                                                                                                                        <p key={index} className='textSet'> 
+                                                                                                                            {text}
+                                                                                                                        </p>
+                                                                                                                    )
+                                                                                                                })
+                                                                                                            }
+                                                                                                            
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
                                                                                             </div>
-
-                                                                                            <div className='textBox'>
-                                                                                                {
-                                                                                                    itemIn?.profile.map((text,index)=>{
-                                                                                                        return(
-                                                                                                            <p key={index} className='textSet'> 
-                                                                                                                {text}
-                                                                                                            </p>
-                                                                                                        )
-                                                                                                    })
-                                                                                                }
-                                                                                                
-                                                                                            </div>
-                                                                                            
                                                                                         </div>    
                                                                                     </div>
                                                                                     {/* 背景 */}

@@ -1,39 +1,81 @@
 
 
-
-.leftSide{
+// 展示區塊
+.showBox{
     position: absolute;
     z-index: 2;
-    top: 75px;
+    top: 9%;
     left: 0;
-    width: auto;
-    height: calc(100% - 75px);
-    aspect-ratio: 626 / 1440;
-    background-color: transparent;
-    transform: translate(-60%, 0);
-    background-position: center 0;      /* 左上角 */
-    background-size: 100% 100%;    /* 寬度填滿，高度等比 */
-    background-repeat: no-repeat;
-    background-image: url('/images/character/aside_yy.png');
+    width: 20%;
+    height: calc(100% - 9%);
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: start;
+    align-items: center;
     pointer-events: none;
+    // 檢測寬度
+    .widthBox{
+        width: 100%;
+        height: auto;
+        aspect-ratio: 230 / 1440;
+        max-width: 100%;
+        max-height: 100%;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        // 檢測高度
+        .heightBox{
+            width: auto;
+            height: 100%;
+            aspect-ratio: 230 / 1440;
+            max-width: 100%;
+            max-height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // 元件本體
+            .leftSide{
+                position: relative;
+                width: 100%;
+                height: 100%;
+                background-color: transparent;
+                background-position: center 0;      /* 左上角 */
+                background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                background-image: url('/images/character/aside_yy02.png');
 
-    .leftSideBtn{
-        position: absolute;
-        top:11.5%;
-        left:auto;
-        right:12%;
-        border: none;
-        padding: 0px;
-        width: 21%;
-        aspect-ratio: 144 / 341;
-        background-color: transparent;
-        background-position: 0 0;      /* 左上角 */
-        background-size: 200% 100%;    /* 寬度填滿，高度等比 */
-        background-repeat: no-repeat;
-        background-image: url('/images/character/aside_yyBtn.png');
-        pointer-events: auto;
-        &:hover {
-            background-position-x: 100%;
+                // 元件按鈕
+                .leftSideBtn{
+                    position: absolute;
+                    top:23%;
+                    left:40%;
+                    border: none;
+                    padding: 0px;
+                    width: 62%;
+                    height: auto;
+                    aspect-ratio: 144 / 341;
+                    transform: translate(-50%,-50%);
+                    background-color: transparent;
+                    background-position: 0 0;      /* 左上角 */
+                    background-size: 200% 100%;    /* 寬度填滿，高度等比 */
+                    background-repeat: no-repeat;
+                    background-image: url('/images/character/aside_yyBtn.png');
+                    pointer-events: auto;
+                    &:hover {
+                        background-position-x: 100%;
+                    }
+                }
+                // 元件按鈕
+            }
+            // 元件本體
+
+            
         }
+        // 檢測高度
     }
+    // 檢測寬度
 }
+
+

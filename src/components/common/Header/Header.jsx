@@ -81,9 +81,14 @@ function Header(){
                 {/* /*內容本體區塊*/}
                 <div className='navbar-box'>
                     {/* 左上角 Logo */}
-                    <Link to="/" className='navbarLogo-box'>
+                    <Link to="/reserve" className='navbarLogo-box'>
                         <div className="navbarLogoImgBox">
-                            <img className="navbarLogoImg-set" src="/images/header/NTE_logo.png" alt="home-section2-1" />
+                            <div className="widthBox">
+                                <div className="heightBox">
+                                    <img className="navbarLogoImg-set" src="/images/header/NTE_logo.png" alt="home-section2-1" />
+                                </div>
+                            </div>
+                            
                         </div>
                     </Link>
                     {/* 左上角 Logo */}
@@ -151,12 +156,34 @@ function Header(){
                     <div className="navbarMbBox d-flex d-lg-none">
                         {/* lg 以下按鈕區塊 */}
                             
+                            <div className="loginShowBox">
+                                <div className="widthBox">
+                                    <div className="heightBox">
+                                        <button className="loginBox"></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="musicShowBox">
+                                <div className="widthBox">
+                                    <div className="heightBox">
+                                        <button className="musicBox"></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="MenuIconBtnShowBox">
+                                <div className="widthBox">
+                                    <div className="heightBox">
+                                        <button className={`MenuIconBtn-set ${onOpen?("active"):("")}`} onClick={()=>{setOnOpen(!onOpen)}}></button>
+                                    </div>
+                                </div>
+                            </div>
                             
-                            <button className="loginBox"></button>
                         
-                            <button className="musicBox"></button>
+                            
                         
-                            <button className={`MenuIconBtn-set ${onOpen?("active"):("")}`} onClick={()=>{setOnOpen(!onOpen)}}></button>
+                            
                             
                             
                         

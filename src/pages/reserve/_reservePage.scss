@@ -1,0 +1,320 @@
+
+// 元件最外圍
+.reservePage{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    background-color: #202020;
+    // 混合板
+    .reservePageBg{
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .mainBox{
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: calc(100vh - 9%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @media (max-width: 992px) {
+            // align-items: start;
+        }
+        // 內容區塊
+        .contentBox{
+            background-color: red;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            @media (max-width: 992px) {
+                justify-content: end;
+                height: 100%;
+            }
+            &::before,&::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                height: 2px;
+                background: #7d7d7d;
+                @media (max-width: 992px) {
+                    top: 80%;
+                }
+            }
+            &::before{
+                left: 0;
+                width: 35%;
+                @media (max-width: 992px) {
+                    width: 30%;
+                }
+            }
+            &::after{
+                right: 0;
+                width: 35%;
+                @media (max-width: 992px) {
+                    width: 30%;
+                }
+            }
+            .iconBox{
+                width: 25%;
+                height: auto;
+                position: relative;
+                z-index: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 3%;
+                @media (max-width: 992px) {
+                    flex: 1 1 0;
+                    width: 100%;
+                    background-color: aquamarine;
+                    // width: 40%;
+                    // margin-bottom: 5%;
+                }
+                .iconSet{
+                    width: 12%;
+                    height: auto;
+                    aspect-ratio: 1 / 1;
+                    background-color: transparent;
+                    background-image: url('/images/footer/otherPlatform.png');
+                    background-position-y: 0%;
+                    background-position-x: 0%;      /* 左上角 */
+                    background-size: 1200% 200%;    /* 寬度填滿，高度等比 */
+                    background-repeat: no-repeat;
+                    border: none;
+                    padding: 0px;
+                    transition: transform 0.2s ease;
+                    &:hover {
+                        background-position-y: 100%;
+                    }
+                    @media (max-width: 992px) {
+                        display: none;
+                    }
+                    // @media (max-width: 576px){
+                    //     width: 33px;
+                    //     background-image: url('/images/footer/Mobile/otherPlatform2.png');
+                    // }
+
+                    &.active {
+                        background-position-y: 100%;
+                    }
+                    &.X{
+                        background-position-x: 0%;
+                    }
+                    &.faceBook{
+                        background-position-x: 11%;
+                    }
+                    &.youtube{
+                        background-position-x: 22%;
+                    }
+                    &.discord{
+                        background-position-x: 33%;
+                    }
+                    &.reddit{
+                        background-position-x: 44.5%;
+                    }
+                    &.instagram{
+                        background-position-x: 55.5%;
+                    }
+                    &.playStation{
+                        background-position-x: 66.5%;
+                    }
+                    &.line{
+                        background-position-x: 78%;
+                    }
+                    &.netFlix{
+                        background-position-x: 89%;
+                    }
+                    &.kakaoTalk{
+                        background-position-x: 100%;
+                    }
+                }
+
+                .reserveBtnSet{
+                    position: absolute;
+                    z-index: 0;
+                    top: auto;
+                    bottom: 110%;
+                    left: 50%;
+                    width: 150%;
+                    height: auto;
+                    aspect-ratio: 739 / 161;
+                    padding: 0px;
+                    border: none;
+                    background-color: transparent;
+                    transform: translateX(-50%);
+                    background-image: url('/images/reserve/pageEggshellYY.png');
+                    background-position-y: 0%;
+                    background-position-x: 0%;      /* 左上角 */
+                    background-size: 100% 300%;    /* 寬度填滿，高度等比 */
+                    background-repeat: no-repeat;
+                    &:hover {
+                        background-position-y: 50%;
+                    }
+                }
+
+                .reserveTitleImgSet{
+                    position: absolute;
+                    z-index: 0;
+                    top: 130%;
+                    left: 50%;
+                    width: 110%;
+                    height: auto;
+                    aspect-ratio: 550 / 37;
+                    padding: 0px;
+                    border: none;
+                    background-color: transparent;
+                    transform: translateX(-50%);
+                    background-image: url('/images/reserve/eggSlogan.png');
+                    background-position-y: 0%;
+                    background-position-x: 0%;      /* 左上角 */
+                    background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                    background-repeat: no-repeat;
+                }
+            }
+            .maskBox{
+                display: none;
+                @media (max-width: 992px) {
+                    display: block;
+                    flex: 0 0 auto;
+                    background-color: aqua;
+                    width: 100%;
+                    height: auto;
+                    aspect-ratio: 741 / 616;
+                }
+            }
+        }
+        // 內容區塊
+
+        .cordonImgSet{
+            position: absolute;
+            z-index: 3;
+            top: auto;
+            bottom: 0%;
+            left: 0%;
+            width: 100%;
+            height: 2%;
+            background-color: transparent;
+            background-image: url('/images/reserve/warningStrip.png');
+            background-repeat: round;
+            background-size: auto 100%;
+        }
+        // 角色貼圖區塊
+        .characterImgSet{
+            position: absolute;
+            z-index: 2;
+            top: auto;
+            bottom: 0%;
+            left: 50%;
+            width: 60%;
+            height: 30%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: end;
+            @media (max-width: 992px) { 
+                width: 100%;
+                height: 100%;
+            }
+            // 偵測寬度
+            .widthBox{
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1500 / 575;
+                max-width: 100%;
+                max-height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                @media (max-width: 992px) { 
+                    aspect-ratio: 741 / 616;
+                }
+                // 偵測高度
+                .heightBox{
+                    width: auto;
+                    height: 100%;
+                    aspect-ratio: 1500 / 575;
+                    max-width: 100%;
+                    max-height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    @media (max-width: 992px) { 
+                        aspect-ratio: 741 / 616;
+                    }
+                    // 圖片本體
+                    .imgBox{
+                        width: 100%;
+                        height: 100%;
+                        background-color: transparent;
+                        background-image: url('/images/reserve/eggPet.png');
+                        background-position-y: 0%;
+                        background-position-x: 0%;      /* 左上角 */
+                        background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                        background-repeat: no-repeat;
+                        @media (max-width: 992px) { 
+                            background-image: url('/images/reserve/手機板/eggPet (1).png');
+                        }
+                    }
+                    // 圖片本體
+                }
+                // 偵測高度
+            }
+            // 偵測寬度
+        }
+        // 角色貼圖區塊
+
+        // 跑馬燈外框
+        .MarqueeSet {
+            position: absolute;
+            z-index: 1;
+            top: auto;
+            bottom: 0%;
+            left: 0%;
+            width: 100%;
+            height: 25%;
+            overflow: hidden;
+            // 跑馬燈內容
+            .track {
+                width: 200%;
+                height: 100%;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                animation: marqueeImgX 12s linear infinite;
+
+                @keyframes marqueeImgX {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+
+                // 內容外框
+                .contentBox{
+                    width: 100%;
+                    height: 100%;
+                    background-image: url('/images/reserve/eggBottom.png');
+                    // 自動調整重複次數，頭尾完整
+                    background-repeat: round;
+                    //以容器高度為準
+                    background-size: auto 100%;
+                }
+            }
+        }
+        // 跑馬燈外框
+    }
+    // 混合板
+}
+// 元件最外圍

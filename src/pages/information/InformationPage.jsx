@@ -163,7 +163,12 @@ function InformationPage (){
                             </div>
                                     
                             <div className="rightBox">
-                                <div className='newsBox'>
+                                <div className='newsShowBox'>
+                                    {/* <div className='widthBox'>
+                                        <div className='heightBox'>
+
+                                        </div>
+                                    </div> */}
                                     <div className='newsTitleBox'>
                                         <img className='newsTitleImgSet' src="/images/information/newsHead.png" alt="" />
                                         <div className='newsTitleItemBox'>
@@ -207,8 +212,7 @@ function InformationPage (){
                                         }
                                     </div>
                                 </div>
-                            </div>
-                                
+                            </div>    
                         </div>
                     </div>
                 )}

@@ -25,11 +25,12 @@
 
         .mainBox{
             z-index: 1;
-            width: calc(100% - 146px);
-            height: calc(100vh - 75px);
+            width: calc(100% - 10%);
+            height: calc(100vh - 9%);
             display: flex;
             justify-content: center;
             align-items: center;
+
             .leftBox{
                 width: 100%;
                 min-width: 0%;
@@ -241,13 +242,38 @@
 
                     .newsItemsBox{
                         width: 100%;
-                        height: auto;
-                        margin-top: 24px;
+                        height: 10%;
+                        margin-top: 5%;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
-                        gap: 12px;
+                        overflow: hidden;
+                        overflow-y: auto;   // ← 讓右側捲軸出現
+                        overflow-x: hidden; // ← 水平不要捲軸
+                        flex-shrink: 0; //不允許這個元素被壓縮
+                        // 捲軸的寬度
+                        &::-webkit-scrollbar {
+                            width: 8px;
+                        }
+
+                        // 捲軸的軌道（背景）
+                        &::-webkit-scrollbar-track {
+                            background: transparent;
+                            border-radius: 4px;
+                        }
+
+                        // 捲軸本體（可以拉動的部分）
+                        &::-webkit-scrollbar-thumb {
+                            background: #999;
+                            border-radius: 4px;
+                        }
+
+                        // 滑鼠 hover 在捲軸上
+                        &::-webkit-scrollbar-thumb:hover {
+                            background: #999;
+                        }
+
                         .newsItem{
                             width: 98%;
                             height: auto;
@@ -301,6 +327,8 @@
                     
                 }
             }
+            
+            
         }
     }
     // 桌面板
