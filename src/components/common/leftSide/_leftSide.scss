@@ -6,7 +6,7 @@
     z-index: 2;
     top: 9%;
     left: 0;
-    width: 20%;
+    width: 10%;
     height: calc(100% - 9%);
     max-width: 100%;
     max-height: 100%;
@@ -15,67 +15,84 @@
     justify-content: start;
     align-items: center;
     pointer-events: none;
-    // 檢測寬度
-    .widthBox{
-        width: 100%;
-        height: auto;
+    
+    // 檢測高度
+    .heightBox{
+        width: auto;
+        height: 100%;
         aspect-ratio: 230 / 1440;
         max-width: 100%;
         max-height: 100%;
         display: flex;
-        justify-content: start;
+        justify-content: center;
         align-items: center;
-        // 檢測高度
-        .heightBox{
-            width: auto;
+        // 元件本體
+        .leftSide{
+            // position: absolute;
+            // top: 0;
+            // left: 0;
+            position: relative;
+            width: 100%;
             height: 100%;
-            aspect-ratio: 230 / 1440;
-            max-width: 100%;
-            max-height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            // 元件本體
-            .leftSide{
-                position: relative;
-                width: 100%;
-                height: 100%;
+            background-color: transparent;
+            background-position: center 0;      /* 左上角 */
+            background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+            background-repeat: no-repeat;
+            background-image: url('/images/character/aside_yy02.png');
+
+            // 元件按鈕
+            .leftSideBtn{
+                position: absolute;
+                top:23%;
+                left:40%;
+                border: none;
+                padding: 0px;
+                width: 62%;
+                height: 25%;
+                //aspect-ratio: 144 / 341;
+                transform: translate(-50%,-50%);
                 background-color: transparent;
-                background-position: center 0;      /* 左上角 */
-                background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                background-position: 0 0;      /* 左上角 */
+                background-size: 200% 100%;    /* 寬度填滿，高度等比 */
                 background-repeat: no-repeat;
-                background-image: url('/images/character/aside_yy02.png');
-
-                // 元件按鈕
-                .leftSideBtn{
-                    position: absolute;
-                    top:23%;
-                    left:40%;
-                    border: none;
-                    padding: 0px;
-                    width: 62%;
-                    height: auto;
-                    aspect-ratio: 144 / 341;
-                    transform: translate(-50%,-50%);
-                    background-color: transparent;
-                    background-position: 0 0;      /* 左上角 */
-                    background-size: 200% 100%;    /* 寬度填滿，高度等比 */
-                    background-repeat: no-repeat;
-                    background-image: url('/images/character/aside_yyBtn.png');
-                    pointer-events: auto;
-                    &:hover {
-                        background-position-x: 100%;
-                    }
+                background-image: url('/images/character/aside_yyBtn.png');
+                pointer-events: auto;
+                &:hover {
+                    background-position-x: 100%;
                 }
-                // 元件按鈕
             }
-            // 元件本體
-
-            
+            // 元件按鈕
         }
-        // 檢測高度
+        // 元件本體
     }
-    // 檢測寬度
+    // 檢測高度
+
+    
+        
 }
 
 
+// // 檢測寬度
+//     .widthBox{
+//         width: 100%;
+//         height: auto;
+//         aspect-ratio: 230 / 1440;
+//         max-width: 100%;
+//         max-height: 100%;
+//         display: flex;
+//         justify-content: start;
+//         align-items: center;
+//         // 檢測高度
+//         .heightBox{
+//             width: auto;
+//             height: 100%;
+//             aspect-ratio: 230 / 1440;
+//             max-width: 100%;
+//             max-height: 100%;
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//         }
+//     // 檢測高度
+// }
+// // 檢測寬度

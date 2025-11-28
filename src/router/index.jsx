@@ -11,6 +11,8 @@ import NotFound from '../pages/NotFound';
 import Page0 from '../pages/Page0';
 import Page1 from '../pages/Page1';
 import ReservePage from '../pages/reserve/reservePage';
+import NewListPage from '../pages/newsList/NewsListPage';
+import NewsPage from '../pages/news/NewsPage';
 
 
 
@@ -48,6 +50,14 @@ const router = createHashRouter([ //createHashRouter為建立router的方法
             {
                 path: "reserve",
                 element: <ReservePage />,
+            },
+            {
+                path: "newsList",
+                element: <NewListPage />,
+            },
+            {
+                path: "news",
+                element: <NewsPage />,
             },
 			{
                 path: "Page0",

@@ -7,9 +7,9 @@ function LeftSide (){
     return(
         <>
             {/* 展示區塊 */}
-            <div className='showBox'>
+            <div className='showBox d-none d-lg-flex'>
                 {/* 檢測寬度 */}
-                <div className='widthBox'>
+                {/* <div className='widthBox'> */}
                     {/* 檢測高度 */}
                     <div className='heightBox'>
                         {/* 元件本體 */}
@@ -19,10 +19,9 @@ function LeftSide (){
                             {/* 元件按鈕 */}
                         </div>
                         {/* 元件本體 */}
-                        
                     </div>
                     {/* 檢測高度 */}
-                </div>
+                {/* </div> */}
                 {/* 檢測寬度 */}
             </div>
             {/* 展示區塊 */}

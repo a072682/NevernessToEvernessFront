@@ -14,7 +14,9 @@ function IndexPage (){
 
     return(
         <>
+            {/* 元件最外圍 */}
             <section className="index">
+                {/* 混合版內容 */}
                 <div className='indexPage'>
                     {/* lg以上背景影片 */}
                     <video
@@ -43,19 +45,29 @@ function IndexPage (){
 
                     {/* 中央按鈕 */}
                     <div className='contentBox'>
+                        {/* 中央按鈕01 */}
                         <button className='indexBtn01'></button>
+                        {/* 中央按鈕01 */}
+
+                        {/* 中央按鈕02 */}
                         <button className='indexBtn02'
                                 type='button'
                                 onClick={()=>{dispatch(open(MODALS.ReserveModal));}}
                         >
-
                         </button>
+                        {/* 中央按鈕02 */}
                     </div>
                     {/* 中央按鈕 */}
+                    {/* footr內容 */}
                     <Footer />
+                    {/* footr內容 */}
                 </div>
+                {/* 混合版內容 */}
             </section>
-            
+            {/* 元件最外圍 */}
+            {/* 提示畫面 */}
+            <div className="landscapeBlocker">請將手機旋轉至直向模式</div>
+            {/* 提示畫面 */}
         </>
     )
 }

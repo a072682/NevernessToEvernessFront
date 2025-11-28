@@ -559,6 +559,10 @@
     }
     /*內容本體區塊*/
 
+    @media screen and (orientation: landscape) and (max-width: 900px) {
+        display: none;
+    }
+
 }
 /* 元件最外圍 */
 

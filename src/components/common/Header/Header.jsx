@@ -81,7 +81,7 @@ function Header(){
                 {/* /*內容本體區塊*/}
                 <div className='navbar-box'>
                     {/* 左上角 Logo */}
-                    <Link to="/reserve" className='navbarLogo-box'>
+                    <Link to="/newsList" className='navbarLogo-box'>
                         <div className="navbarLogoImgBox">
                             <div className="widthBox">
                                 <div className="heightBox">
@@ -179,14 +179,6 @@ function Header(){
                                     </div>
                                 </div>
                             </div>
-                            
-                        
-                            
-                        
-                            
-                            
-                            
-                        
                         {/* lg 以下按鈕區塊 */}
                     </div>
                     

@@ -1,6 +1,6 @@
 
 
-
+//元件最外圍
 .footer{
     width: 100%;
     height: 20%;
@@ -18,7 +18,7 @@
     @media (max-width: 992px){
         height: 100%;
     }
-
+    //桌面板背景
     .footerBgImgSet{
         position: absolute;
         width: 100%;
@@ -28,7 +28,9 @@
         pointer-events: none;
         z-index: 0;
     }
+    //桌面板背景
 
+    //主內容區塊
     .footerContentBox{
         width: 100%;
         height: 50%;
@@ -42,19 +44,24 @@
             height: 100%;
             padding: 0px;
             justify-content: end;
-            align-items: start;
-            
+            align-items: center;
         }
+        //logo圖片外圍
         .logoBox{
             width: 6%;
             height: auto;
             aspect-ratio: 94 / 43;
+            // logo圖片
             .logoImgSet{
                 width: 100%;
                 height: auto;
                 object-fit: cover;
             }
+            // logo圖片
         }
+        //logo圖片外圍
+
+        //icon區塊
         .iconBox{
             margin-right: auto;
             display: flex;
@@ -66,6 +73,7 @@
                 flex-direction: column;
                 margin-right: 0px;
             }
+            //icon設定
             .iconSet{
                 width: 42px;
                 height: auto;
@@ -121,16 +129,25 @@
                     background-position-x: 100%;
                 }
             }
+            //icon設定
         }
-        .titleBox{
+        //icon區塊
+
+        //子標題外圍
+        .subTitleBox{
             width: 422px;
             height: auto;
             aspect-ratio: 662 / 43;
-            .titleImgSet{
+            //子標題圖片設定
+            .subTitleImgSet{
                 width: 100%;
                 height: auto;
                 object-fit: cover;
             }
+            //子標題圖片設定
         }
+        //子標題外圍
     }
+    //主內容區塊
 }
+//元件最外圍

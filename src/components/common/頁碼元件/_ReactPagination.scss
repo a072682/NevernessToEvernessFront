@@ -1,0 +1,66 @@
+
+
+// 元件最外層
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+
+    margin: 0px;
+    gap:4px;
+
+    // 頁碼外圍
+    .page-item {
+        width: 100%;
+        height: auto;
+        //頁碼禁按狀態
+        &.disabled{
+            display: none;
+            //頁碼內部的icon
+            .material-symbols-outlined{
+                color: #909090;
+            }
+            //頁碼內部的icon
+        }
+        //頁碼禁按狀態
+
+        //被選擇的狀態
+        &.active{
+
+            .page-link{
+                background-color: transparent;
+                border-color: rgb(124, 236, 252);
+                color: rgb(124, 236, 252);
+            }
+        }
+        //被選擇的狀態
+
+
+        //頁碼本體
+        .page-link{
+            cursor: pointer;
+            color: #ffffff;
+            display: flex ;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            font-size: 16px;
+            background-color: transparent;
+            border-radius: 0px;
+            padding: 0px;
+            //頁碼內部的icon
+            .material-symbols-outlined{
+                font-size: 24px;
+            }
+            //頁碼內部的icon
+        }
+        //頁碼本體
+    }
+    // 頁碼外圍
+
+}
+// 元件最外層
+  

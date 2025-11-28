@@ -13,6 +13,10 @@ import LeftSide from '../../components/common/leftSide/LeftSide';
 
 function CharacterPage (){
 
+    //#region 
+    //#endregion
+
+    //#region 解析度判斷
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 992);
 
     useEffect(() => {
@@ -23,269 +27,310 @@ function CharacterPage (){
         window.addEventListener("resize", resizeHandler);
         return () => window.removeEventListener("resize", resizeHandler);
     }, []);
+    //#endregion
 
-    // 縮圖輪播顯示資料
-    const ThumbSwiperData01 = [
-        {
-            id:"1-1",
-            imgSm:`/images/character/factions1_nav1.jpg`,
-            role:`/images/character/factions1_role1_des.png`,
-            profile:[
-                "古董店「伊波恩」的一號台柱，橋間地最有名望的家族老大，海特洛市前途無量的異能者之星！",
-                "穩重威嚴，慷慨仁慈，睿智冷靜。",
-                "曾參與「團三郎的復仇」「棉絨絨魔王對決」「V級暴怒GR雲危機」等多起大型異象收容、泯除行動，以一招「柯林斯終極幽魂暗影裂空霆焰魔拳」掃蕩四方，從無敗績！",
-            ],
-            video:`/images/character/nte_pbgv_nanali_20250513_opt.webm`,
-        },
-        {
-            id:"1-2",
-            imgSm:`/images/character/factions1_nav2.jpg`,
-            role:`/images/character/factions1_role2_des.png`,
-            profile:[
-                "「第一，不準給鬼郎丸亂餵東西！",
-                "第二，不準低頭看人！",
-                "第三，不準打開冰箱冷藏室第三格！」",
-                "早霧，古董店「伊波恩」冰箱便利貼規則制定者——",
-                "雖然到現在，真正遵循的人……咳，屈指可數。",
-                "要是惹惱了早霧，記得提防她那把名叫「鬼郎丸」的異象巨錘，別靠得太近……",
-                "「什麼東西被吞了，又或是被咬了屁股，伊波恩古董店概不負責。」",
-            ],
-            video:`/images/character/nte_pbgv_zaowu_20250513_opt.webm`,
-        },
-        {
-            id:"1-3",
-            imgSm:`/images/character/factions1_nav3.jpg`,
-            role:`/images/character/factions1_role3_des.png`,
-            profile:[
-                "對各類異象的「奇點」有著敏銳的洞察力，由空白與謎團中現身的異能者。",
-                "接受了管理局的安排，作為新進的「鑒定師」，加入到了（經營狀況不容樂觀的）古董店兼異象獵人團體「伊波恩」。",
-                "似乎還未取得異象獵人資格證……在這種情況下展開工作真的沒問題嗎？",
-                "「哎呀，要說完全合規的東西，恐怕我們店里根本數不上幾件，不也照樣還能開業嗎？像招財寶這樣有潛力的店員呀，稍稍有那麽一點點不合規，不會有問題的！」",
-                "……既然店長潯都這麽說了，就安心地放眼接下來繽紛多彩的都市生活吧！",
-            ],
-            video:`/images/character/nte_pbgv_nanzhu_20250621_opt.webm`,
-        },
-        {
-            id:"1-4",
-            imgSm:`/images/character/factions1_nav4.jpg`,
-            role:`/images/character/factions1_role3_des.png`,
-            profile:[
-                "對各類異象的「奇點」有著敏銳的洞察力，由空白與謎團中現身的異能者。",
-                "接受了管理局的安排，作為新進的「鑒定師」，加入到了（經營狀況不容樂觀的）古董店兼異象獵人團體「伊波恩」。",
-                "似乎還未取得異象獵人資格證……在這種情況下展開工作真的沒問題嗎？",
-                "「哎呀，要說完全合規的東西，恐怕我們店里根本數不上幾件，不也照樣還能開業嗎？像招財寶這樣有潛力的店員呀，稍稍有那麽一點點不合規，不會有問題的！」",
-                "……既然店長潯都這麽說了，就安心地放眼接下來繽紛多彩的都市生活吧！",
-            ],
-            video:`/images/character/nte_pbgv_nvzhu_20250621_opt.webm`,
-        },
-    ];
+    //#region 桌面板輪播相關
 
-    const w_ThumbSwiperData01 = [...ThumbSwiperData01,...ThumbSwiperData01];
+        //#region 桌面板輪播顯示資料
+            const ThumbSwiperData01 = [
+                {
+                    id:"1-1",
+                    imgSm:`/images/character/factions1_nav1.jpg`,
+                    role:`/images/character/factions1_role1_des.png`,
+                    profile:[
+                        "古董店「伊波恩」的一號台柱，橋間地最有名望的家族老大，海特洛市前途無量的異能者之星！",
+                        "穩重威嚴，慷慨仁慈，睿智冷靜。",
+                        "曾參與「團三郎的復仇」「棉絨絨魔王對決」「V級暴怒GR雲危機」等多起大型異象收容、泯除行動，以一招「柯林斯終極幽魂暗影裂空霆焰魔拳」掃蕩四方，從無敗績！",
+                    ],
+                    video:`/images/character/nte_pbgv_nanali_20250513_opt.webm`,
+                },
+                {
+                    id:"1-2",
+                    imgSm:`/images/character/factions1_nav2.jpg`,
+                    role:`/images/character/factions1_role2_des.png`,
+                    profile:[
+                        "「第一，不準給鬼郎丸亂餵東西！",
+                        "第二，不準低頭看人！",
+                        "第三，不準打開冰箱冷藏室第三格！」",
+                        "早霧，古董店「伊波恩」冰箱便利貼規則制定者——",
+                        "雖然到現在，真正遵循的人……咳，屈指可數。",
+                        "要是惹惱了早霧，記得提防她那把名叫「鬼郎丸」的異象巨錘，別靠得太近……",
+                        "「什麼東西被吞了，又或是被咬了屁股，伊波恩古董店概不負責。」",
+                    ],
+                    video:`/images/character/nte_pbgv_zaowu_20250513_opt.webm`,
+                },
+                {
+                    id:"1-3",
+                    imgSm:`/images/character/factions1_nav3.jpg`,
+                    role:`/images/character/factions1_role3_des.png`,
+                    profile:[
+                        "對各類異象的「奇點」有著敏銳的洞察力，由空白與謎團中現身的異能者。",
+                        "接受了管理局的安排，作為新進的「鑒定師」，加入到了（經營狀況不容樂觀的）古董店兼異象獵人團體「伊波恩」。",
+                        "似乎還未取得異象獵人資格證……在這種情況下展開工作真的沒問題嗎？",
+                        "「哎呀，要說完全合規的東西，恐怕我們店里根本數不上幾件，不也照樣還能開業嗎？像招財寶這樣有潛力的店員呀，稍稍有那麽一點點不合規，不會有問題的！」",
+                        "……既然店長潯都這麽說了，就安心地放眼接下來繽紛多彩的都市生活吧！",
+                    ],
+                    video:`/images/character/nte_pbgv_nanzhu_20250621_opt.webm`,
+                },
+                {
+                    id:"1-4",
+                    imgSm:`/images/character/factions1_nav4.jpg`,
+                    role:`/images/character/factions1_role3_des.png`,
+                    profile:[
+                        "對各類異象的「奇點」有著敏銳的洞察力，由空白與謎團中現身的異能者。",
+                        "接受了管理局的安排，作為新進的「鑒定師」，加入到了（經營狀況不容樂觀的）古董店兼異象獵人團體「伊波恩」。",
+                        "似乎還未取得異象獵人資格證……在這種情況下展開工作真的沒問題嗎？",
+                        "「哎呀，要說完全合規的東西，恐怕我們店里根本數不上幾件，不也照樣還能開業嗎？像招財寶這樣有潛力的店員呀，稍稍有那麽一點點不合規，不會有問題的！」",
+                        "……既然店長潯都這麽說了，就安心地放眼接下來繽紛多彩的都市生活吧！",
+                    ],
+                    video:`/images/character/nte_pbgv_nvzhu_20250621_opt.webm`,
+                },
+            ];
 
-    const ThumbSwiperData02 = [
-        {
-            id:"2-1",
-            imgSm:`/images/character/factions2_nav1.jpg`,
-            role:`/images/character/factions2_role1_des.png`,
-            profile:[
-                "異象管理局收容二組預備幹部，同事街坊人名辭典，海特洛市平價美食活地圖。",
-                "從總務處不苟言笑的財務姐姐到員工食堂的手抖大叔，從卜多力小屋的寡言大將到DSD潮玩店的熱情店員，都能上前大聊特聊……當然，是工作外的時間！",
-                "什麼都可以漫天發散，沒有他接不住的話題……大概。",
-                "異象管理局每次收容安全考試的成績除外。",
-            ],
-            video:`/images/character/nte_pbgv_bohe_20250513_opt.webm`,
-        },
-        {
-            id:"2-2",
-            imgSm:`/images/character/factions2_nav2.jpg`,
-            role:`/images/character/factions2_role2_des.png`,
-            profile:[
-                "「親眼所見！那小姑娘把販賣機橫著一抬，隨手晃了晃，就把裡面的番茄醬通通搖了出來。」",
-                "「噢？不會用自動販賣機？真是缺乏生活常識的孩子呢，你怎麼不去幫幫人家？」",
-                "「那……我可不敢！要是沒認錯的話，她是E.T.D的那幫人！怪人！怪力！怪癖！總感覺隨便上去搭話，我的下場會和滿地的番茄醬一樣……」",
-                "空空的「番茄百分百」自動販賣機前，抱著滿懷番茄醬的安魂曲打了個噴嚏。",
-            ],
-            video:`/images/character/nte_pbgv_anhunqu_20250513_opt.webm`,
-        },
-        {
-            id:"2-3",
-            imgSm:`/images/character/factions2_nav3.jpg`,
-            role:`/images/character/factions2_role3_des.png`,
-            profile:[
-                "即使是在「異類眾多」的E.T.D，那位為所欲為的法莉婭小姐，也是異象管理局多數同僚難以招架的存在。",
-                "「——那次協助E.T.D四隊的收容行動中，我小聲提醒她『指令上要求不造成任何傷亡損失』，她對我笑得那麼好看，還悄悄讓我閉上眼睛……」",
-                "「我其實、其實也沒有在期待什麼……然後嘴巴就被封住了！」",
-                "「——嗚嗚嗚嗚嗚嗚……那可是我的初吻啊，怎麼就獻給了一隻剛鑽了下水道的歧骸啊！！！……」",
-                "若是平時，這位肆無忌憚的當事人或許還有心情再去逗弄那些亂了陣腳的可憐蟲，但當一個更能讓她血脈噴張目眩神迷的獵物閃現在她的獵場時——",
-                "「啊啊~你又能讓我享用到怎樣的痛楚呢？真是令人，無比期待啊！」",
-            ],
-            video:`/images/character/nte_pbgv_fadiya_20250513_opt.webm`,
-        },
-        {
-            id:"2-4",
-            imgSm:`/images/character/factions2_nav4.jpg`,
-            role:`/images/character/factions2_role4_des.png`,
-            profile:[
-                "異象管理局E.T.D四隊隊長，白藏——隨性散漫，出言無狀，工作摸魚大師，麻煩制造機。",
-                "在管理局內部的神秘唄果社群中，大家正討論「誰是E.T.D中最不像隊長的隊長」。",
-                "「有沒有人覺得四隊的白藏隊長很惡趣味？？」",
-                "「把『覺得』去掉。每次我都是臨睡前突然發現今天又被他捉弄了，氣死我了啊啊啊啊！」",
-                "……",
-                "一刻也沒有為自己的行為而感到抱歉，即刻趕來的是白藏一氣呵成的按讚與收藏。",
-            ],
-            video:`/images/character/nte_pbgv_baizang_20250621_opt.webm`,
-        },
-    ];
+            const w_ThumbSwiperData01 = [...ThumbSwiperData01,...ThumbSwiperData01];
 
-    const w_ThumbSwiperData02 = [...ThumbSwiperData02,...ThumbSwiperData02];
-    // 縮圖輪播顯示資料
+            const ThumbSwiperData02 = [
+                {
+                    id:"2-1",
+                    imgSm:`/images/character/factions2_nav1.jpg`,
+                    role:`/images/character/factions2_role1_des.png`,
+                    profile:[
+                        "異象管理局收容二組預備幹部，同事街坊人名辭典，海特洛市平價美食活地圖。",
+                        "從總務處不苟言笑的財務姐姐到員工食堂的手抖大叔，從卜多力小屋的寡言大將到DSD潮玩店的熱情店員，都能上前大聊特聊……當然，是工作外的時間！",
+                        "什麼都可以漫天發散，沒有他接不住的話題……大概。",
+                        "異象管理局每次收容安全考試的成績除外。",
+                    ],
+                    video:`/images/character/nte_pbgv_bohe_20250513_opt.webm`,
+                },
+                {
+                    id:"2-2",
+                    imgSm:`/images/character/factions2_nav2.jpg`,
+                    role:`/images/character/factions2_role2_des.png`,
+                    profile:[
+                        "「親眼所見！那小姑娘把販賣機橫著一抬，隨手晃了晃，就把裡面的番茄醬通通搖了出來。」",
+                        "「噢？不會用自動販賣機？真是缺乏生活常識的孩子呢，你怎麼不去幫幫人家？」",
+                        "「那……我可不敢！要是沒認錯的話，她是E.T.D的那幫人！怪人！怪力！怪癖！總感覺隨便上去搭話，我的下場會和滿地的番茄醬一樣……」",
+                        "空空的「番茄百分百」自動販賣機前，抱著滿懷番茄醬的安魂曲打了個噴嚏。",
+                    ],
+                    video:`/images/character/nte_pbgv_anhunqu_20250513_opt.webm`,
+                },
+                {
+                    id:"2-3",
+                    imgSm:`/images/character/factions2_nav3.jpg`,
+                    role:`/images/character/factions2_role3_des.png`,
+                    profile:[
+                        "即使是在「異類眾多」的E.T.D，那位為所欲為的法莉婭小姐，也是異象管理局多數同僚難以招架的存在。",
+                        "「——那次協助E.T.D四隊的收容行動中，我小聲提醒她『指令上要求不造成任何傷亡損失』，她對我笑得那麼好看，還悄悄讓我閉上眼睛……」",
+                        "「我其實、其實也沒有在期待什麼……然後嘴巴就被封住了！」",
+                        "「——嗚嗚嗚嗚嗚嗚……那可是我的初吻啊，怎麼就獻給了一隻剛鑽了下水道的歧骸啊！！！……」",
+                        "若是平時，這位肆無忌憚的當事人或許還有心情再去逗弄那些亂了陣腳的可憐蟲，但當一個更能讓她血脈噴張目眩神迷的獵物閃現在她的獵場時——",
+                        "「啊啊~你又能讓我享用到怎樣的痛楚呢？真是令人，無比期待啊！」",
+                    ],
+                    video:`/images/character/nte_pbgv_fadiya_20250513_opt.webm`,
+                },
+                {
+                    id:"2-4",
+                    imgSm:`/images/character/factions2_nav4.jpg`,
+                    role:`/images/character/factions2_role4_des.png`,
+                    profile:[
+                        "異象管理局E.T.D四隊隊長，白藏——隨性散漫，出言無狀，工作摸魚大師，麻煩制造機。",
+                        "在管理局內部的神秘唄果社群中，大家正討論「誰是E.T.D中最不像隊長的隊長」。",
+                        "「有沒有人覺得四隊的白藏隊長很惡趣味？？」",
+                        "「把『覺得』去掉。每次我都是臨睡前突然發現今天又被他捉弄了，氣死我了啊啊啊啊！」",
+                        "……",
+                        "一刻也沒有為自己的行為而感到抱歉，即刻趕來的是白藏一氣呵成的按讚與收藏。",
+                    ],
+                    video:`/images/character/nte_pbgv_baizang_20250621_opt.webm`,
+                },
+            ];
 
-    //tab控制
-    const [activeTab, setActiveTab] = useState('01');
-    //tab控制
+            const w_ThumbSwiperData02 = [...ThumbSwiperData02,...ThumbSwiperData02];
+        //#endregion
 
-    const tabData = [
-        {
-            key:"01",
-            class:"tabBtn01",
-            swiperData:w_ThumbSwiperData01,
-        },
-        {
-            key:"02",
-            class:"tabBtn02",
-            swiperData:w_ThumbSwiperData02,
-        },
-    ]
+        //#region 桌面板tab相關
+            //#region tab控制
+            const [activeTab, setActiveTab] = useState('01');
+            //#endregion
 
-    const videoSwipers = useRef([]);  // 大圖輪播的 Swiper instances
-    const mainSwipers = useRef([]);   // 縮圖輪播的 Swiper instances
+            //#region tab選項
+            const tabData = [
+                {
+                    key:"01",
+                    class:"tabBtn01",
+                    swiperData:w_ThumbSwiperData01,
+                },
+                {
+                    key:"02",
+                    class:"tabBtn02",
+                    swiperData:w_ThumbSwiperData02,
+                },
+            ]
+            //#endregion
+        //#endregion
 
-    
-    const NextBtn = useRef([]);
-    const PrevBtn = useRef([]);
+        //#region 桌面板背景輪播
+        const videoSwipers = useRef([]);
+        //#endregion
 
-    const [cooldown, setCooldown] = useState(false);
+        //#region 桌面板縮圖輪播
+        const mainSwipers = useRef([]);
+        //#endregion
 
-    const handlePrevClick = (index) => {
-        if (cooldown) {return;}           // 正在冷卻
-        setCooldown(true);              // 進入冷卻
-        videoSwipers.current[index]?.slidePrev();
+        //#region 左右案件設定
+        const NextBtn = useRef([]);
+        const PrevBtn = useRef([]);
+        //#endregion
 
-        // 冷卻結束（例如 300ms）
-        setTimeout(() => setCooldown(false), 500);
-    };
+        //#region 按鈕冷卻設定
+        const [cooldown, setCooldown] = useState(false);
+        //#endregion
 
-    const handleNextClick = (index) => {
-        if (cooldown) {return;}           // 正在冷卻
-        setCooldown(true);              // 進入冷卻
-        videoSwipers.current[index]?.slideNext();
+        //#region 處理上一張函式
+        const handlePrevClick = (index) => {
+            if (cooldown) {return;}           // 正在冷卻
+            setCooldown(true);              // 進入冷卻
+            videoSwipers.current[index]?.slidePrev();
 
-        // 冷卻結束（例如 300ms）
-        setTimeout(() => setCooldown(false), 500);
-    };
+            // 冷卻結束（例如 300ms）
+            setTimeout(() => setCooldown(false), 500);
+        };
+        //#endregion
 
-    // 縮圖輪播顯示資料
-    const ThumbSwiperMbData01 = [
-        {
-            id:"1-1",
-            imgSm:`/images/character/factions1_nav1.jpg`,
-            bgimg:`/images/character/手機板/nte_mpic_nanali_20250514.jpg`,
-            role:`/images/character/手機板/factions1_role1_des.png`,
-        },
-        {
-            id:"1-2",
-            imgSm:`/images/character/factions1_nav2.jpg`,
-            bgimg:`/images/character/手機板/nte_mpic_zaowu_20250514.jpg`,
-            role:`/images/character/手機板/factions1_role2_des.png`,
-        },
-        {
-            id:"1-3",
-            imgSm:`/images/character/factions1_nav3.jpg`,
-            bgimg:`/images/character/手機板/factions1_m_poster3.jpg`,
-            role:`/images/character/手機板/factions1_role3_des.png`,
-        },
-        {
-            id:"1-4",
-            imgSm:`/images/character/factions1_nav4.jpg`,
-            bgimg:`/images/character/手機板/factions1_m_poster4.jpg`,
-            role:`/images/character/手機板/factions1_role3_des.png`,
-        },
-    ];
+        //#region 處理下一張函式
+        const handleNextClick = (index) => {
+            if (cooldown) {return;}           // 正在冷卻
+            setCooldown(true);              // 進入冷卻
+            videoSwipers.current[index]?.slideNext();
 
-    const w_ThumbSwiperMbData01 = [...ThumbSwiperMbData01,...ThumbSwiperMbData01];
+            // 冷卻結束（例如 300ms）
+            setTimeout(() => setCooldown(false), 500);
+        };
+        //#endregion
+    //#endregion
 
-    const ThumbSwiperMbData02 = [
-        {
-            id:"2-1",
-            imgSm:`/images/character/factions2_nav1.jpg`,
-            bgimg:`/images/character/手機板/nte_mpic_bohe_20250514.jpg`,
-            role:`/images/character/手機板/factions2_role1_des.png`,
-        },
-        {
-            id:"2-2",
-            imgSm:`/images/character/factions2_nav2.jpg`,
-            bgimg:`/images/character/手機板/nte_mpic_anhunqu_20250514.jpg`,
-            role:`/images/character/手機板/factions2_role2_des.png`,
-        },
-        {
-            id:"2-3",
-            imgSm:`/images/character/factions2_nav3.jpg`,
-            bgimg:`/images/character/手機板/nte_mpic_fadiya_20250514.jpg`,
-            role:`/images/character/手機板/factions2_role3_des.png`,
-        },
-        {
-            id:"2-4",
-            imgSm:`/images/character/factions2_nav4.jpg`,
-            bgimg:`/images/character/手機板/factions2_m_poster4.jpg`,
-            role:`/images/character/手機板/factions2_role4_des.png`,
-        },
-    ];
+    //#region 手機板輪播相關
+        //#region 手機板輪播顯示資料
+            const ThumbSwiperMbData01 = [
+                {
+                    id:"1-1",
+                    imgSm:`/images/character/factions1_nav1.jpg`,
+                    bgimg:`/images/character/手機板/nte_mpic_nanali_20250514.jpg`,
+                    role:`/images/character/手機板/factions1_role1_des.png`,
+                },
+                {
+                    id:"1-2",
+                    imgSm:`/images/character/factions1_nav2.jpg`,
+                    bgimg:`/images/character/手機板/nte_mpic_zaowu_20250514.jpg`,
+                    role:`/images/character/手機板/factions1_role2_des.png`,
+                },
+                {
+                    id:"1-3",
+                    imgSm:`/images/character/factions1_nav3.jpg`,
+                    bgimg:`/images/character/手機板/factions1_m_poster3.jpg`,
+                    role:`/images/character/手機板/factions1_role3_des.png`,
+                },
+                {
+                    id:"1-4",
+                    imgSm:`/images/character/factions1_nav4.jpg`,
+                    bgimg:`/images/character/手機板/factions1_m_poster4.jpg`,
+                    role:`/images/character/手機板/factions1_role3_des.png`,
+                },
+            ];
 
-    const w_ThumbSwiperMbData02 = [...ThumbSwiperMbData02,...ThumbSwiperMbData02];
-    // 縮圖輪播顯示資料
+            const w_ThumbSwiperMbData01 = [...ThumbSwiperMbData01,...ThumbSwiperMbData01];
 
-    const tabDataMB = [
-        {
-            key:"01",
-            class:"tabBtn01",
-            swiperData:w_ThumbSwiperMbData01,
-        },
-        {
-            key:"02",
-            class:"tabBtn02",
-            swiperData:w_ThumbSwiperMbData02,
-        },
-    ]
+            const ThumbSwiperMbData02 = [
+                {
+                    id:"2-1",
+                    imgSm:`/images/character/factions2_nav1.jpg`,
+                    bgimg:`/images/character/手機板/nte_mpic_bohe_20250514.jpg`,
+                    role:`/images/character/手機板/factions2_role1_des.png`,
+                },
+                {
+                    id:"2-2",
+                    imgSm:`/images/character/factions2_nav2.jpg`,
+                    bgimg:`/images/character/手機板/nte_mpic_anhunqu_20250514.jpg`,
+                    role:`/images/character/手機板/factions2_role2_des.png`,
+                },
+                {
+                    id:"2-3",
+                    imgSm:`/images/character/factions2_nav3.jpg`,
+                    bgimg:`/images/character/手機板/nte_mpic_fadiya_20250514.jpg`,
+                    role:`/images/character/手機板/factions2_role3_des.png`,
+                },
+                {
+                    id:"2-4",
+                    imgSm:`/images/character/factions2_nav4.jpg`,
+                    bgimg:`/images/character/手機板/factions2_m_poster4.jpg`,
+                    role:`/images/character/手機板/factions2_role4_des.png`,
+                },
+            ];
 
-    const mainMbSwipers = useRef([]);  // 大圖輪播的 Swiper instances
-    const thumbMbSwipers = useRef([]);   // 縮圖輪播的 Swiper instances
+            const w_ThumbSwiperMbData02 = [...ThumbSwiperMbData02,...ThumbSwiperMbData02];
+        //#endregion
 
-    
-    const NextMbBtn = useRef([]);
-    const PrevMbBtn = useRef([]);
+        //#region 手機板tab相關
+            //#region tab控制
+            const [activeMbTab, setActiveMbTab] = useState('01');
+            //#endregion
 
-    const [coolMbdown, setCoolMbdown] = useState(false);
+            //#region tab選項
+            const tabDataMB = [
+                {
+                    key:"01",
+                    class:"tabBtn01",
+                    swiperData:w_ThumbSwiperMbData01,
+                },
+                {
+                    key:"02",
+                    class:"tabBtn02",
+                    swiperData:w_ThumbSwiperMbData02,
+                },
+            ]
+            //#endregion
+        //#endregion
+            
+        //#region 縮圖版背景輪播
+        const mainMbSwipers = useRef([]);
+        //#endregion
 
-    const handleMbPrevClick = (index) => {
-        if (coolMbdown) {return;}           // 正在冷卻
-        setCoolMbdown(true);              // 進入冷卻
-        mainMbSwipers.current[index]?.slidePrev();
-        // thumbMbSwipers.current[index]?.slidePrev();
+        //#region 縮圖版縮圖輪播
+        const thumbMbSwipers = useRef([]);
+        //#endregion
 
-        // 冷卻結束（例如 300ms）
-        setTimeout(() => setCoolMbdown(false), 500);
-    };
+        //#region 左右案件設定
+        const NextMbBtn = useRef([]);
+        const PrevMbBtn = useRef([]);
+        //#endregion
 
-    const handleMbNextClick = (index) => {
-        if (coolMbdown) {return;}           // 正在冷卻
-        setCoolMbdown(true);              // 進入冷卻
-        mainMbSwipers.current[index]?.slideNext();
-        // thumbMbSwipers.current[index]?.slideNext();
+        //#region 按鈕冷卻設定
+        const [coolMbdown, setCoolMbdown] = useState(false);
+        //#endregion
+            
+        //#region 處理上一張函式
+        const handleMbPrevClick = (index) => {
+            if (coolMbdown) {return;}           // 正在冷卻
+            setCoolMbdown(true);              // 進入冷卻
+            mainMbSwipers.current[index]?.slidePrev();
+            // thumbMbSwipers.current[index]?.slidePrev();
 
-        // 冷卻結束（例如 300ms）
-        setTimeout(() => setCoolMbdown(false), 500);
-    };
+            // 冷卻結束（例如 300ms）
+            setTimeout(() => setCoolMbdown(false), 500);
+        };
+        //#endregion
 
+        //#region 處理下一張函式
+        const handleMbNextClick = (index) => {
+            if (coolMbdown) {return;}           // 正在冷卻
+            setCoolMbdown(true);              // 進入冷卻
+            mainMbSwipers.current[index]?.slideNext();
+            // thumbMbSwipers.current[index]?.slideNext();
+
+            // 冷卻結束（例如 300ms）
+            setTimeout(() => setCoolMbdown(false), 500);
+        };
+        //#endregion
+    //#endregion
 
     return(
         <>
@@ -295,17 +340,21 @@ function CharacterPage (){
                 {isDesktop && (
                     /* 桌面板 */
                     <div className='characterPagePC'>
+                        {/* 桌面板背景 */}
                         <img className='characterPageBg' src="/images/character/bg.jpg" alt="" />
+                        {/* 桌面板背景 */}
+                        
                         {/* 控制層 顯示元素不存在 */}
                         <Tab.Container activeKey={activeTab} onSelect={(key) => setActiveTab(key)}>
                             {/* 側邊面板 */}
                             <LeftSide />
                             {/* 側邊面板 */}
 
-                            {/* 側邊tab選項 */}
+                            {/* 側邊tab選項區塊 */}
                             <div className='tabCircleImgShowBox'>
                                 <div className='widthBox'>
                                     <div className='heightBox'>
+                                        {/* tab選項區塊背景 */}
                                         <div className='tabCircleImg'>
                                             {/* Tab 選單區 */}
                                             <Nav className='tab-box'>
@@ -315,13 +364,13 @@ function CharacterPage (){
                                                     {
                                                         tabData?.map((item)=>{
                                                             return(
-                                                                //{/* 選項按鈕本體 */}
+                                                                //tab選項按鈕本體
                                                                 <Nav.Link   key={item.key}
                                                                             className={`tab-link ${item.class}`}
                                                                             aria-disabled="true"
                                                                             eventKey={item.key}>
                                                                 </Nav.Link>
-                                                                //{/* 選項按鈕本體 */}
+                                                                //tab選項按鈕本體
                                                             )
                                                         }) 
                                                     }
@@ -330,11 +379,12 @@ function CharacterPage (){
                                             </Nav>
                                             {/* Tab 選單區 */}
                                         </div>
+                                        {/* tab選項區塊背景 */}
                                     </div>
                                 </div>
                                 
                             </div>
-                            {/* 側邊tab選項 */}
+                            {/* 側邊tab選項區塊 */}
 
                             {/* Tab 內容區 */}
                             <Tab.Content className='tabContent w-100 h-100'>
@@ -345,7 +395,7 @@ function CharacterPage (){
                                             <Tab.Pane key={item.key} eventKey={item.key} className='w-100 h-100'>
                                                 {
                                                     activeTab === item.key && (
-                                                        // {/* 角色顯示區塊最外圍 */}
+                                                        //角色顯示區塊最外圍
                                                         <div className='characterContentBox'>
                                                             {/* 大輪播圖外圍 */}
                                                             <div className='characterSwiperBox'>
@@ -483,7 +533,7 @@ function CharacterPage (){
                                                             </div>
                                                             {/* 大輪播圖外圍 */}
                                                         </div>
-                                                        // {/* 角色顯示區塊最外圍 */}
+                                                        //角色顯示區塊最外圍
                                                     )
                                                 }
                                             </Tab.Pane>
@@ -505,9 +555,12 @@ function CharacterPage (){
                 {!isDesktop && (
                     /* 手機板 */
                     <div className='characterPageMB'>
+                        {/* 手機板背景 */}
                         <img className='characterPageMbBg' src="/images/character/bg.jpg" alt="" />
+                        {/* 手機板背景 */}
+
                         {/* 控制層 顯示元素不存在 */}
-                        <Tab.Container activeKey={activeTab} onSelect={(key) => setActiveTab(key)}>
+                        <Tab.Container activeKey={activeMbTab} onSelect={(key) => setActiveMbTab(key)}>
                         
                         {/* 控制欄位 */}
                         <div className='characterMbBox'>
@@ -519,22 +572,24 @@ function CharacterPage (){
                                             return(
                                                 //{/* 內容外層
                                                 <Tab.Pane key={item.key} eventKey={item.key} className='w-100 h-100'>
+
                                                     {/* 左右按鈕設定 */}
                                                     <button disabled={cooldown}
-                                                        className={`ThumbMbPrevBtn ${item.key === activeTab?("active"):("")}`}
+                                                        className={`ThumbMbPrevBtn ${item.key === activeMbTab?("active"):("")}`}
                                                         ref={(prevBtn) => (PrevMbBtn.current[index] = prevBtn)}
                                                         onClick={() => handleMbPrevClick(index)}
                                                         >
                                                     </button>
                                                     <button disabled={cooldown}
-                                                        className={`ThumbMbNextBtn ${item.key === activeTab?("active"):("")}`}
+                                                        className={`ThumbMbNextBtn ${item.key === activeMbTab?("active"):("")}`}
                                                         ref={(nextBtn) => (NextMbBtn.current[index] = nextBtn)}
                                                         onClick={() => handleMbNextClick(index)}
                                                         >
                                                     </button>
                                                     {/* 左右按鈕設定 */}
+
                                                     {
-                                                        activeTab === item.key && (
+                                                        activeMbTab === item.key && (
                                                             /* 縮圖輪播片 */
                                                             <Swiper
                                                                 className="thumbsMbSwiper"
@@ -622,7 +677,7 @@ function CharacterPage (){
                                             //{/* 內容外層
                                             <Tab.Pane key={item.key} eventKey={item.key} className='w-100 h-100'>
                                                 {
-                                                    activeTab === item.key && (
+                                                    activeMbTab === item.key && (
                                             
                                                         /* 大輪播圖外圍 */
                                                         <div className='characterSwiperMbBox'>
@@ -687,6 +742,10 @@ function CharacterPage (){
                 {/* MB 版內容 */}
             </section>
             {/* 元件最外圍 */}
+
+            {/* 提示畫面 */}
+            <div className="landscapeBlocker">請將手機旋轉至直向模式</div>
+            {/* 提示畫面 */}
         </>
     )
 }

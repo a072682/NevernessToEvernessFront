@@ -1,0 +1,334 @@
+
+
+import { useEffect, useState } from 'react';
+import './_NewsPage.scss';
+import LeftSide from '../../components/common/leftSide/LeftSide';
+import Copyright from '../../components/common/版權區塊/Copyright';
+
+
+
+function NewsPage (){
+
+    //#region 
+    //#endregion
+
+    
+
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
+    
+    useEffect(()=>{
+        console.log("解析度",isDesktop);
+        if(!isDesktop){
+            console.log("我有更新");
+            setCopyright(true);
+        }else if(isDesktop){
+            console.log("我沒更新");
+            setCopyright(false);
+        }
+    },[isDesktop]);
+
+    useEffect(() => {
+        const resizeHandler = () => {
+            setIsDesktop(window.innerWidth >= 768);
+        };
+
+        window.addEventListener("resize", resizeHandler);
+        return () => window.removeEventListener("resize", resizeHandler);
+    }, []);
+
+    //#region 版權區塊控制
+      const[copyright,setCopyright]=useState(false);
+      useEffect(()=>{console.log("結果",copyright)},[copyright]);
+    //#endregion
+
+    const textData = [
+        {
+            title:"活動說明：",
+            content:[
+                "異環「收容測試」將於7月3日正式開始！我們整理了測試相關詳細的說明與常見問題解答，請鑒定師們查閱。",
+            ]
+        },
+        {
+            title:"測試資訊",
+            content:[
+                "測試類型：限量不計費刪檔測試",
+                "測試平台：PC (Windows)",
+                "遊戲語言：英文、日文、簡體中文、繁體中文",
+                "配音語言：英文、日文、中文",
+            ]
+        },
+        {
+            title:"招募時間",
+            content:[
+                "招募開啟時間：2025年5月15日10:00（UTC+8）",
+                "測試招募結束時間將在後續另行通知，請想參與測試的鑒定師及時前往官網預約並填寫招募問卷，並持續關注官方社群發佈的相關資訊。",
+            ]
+        },
+        {
+            title:"測試時間",
+            content:[
+                "測試開啟時間：2025年7月3日09:00（UTC+8）",
+                "測試結束時間：2025年7月16日23:59（UTC+8）",
+                "預下載開放時間：2025年7月2日10:00（UTC+8）",
+                "*測試資格通知及具體預下載方式請見後續官方社群發佈的通知。",
+            ]
+        },
+        {
+            title:"設備要求",
+            content:[
+                "◆系統◆",
+                "Windows 10 64位及以上",
+                "◆CPU◆",
+                "推薦>> 12th Gen Intel®Core™ i7-12700及以上",
+                "低>> 10th Gen Intel®Core™i7-10700",
+                "◆顯示卡◆",
+                "推薦>> NVIDIA GeForce RTX 3060同等級及以上",
+                "最低>> NVIDIA GeForce GTX 1660或同等級",
+                "◆記憶體◆",
+                "推薦>> 32GB及以上",
+                "最低>> 16GB",
+                "◆儲存空間◆",
+                "預留 60GB 及以上可用空間，推薦安裝至固態硬碟(SSD)",
+            ]
+        },
+        {
+            title:"設備要求",
+            content:[
+                "◆系統◆",
+                "Windows 10 64位及以上",
+                "◆CPU◆",
+                "推薦>> 12th Gen Intel®Core™ i7-12700及以上",
+                "低>> 10th Gen Intel®Core™i7-10700",
+                "◆顯示卡◆",
+                "推薦>> NVIDIA GeForce RTX 3060同等級及以上",
+                "最低>> NVIDIA GeForce GTX 1660或同等級",
+                "◆記憶體◆",
+                "推薦>> 32GB及以上",
+                "最低>> 16GB",
+                "◆儲存空間◆",
+                "預留 60GB 及以上可用空間，推薦安裝至固態硬碟(SSD)",
+            ]
+        },
+        {
+            title:"測試相關問題",
+            content:[
+                "Q：我該如何獲取測試資格？",
+                "A：前往《異環》官網完成預約並填寫問卷後提交，即為測試報名成功，將有機會獲得測試資格。",
+                "Q：本次測試的開啟和結束時間是？",
+                "A：異環「收容測試」將於2025年7月3日09:00（UTC+8）開啟，7月16日23:59（UTC+8）結束。",
+                "Q：未成年人可以參與本次測試嗎？",
+                "A：本次測試僅限成年人參與。如果您未達到所在國家或地區的成年年齡，將無法獲得測試資格、參與測試。請務必如實填寫問卷資訊，如填寫情況與實際不一致，將導致無法參與測試或取消測試資格。",
+                "Q：這次測試支持手把體驗遊戲嗎？",
+                "A：本次測試將支援以下手把：PS5™（DualSense™ 無線控制器）、PS4™（DUALSHOCK®4無線控制器）、Xbox（Xbox 無線控制器、Xbox Elite 無線控制器）",
+                "Q：這次測試我都可以在哪些平台上體驗異環遊戲？",
+                "A：本次測試將支援PC (Windows)平台遊玩。海外多語言移動設備測試版本正在緊密開發中，將在未來的測試節點中與大家見面！",
+                "同時，iOS及macOS系統正在積極研發中，將支援硬體加速光線追蹤技術，配合穩定的幀數運行效果，致力於為大家在iOS與Mac設備上帶來更加流暢及精細的遊玩感受。",
+                "未來各位鑒定師們將能夠在iPhone、iPad、Mac、Android與主機等平台上體驗《異環》遊戲！請鑒定師持續關注官方社群發佈的相關資訊。感謝各位鑒定師們的期待與支持！",
+                "Q：招募與測試期間如果我遇到其他問題，我該如何解決？",
+                "A：如您遇到任何問題，都可以聯繫異環官方客服進行解決。",
+                "官方客服：https://www.iwplay.com.tw/contact.html",
+                "Q：我可以在Youtube、Twitch等直播平台直播遊玩異環，或在社交平台中分享異環相關的遊戲截圖、影片等內容嗎？",
+                "A：本次測試將不限制玩家合理的遊戲內容分享、討論等傳播行為，請鑒定師們注意遵守相關法律法規及平台規則等要求。對於解包、盜用、刻意抹黑、不當使用等一系列侵權行為，我們將保留採取訴訟等方式追究法律責任的權利。",
+            ]
+        },
+        {
+            title:"預約相關問題",
+            content:[
+                "Q：我該如何預約異環？",
+                "A：前往異環官網點擊【立即預約】按鈕，在彈窗內填寫手機號碼、確認法律相關條款並提交，即為預約成功。",
+                "Q：我已經預約過異環遊戲了，是不是算參與測試招募了？",
+            ]
+        },
+        {
+            title:"※注意事項",
+            content:[
+                "1.遊戲仍處於研發階段，測試版本不代表最終遊戲品質，感謝各位鑒定師的理解與支持。",
+                "2.【收容測試】招募結束後，我們將通過問卷中填寫的簡訊和信箱，通知已獲得測試資格的鑒定師。請您務必確認問卷中填寫手機號碼及信箱地址的正確性，並留意後續相關通知。",
+                "3.本次測試資格僅對當期測試有效，無法繼承至下次測試中。",
+                "4.請注意，本次測試嚴禁任何形式的測試用戶端或測試帳號的出售、轉讓行為，一經發現將取消該帳號的測試資格。",
+            ]
+        },
+    ]
+
+
+    return(
+        <>
+            {/* 元件最外圍 */}
+            <section className='newsPage'>
+                {/* 側邊面板 */}
+                <LeftSide />
+                {/* 側邊面板 */}
+                {/* 混合版內容 */}
+                <div className='newsShowPage'>
+                    {/* 背景 */}
+                    <img className='newsPageBg' src="/images/news/articlePage.jpg" alt="" />
+                    {/* 背景 */}
+                    {/* 主內容區塊 */}
+                    <div className='mainBox'>
+                        {/* 中央區塊 */}
+                        <div className='contentBox'>
+                            {/* 標題區塊 */}
+                            <div className='titleBox'>
+                                {/* 標題背景圖 */}
+                                <picture>
+                                    <source 
+                                        media="(max-width: 768px)" 
+                                        srcSet="/images/news/手機板/articleHead_m.png" 
+                                    />
+                                    <img className='titleImgSet' src="/images/news/articleHead.png" alt="" />
+                                </picture>
+                                {/* 標題背景圖 */}
+                                {/* 主要標題 */}
+                                <h1 className='titleSet'>「收容測試」測試說明與常見問題解答</h1>
+                                {/* 主要標題 */}
+                                {/* 來源連結 */}
+                                <div className='Breadcrumb'>
+                                    <p className='textSet'>
+                                        異環 &gt; 情報速遞 &gt; 
+                                    </p>
+                                    <p className='textSet'>系統</p>
+                                </div>
+                                {/* 來源連結 */}
+                                {/* 顯示時間 */}
+                                <div className='timeSet'>
+                                    <time className='textSet' datetime="">2025-06-10</time>
+                                </div>
+                                {/* 顯示時間 */}
+                            </div>
+                            {/* 標題區塊 */}
+
+                            {/* 圖片區塊 */}
+                            <div className='imgBox'>
+                                {/* 圖片本體 */}
+                                <img className='imgSet' src="/images/news/2025061017550821522486.webp" alt="" />
+                                {/* 圖片本體 */}
+
+                                {/* 左側圖片區塊 */}
+                                <div className='leftImgBox'>
+                                    <img className="imgSet" src="/images/news/articleAside.png" alt="" />
+                                </div>
+                                {/* 左側圖片區塊 */}
+                            </div>
+                            {/* 圖片區塊 */}
+
+                            {/* 文字區塊 */}
+                            <div className='textBox'>
+                                {
+                                    textData?.map((text,index)=>{
+                                        return(
+                                            /* 文字群組 */
+                                            <div key={index} className='textGroup'>
+                                                <h2 className='title'>{text.title}</h2>
+                                                {
+                                                    text.content?.map((content,indexIn)=>{
+                                                        return(
+                                                            <p key={indexIn} className='content'>
+                                                                {content}
+                                                            </p>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                            /* 文字群組 */
+                                        )
+                                        
+                                    })
+                                }
+                            </div>
+                            {/* 文字區塊 */}
+
+                            {/* 結尾區塊 */}
+                            <div className='footerBox'>
+                                {/* 文字條列 */}
+                                <div className='itemSet'>
+                                    <span className='textSet'>【異環】官方粉絲團</span>
+                                    <a className='linkSet' href="">&raquo; 點擊前往 &laquo;</a>
+                                </div>
+                                <div className='itemSet'>
+                                    <span>【異環】官方YouTube頻道：</span><a href="">&raquo; 點擊前往 &laquo;</a>
+                                </div>
+                                <div className='itemSet'>
+                                    <span>&nbsp;</span>
+                                </div>
+                                <div className='itemSet'>
+                                   <p className='textSet end'>《異環》營運團隊敬上</p>
+                                </div>
+                                {/* 文字條列 */}
+                                
+                                {/* 圖片區塊 */}
+                                <div className='footerImgBox'>
+                                    <picture>
+                                        <source 
+                                            media="(max-width: 768px)" 
+                                            srcSet="/images/news/手機板/articleBottom_m.png" 
+                                        />
+                                        <img className='footerImgSet' src="/images/news/articleBottom.png" alt="" />
+                                    </picture>
+                                    
+                                    <div className='textBox'>
+                                        <p className='textSet'>
+                                            《異環》是Hotta Studio自主研發的超自然都市開放世界RPG。故事將從海特洛市啟篇，作為首位「無證工作」的「異象獵人」，你將成為接取民間異象委託維持周轉的古董店「伊波恩」的一員，與個性迥異、能力非凡的夥伴們一起探索各城市的大小謎團，歷經有笑有淚的各式奇遇，演繹獨屬於你們的都市物語。
+                                        </p>
+                                    </div>
+                                    <div className='iconBox'>
+                                        <a className='iconSet faceBook' href=""></a>
+                                        <a className='iconSet youtube' href=""></a>
+                                        <a className='iconSet discord' href=""></a>
+                                        <a className='iconSet instagram' href=""></a>
+                                        <a className='iconSet X' href=""></a>
+                                        <a className='iconSet playStation' href=""></a>
+                                    </div>
+                                </div>
+                                {/* 圖片區塊 */}
+                            </div>
+                            {/* 結尾區塊 */}
+
+                            {/* 版權按鈕 */}
+                            <button className={`copyrightBtnSet ${copyright?("active"):("")}`} 
+                                    onClick={()=>{setCopyright(!copyright)}}> 
+                                <span className='textSet'>版權訊息</span>
+                                <img className='btnIconSet' src="/images/news/copyRightArrow.png" alt="" />
+                            </button>
+                            {/* 版權按鈕 */}
+
+                            {/* 回最上按鈕 */}
+                            <button className='topBtnbox'>
+                                <img className='topBtnSet' src="/images/news/articleTop.png" alt="" />
+                            </button>
+                            {/* 回最上按鈕 */}
+
+                        </div>
+                        {/* 中央區塊 */}
+
+                        {/* 版權區塊 */}
+                        <div className='copyright'> 
+                            <Copyright copyright={copyright}/>
+                        </div>
+                        {/* 版權區塊 */}
+
+                        {/* 上一頁按鈕 */}
+                        <button className='backBtnSet'></button>
+                        {/* 上一頁按鈕 */}
+                        
+                        
+
+                    </div>
+                    {/* 主內容區塊 */}
+                </div>
+                {/* 混合內容 */}
+            </section>
+            {/* 元件最外圍 */}
+            {/* 提示畫面 */}
+            <div className="landscapeBlocker">請將手機旋轉至直向模式</div>
+            {/* 提示畫面 */}
+        </>
+    )
+}
+export default NewsPage;
+
+{/* <div className="widthBox">
+    <div className='heightBox'>
+
+    </div>
+</div> */}
+            

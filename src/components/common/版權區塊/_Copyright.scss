@@ -1,0 +1,88 @@
+
+
+.copyrightPage{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    overflow: hidden;
+    background-color: #000;
+    // position: fixed;
+    // top: auto;
+    // bottom: 0%;
+    // left: 0%;
+    .copyrightShowBox{
+        width: 100%;
+        padding: 15px;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        .companyLinkBox{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            .linkItem01,.linkItem02{
+                width: 112px;
+                height: auto;
+                aspect-ratio: 112 / 30;
+                background-color: transparent;
+                background-position: center 0;      /* 左上角 */
+                background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                background-repeat: no-repeat;
+                
+            }
+            .linkItem01{
+                background-image: url('/images/newsList/版權區塊/hotta_b.png');
+            }
+            .linkItem02{
+                background-image: url('/images/newsList/版權區塊/iwplay_world_b.png');
+            }
+        }
+        .serviceMessageBox{
+            .textSet{
+                font-size: 9.5px;
+                color: #ffffff;
+                @media (max-width: 768px) { 
+                    text-align: center;
+                 }
+            }
+        }
+        .warningMessageBox{
+            width: auto;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 8px;
+            .imgBox{
+                width: 48px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                .imgSet{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .textBox{
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: start;
+                .textSet01{
+                    font-size: 16px;
+                    color: #ffffff;
+                    white-space: nowrap;//取消文字自動換行
+                }
+                .textSet{
+                    font-size: 8px;
+                    color: #ffffff;
+                    white-space: nowrap;//取消文字自動換行
+                }
+            }
+        }
+    }
+}
