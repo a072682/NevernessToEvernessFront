@@ -83,6 +83,7 @@ function Header(){
 
         //#region 判定是否播放
         const [isPlaying, setIsPlaying] = useState(false);
+        useEffect(()=>{console.log("音樂",isPlaying)},[isPlaying]);
         //#endregion 
 
         //#region 處理音樂播放函式

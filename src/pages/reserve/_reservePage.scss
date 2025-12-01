@@ -4,7 +4,7 @@
     position: fixed;
     inset: 0;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     z-index: 10;
     display: flex;
     justify-content: center;
@@ -202,11 +202,11 @@
                         background-position-x: 0%;      /* 左上角 */
                         background-size: 100% 100%;    /* 寬度填滿，高度等比 */
                         background-repeat: no-repeat;
-                        animation: floatY 2.5s ease-in-out infinite;
+                        animation: floatY02 2.5s ease-in-out infinite;
 
                         /* 動畫設定 */
                         /* 上下浮動動畫 */
-                        @keyframes floatY {
+                        @keyframes floatY02 {
                             0%   { transform: translate(-50%,0px); }
                             50%  { transform: translate(-50%,-10px); }  /* 上移 */
                             100% { transform: translate(-50%,0px); }    /* 回來 */

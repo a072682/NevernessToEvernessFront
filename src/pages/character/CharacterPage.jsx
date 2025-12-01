@@ -699,6 +699,7 @@ function CharacterPage (){
                                                                     effect="fade"                                   //啟用淡入淡出
                                                                     fadeEffect={{ crossFade: true }}                // 可選：交錯漸變更順
                                                                     speed={600}                                     // 可選：動畫時間(毫秒)
+                                                                    allowTouchMove={false}
                                                                     spaceBetween={10}
                                                                     centeredSlides
                                                                     onSlideChange={(swiper) => {

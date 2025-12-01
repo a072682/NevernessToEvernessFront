@@ -491,9 +491,6 @@
                             border: none;
                             padding: 0px;
                             transition: transform 0.2s ease;
-                            &:hover {
-                                background-position-x: 0%;
-                            }
 
                             &.active {
                                 background-position-x: 0%;
