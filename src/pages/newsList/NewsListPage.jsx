@@ -6,12 +6,25 @@ import LeftSide from '../../components/common/leftSide/LeftSide';
 import ReactPagination from '../../components/common/頁碼元件/ReactPagination';
 import Copyright from '../../components/common/版權區塊/Copyright';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 function NewListPage (){
 
     //#region 移動頁面前置宣告
         const navigate = useNavigate();
+    //#endregion
+
+    //#region 讀取中央登入資料
+        const newsData = useSelector((state)=>{
+            return(
+                state.news.news
+            )
+        })
+
+        useEffect(()=>{
+            console.log("news資訊:",newsData);
+        },[newsData])
     //#endregion
 
     //#region 頁碼元件控制用
@@ -45,6 +58,12 @@ function NewListPage (){
       
     //#region 版權區塊控制
       const[copyright,setCopyright]=useState(false);
+    //#endregion
+
+    //#region 處理頁面移動函式
+    const handleGoToNews = (id) => {
+        navigate(`/information/NewListPage/${id}`);
+    };
     //#endregion
 
     //#region 處理頁面移動函式
@@ -143,28 +162,64 @@ function NewListPage (){
                         {/* 新聞項目列表外圍 */}
                         <div className='newsListBox'>
                             {
-                                currentItems?.map((item,index)=>{
+                                newsData?.map((item,index)=>{
                                     return(
                                         /* 新聞消息項目設定 */
-                                        <div key={index} className='newsItemSet'>
+                                        <button key={index} 
+                                                className='newsItemSet'
+                                                onClick={()=>{handleGoToNews(item.id)}}
+                                        >
                                             {/* 內容設定 */}
                                             <div className='contentBox'>
                                                 {/* 上半部區塊 */}
                                                 <div className='topBox'>
-                                                    <h2 className='title'>「收容測試」測試說明與常見問題解答</h2>
-                                                    <div className='time'>2025-06-10</div>
+                                                    <h2 className='title'>{item.title}</h2>
+                                                    <div className='time'>{item.time}</div>
                                                 </div>
                                                 {/* 上半部區塊 */}
 
                                                 {/* 下半部區塊 */}
                                                 <div className='bottomBox'>
-                                                    <div className='profile'>異環「收容測試」將於7月3日正式開始！我們整理了測試相關詳細的說明與常見問題解答，請鑒定師們查閱。</div>
-                                                    <div className='class system'>系統</div>
+                                                    <div className='profile'>
+                                                        {
+                                                            item.content.slice(0, 1).map((itemIn, indexIn) => {
+                                                                return (
+                                                                <>
+                                                                    {
+                                                                        itemIn.contents.map((linesData, lineIndex) => {
+                                                                            return (
+                                                                            <>
+                                                                                {
+                                                                                    linesData.lines.map((textData, textIndex) => {
+                                                                                        return (
+                                                                                            <p key={`${indexIn}-${lineIndex}-${textIndex}`}>
+                                                                                                {textData}
+                                                                                            </p>
+                                                                                        )
+                                                                                    })
+                                                                                }
+                                                                            </>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </>
+                                                                )
+                                                            })
+                                                            }
+                                                    </div>
+                                                    <div className={`class ${item.class}`}>
+                                                        {
+                                                            item.class === "system"? "系統"
+                                                            : item.class === "activity"? "活動"
+                                                            : item.class === "gamenews"? "新聞"
+                                                            : ""
+                                                        }
+                                                    </div>
                                                 </div>
                                                 {/* 下半部區塊 */}
                                             </div>
                                             {/* 內容設定 */}
-                                        </div>
+                                        </button>
                                         /* 新聞消息項目設定 */
                                     )
                                 })

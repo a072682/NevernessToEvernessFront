@@ -120,9 +120,16 @@
                                                 height: 100%;
                                                 /* 輪播片內容 */
                                                 .slide-item {
+                                                    border: none;
+                                                    padding: 0px;
+                                                    background-color: transparent;
                                                     width: 100%;
                                                     height: 100%;
-                                                    object-fit: cover;
+                                                    .imgSet{
+                                                        width: 100%;
+                                                        height: 100%;
+                                                        object-fit: cover;
+                                                    }
                                                 }
                                                 /* 輪播片內容 */
                                             }
@@ -519,9 +526,16 @@
                                         height: 100%;
                                         /* 輪播片內容 */
                                         .slide-item {
+                                            border: none;
+                                            padding: 0px;
+                                            background-color: transparent;
                                             width: 100%;
                                             height: 100%;
-                                            object-fit: cover;
+                                            .imgSet{
+                                                width: 100%;
+                                                height: 100%;
+                                                object-fit: cover;
+                                            }   
                                         }
                                         /* 輪播片內容 */
                                     }
@@ -689,7 +703,7 @@
                     .newsItemsBox{
                         flex: 1 1 0;
                         width: 100%;
-                        height: 100%;
+                        height: auto;
                         display: flex;
                         flex-direction: column;
                         justify-content: start;
@@ -774,6 +788,26 @@
                             }
                         }
                     }
+
+                    .newsBtnBox{
+                        flex: 0 0 auto;
+                        width: 100%;
+                        height: 15%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .newBtnSet{
+                            width: 20%;
+                            height: 50%;
+                            border: 1px solid #ffffff;
+                            background-color: transparent;
+                            padding: 0px;
+                            color: #ffffff;
+                            border-radius: 8px;
+                        }
+                    }
+
                     
                 }
             }

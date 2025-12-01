@@ -25,8 +25,8 @@ function CityPage (){
     //#endregion
 
     //#region 從Context取得手機版layout資料
-        const { mbSwiperLayout } = useContext(SwiperContext);
-    //#endregion
+        const { mbSwiperLayout,mbSwiperLayoutData } = useContext(SwiperContext);
+    //#endregion    
 
     //#region swiper相關
         //#region swiper綁定宣告
@@ -206,7 +206,7 @@ function CityPage (){
                 {/* PC版內容 */}
 
                 {/* MB 版內容 */}
-                {!isDesktop && (
+                {!isDesktop && mbSwiperLayoutData?.realIndex === 4 && (
                     /* 手機板 */
                     <div className='cityPageMB'>
                         <img className='cityPageBg' src="/images/city/bg.jpg" alt="" />

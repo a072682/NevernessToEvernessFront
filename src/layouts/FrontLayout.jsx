@@ -1,5 +1,5 @@
 import './_FrontLayout.scss';
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { matchPath, Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/common/Header/Header";
 import { useEffect, useRef, useState } from "react";
 
@@ -228,7 +228,9 @@ function FrontLayout(){
                             // 輪播片本體
                         ))}
                         </Swiper>
-                        <Outlet />
+                        
+                        {matchPath("/information/NewListPage/*", location?.pathname) && <Outlet />}
+                        
                     </>
                 )}
                 {/* 手機板 */}

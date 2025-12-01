@@ -1,10 +1,11 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import OffcanvasPage from "./OffcanvasPage/OffcanvasPage";
 import './_Header.scss';
 import { useDispatch } from "react-redux";
 import { MODALS, open } from "../../../slice/modalSlice";
+import { SwiperContext } from "../../../context/SwiperContext";
 
 
 
@@ -83,7 +84,7 @@ function Header(){
 
         //#region 判定是否播放
         const [isPlaying, setIsPlaying] = useState(false);
-        useEffect(()=>{console.log("音樂",isPlaying)},[isPlaying]);
+        useEffect(()=>{},[isPlaying]);
         //#endregion 
 
         //#region 處理音樂播放函式
@@ -135,6 +136,10 @@ function Header(){
     ]
     //#endregion
 
+    //#region 從Context取得goToPage函式
+        const { goToPage } = useContext(SwiperContext);
+    //#endregion
+
     const [expanded, setExpanded] = useState(false);
     
     return(
@@ -149,7 +154,10 @@ function Header(){
                     {/* 左上角 Logo */}
                     <Link   to="/" 
                             className='navbarLogo-box' 
-                            onClick={()=>{handleClose()}}>
+                            onClick={()=>{
+                                goToPage(0);
+                                handleClose();
+                            }}>
                         <div className="navbarLogoImgBox">
                             <div className="widthBox">
                                 <div className="heightBox">

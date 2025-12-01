@@ -249,9 +249,10 @@
                 }
                 //新聞消息項目設定
                 .newsItemSet{
+                    border: none;
+                    padding: 0px;
                     width: 100%;
                     height: auto;
-                    //aspect-ratio: 2560 / 153;
                     background-color: transparent;
                     background-position: center 0;      /* 左上角 */
                     background-size: 100% 100%;    /* 寬度填滿，高度等比 */

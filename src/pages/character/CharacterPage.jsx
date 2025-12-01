@@ -18,7 +18,7 @@ function CharacterPage (){
     //#endregion
 
     //#region 從Context取得手機版layout資料
-        const { mbSwiperLayout } = useContext(SwiperContext);
+        const { mbSwiperLayout,mbSwiperLayoutData } = useContext(SwiperContext);
     //#endregion
 
     //#region 解析度判斷
@@ -557,7 +557,7 @@ function CharacterPage (){
                 {/* PC 版內容 */}
 
                 {/* MB 版內容 */}
-                {!isDesktop && (
+                {!isDesktop && mbSwiperLayoutData?.realIndex === 1 && (
                     /* 手機板 */
                     <div className='characterPageMB'>
                         {/* 手機板背景 */}

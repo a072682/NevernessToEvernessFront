@@ -15,9 +15,10 @@ function WorldPage (){
 
     //#region
     //#endregion
+    
 
     //#region 從Context取得手機版layout資料
-    const { mbSwiperLayoutData } = useContext(SwiperContext);
+    const { mbSwiperLayoutData,mbSwiperLayout } = useContext(SwiperContext);
     //#endregion
 
     //#region 解析度判定
@@ -31,10 +32,6 @@ function WorldPage (){
         window.addEventListener("resize", resizeHandler);
         return () => window.removeEventListener("resize", resizeHandler);
     }, []);
-    //#endregion
-
-    //#region 從Context取得手機版layout資料
-        const { mbSwiperLayout } = useContext(SwiperContext);
     //#endregion
 
     //#region 桌面板TAB相關
@@ -486,7 +483,7 @@ function WorldPage (){
                 {/* PC版內容 */}
                 
                 {/* MB 版內容 */}
-                {!isDesktop && (
+                {!isDesktop && mbSwiperLayoutData?.realIndex === 3 && (
                     /* 手機板 */
                     <div className={`WorldPageMB ${isDesktop?("d-none"):("")}`}>
                         {/* 背景 */}
@@ -543,8 +540,7 @@ function WorldPage (){
                                                                 
                                                                 <div className='slideItem'>
                                                                     {
-                                                                        nameMbSwiperData?.realIndex === num && 
-                                                                        mbSwiperLayoutData?.realIndex === 3 && (
+                                                                        nameMbSwiperData?.realIndex === num && (
                                                                             <Swiper
                                                                                 className='wordSwiper'
                                                                                 modules={[Pagination]}
@@ -600,18 +596,11 @@ function WorldPage (){
                                                     {/* 動圖區塊 */}
                                                 </div>
                                                 {/* 路燈顯示區塊 */}
-                                            </div>
-
-                                            
-
-                                            
+                                            </div> 
                                         </div>
-                                    </div>
-                                    
-                                            
+                                    </div>         
                                 </div>
-                                {/* 顯示區塊 */}
-                                
+                                {/* 顯示區塊 */}   
                             </div>
                             {/* 內容顯示區塊 */}
                             

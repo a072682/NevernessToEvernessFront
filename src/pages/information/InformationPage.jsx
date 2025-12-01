@@ -23,16 +23,15 @@ function InformationPage (){
     //#endregion
 
     //#region 讀取中央登入資料
-        //讀取中央資料
-        // const newsData = useSelector((state)=>{
-        //     return(
-        //         state.login.isLogin
-        //     )
-        // })
+        const newsData = useSelector((state)=>{
+            return(
+                state.news.news
+            )
+        })
 
-        // useEffect(()=>{
-        //     console.log("loginState狀態:",loginState);
-        // },[newsData])
+        useEffect(()=>{
+            console.log("news資訊:",newsData);
+        },[newsData])
     //#endregion
 
     //#region 解析度判定
@@ -57,7 +56,7 @@ function InformationPage (){
     //#endregion
 
     //#region 從Context取得手機版layout資料
-        const { mbSwiperLayout } = useContext(SwiperContext);
+        const { mbSwiperLayout,mbSwiperLayoutData } = useContext(SwiperContext);
     //#endregion
  
     //#region 輪播片相關
@@ -227,6 +226,12 @@ function InformationPage (){
     };
     //#endregion
 
+    //#region 處理頁面移動函式
+    const handleGoToNewsList = () => {
+        navigate(`/information/NewListPage`);
+    };
+    //#endregion
+
     return(
         <>
             {/* 元件最外圍 */}
@@ -279,12 +284,16 @@ function InformationPage (){
                                                             slidesPerView={1}
                                                             centeredSlides
                                                         >
-                                                            {swiperData.map((item, index) => (
+                                                            {newsData?.map((item, index) => (
                                                                 <SwiperSlide    className='swiperSlide'
-                                                                                key={item.id}
+                                                                                key={index}
                                                                 >
-                                                                    {/* bg-primary */}
-                                                                    <img className='slide-item' src={item.imgSm} alt="" />
+                                                                    <button className='slide-item'
+                                                                            type='button'
+                                                                            onClick={()=>{handleGoToNews(item.id)}}>
+                                                                        <img className='imgSet' src={item.imgData} alt="" />
+                                                                    </button>
+                                                                    
                                                                 </SwiperSlide>
                                                             ))}
                                                         </Swiper>
@@ -339,7 +348,7 @@ function InformationPage (){
                                                 {/* 新聞消息顯示區塊 */}
                                                 <div className='newsItemsBox'>
                                                     {
-                                                        articleData?.map((item,index)=>{
+                                                        newsData?.map((item,index)=>{
                                                             if(tabActiveData === "news" || tabActiveData === item.class){
                                                                 return(
                                                                     <button key={index} 
@@ -355,7 +364,7 @@ function InformationPage (){
                                                                                 : ""
                                                                             }
                                                                         </div>
-                                                                        <div className='content'>{item.content}</div>
+                                                                        <div className='content'>{item.title}</div>
                                                                         <div className='time'>{item.time}</div>
                                                                     </button>
                                                                 )
@@ -381,7 +390,7 @@ function InformationPage (){
                 {/* PC版內容 */}
 
                 {/* MB 版內容 */}
-                {!isDesktop && (
+                {!isDesktop && mbSwiperLayoutData?.realIndex === 2 && (
                     /* 手機板 */
                     <div className='informationPageMB'>
                         <img className='informationPageBg' src="/images/information/bg.jpg" alt="" />
@@ -417,7 +426,12 @@ function InformationPage (){
                                                         <SwiperSlide    className='swiperSlide'
                                                                         key={item.id}
                                                         >
-                                                            <img className='slide-item' src={item.imgSm} alt="" />
+                                                            <button className='slide-item'
+                                                                    type='button'
+                                                                    onClick={()=>{handleGoToNews(123)}}>
+                                                                <img className='imgSet' src={item.imgSm} alt="" />
+                                                            </button>
+                                                            
                                                         </SwiperSlide>
                                                     ))}
                                                 </Swiper>
@@ -457,7 +471,7 @@ function InformationPage (){
                                     </div>
                                     <div className='newsItemsBox'>
                                         {
-                                            articleData?.map((item,index)=>{
+                                            articleData?.slice(0,5).map((item,index)=>{
                                                 if(tabActiveData === "news" || tabActiveData === item.class){
                                                     return(
                                                         <button key={index}
@@ -480,6 +494,13 @@ function InformationPage (){
                                                 }
                                             })
                                         }
+                                    </div>
+                                    <div className='newsBtnBox'>
+                                        <button className='newBtnSet'
+                                                type='button'
+                                                onClick={()=>{handleGoToNewsList()}}>
+                                                    全部新聞
+                                        </button>
                                     </div>
                                 </div>
                             </div>
