@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import OffcanvasPage from "./OffcanvasPage/OffcanvasPage";
 import './_Header.scss';
+import { useDispatch } from "react-redux";
+import { MODALS, open } from "../../../slice/modalSlice";
 
 
 
@@ -10,6 +12,11 @@ import './_Header.scss';
 function Header(){
 
     //#region
+    //#endregion
+
+    //#region 讀取中央函式前置宣告
+        //讀取中央函式前置宣告
+        const dispatch = useDispatch();
     //#endregion
 
     //#region 宣告等待狀態
@@ -69,6 +76,64 @@ function Header(){
         //側邊狀態
     //#endregion
 
+    //#region 音樂相關
+        //#region 綁定音樂檔
+        const audioRef = useRef(null);
+        //#endregion 
+
+        //#region 判定是否播放
+        const [isPlaying, setIsPlaying] = useState(false);
+        //#endregion 
+
+        //#region 處理音樂播放函式
+        const handleMusicPlay = () => {
+            const audio = audioRef.current;
+
+            if (!audio) return;
+
+            if (isPlaying) {
+                audio.pause();
+                audio.currentTime = 0;
+                setIsPlaying(false);
+            } else {
+                audio.currentTime = 0;
+                audio.play();
+                setIsPlaying(true);
+            }
+        };
+        //#endregion 
+    //#endregion 
+
+    //#region 連結設定
+    const linkData = [
+        {
+            goto:"/",
+            classData:"indexPage",
+            ActiveIndex:1,
+        },
+        {
+            goto:"/character",
+            classData:"character",
+            ActiveIndex:2,
+        },
+        {
+            goto:"/information",
+            classData:"information",
+            ActiveIndex:3,
+        },
+        {
+            goto:"/world",
+            classData:"world",
+            ActiveIndex:4,
+        },
+        {
+            goto:"/city",
+            classData:"city",
+            ActiveIndex:5,
+        },
+    ]
+    //#endregion
+
     const [expanded, setExpanded] = useState(false);
     
     return(
@@ -81,14 +146,15 @@ function Header(){
                 {/* /*內容本體區塊*/}
                 <div className='navbar-box'>
                     {/* 左上角 Logo */}
-                    <Link to="/newsList" className='navbarLogo-box'>
+                    <Link   to="/" 
+                            className='navbarLogo-box' 
+                            onClick={()=>{handleClose()}}>
                         <div className="navbarLogoImgBox">
                             <div className="widthBox">
                                 <div className="heightBox">
                                     <img className="navbarLogoImg-set" src="/images/header/NTE_logo.png" alt="home-section2-1" />
                                 </div>
                             </div>
-                            
                         </div>
                     </Link>
                     {/* 左上角 Logo */}
@@ -100,21 +166,15 @@ function Header(){
                         <div className="navbarItemMask"></div>
                         {/* 遮罩 */}
                         {/* link選項 */}
-                        <div className="navbarItemBoxSet">
-                            <Nav.Link as={NavLink} to="/" className="navbarItem-set indexPage" onClick={() => setActiveIndex(1)}></Nav.Link>
-                        </div>
-                        <div className="navbarItemBoxSet">
-                            <Nav.Link as={NavLink} to="/character" className="navbarItem-set character" onClick={() => setActiveIndex(2)}></Nav.Link>
-                        </div>
-                        <div className="navbarItemBoxSet">
-                            <Nav.Link as={NavLink} to="/information" className="navbarItem-set information" onClick={() => setActiveIndex(3)}></Nav.Link>
-                        </div>
-                        <div className="navbarItemBoxSet">
-                            <Nav.Link as={NavLink} to="/world" className="navbarItem-set world" onClick={() => setActiveIndex(4)}></Nav.Link>
-                        </div>
-                        <div className="navbarItemBoxSet">
-                            <Nav.Link as={NavLink} to="/city" className="navbarItem-set city" onClick={() => setActiveIndex(5)}></Nav.Link>
-                        </div>
+                        {
+                            linkData?.map((data,index)=>{
+                                return(
+                                    <div key={index} className="navbarItemBoxSet">
+                                        <Nav.Link as={NavLink} to={data.goto} className={`navbarItem-set ${data.classData}`} onClick={() => setActiveIndex(data.ActiveIndex)}></Nav.Link>
+                                    </div>
+                                )
+                            })
+                        }
                         {/* link選項 */}
                         {/* 動畫群組01 */}
                         <div className={`animationGroup 
@@ -146,10 +206,10 @@ function Header(){
                     </div>
                     {/* lg 以上選項區塊 */}
 
-                    {/* lg 以上會員頭像 */}
+                    {/* lg 以上icon */}
                     <div className="navbarRightBox d-none d-lg-flex">
-                        <button className="loginBox"></button>
-                        <button className="musicBox"></button>
+                        <button className="loginBox" onClick={()=>{dispatch(open(MODALS.ReserveModal));}}></button>
+                        <button className={`musicBox ${isPlaying?("active"):("")}`} onClick={()=>{handleMusicPlay()}}></button>
                     </div>
                     
                     {/* lg 以下選項區塊 */}
@@ -159,7 +219,7 @@ function Header(){
                             <div className="loginShowBox">
                                 <div className="widthBox">
                                     <div className="heightBox">
-                                        <button className="loginBox"></button>
+                                        <button className="loginBox" onClick={()=>{dispatch(open(MODALS.ReserveModal));}}></button>
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +227,7 @@ function Header(){
                             <div className="musicShowBox">
                                 <div className="widthBox">
                                     <div className="heightBox">
-                                        <button className="musicBox"></button>
+                                        <button className={`musicBox ${isPlaying?("active"):("")}`} onClick={()=>{handleMusicPlay()}}></button>
                                     </div>
                                 </div>
                             </div>
@@ -189,6 +249,10 @@ function Header(){
             </Navbar>
             {/* 元件最外圍 */}
             <OffcanvasPage onOpen={onOpen} handleClose={handleClose}/>
+            
+            {/* 音樂本體 */}
+            <audio ref={audioRef} src="/images/index/nte_gw_bgm_20250514.mp3" preload="auto" />
+            {/* 音樂本體 */}
         </>
     )
 }

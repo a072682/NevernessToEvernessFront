@@ -1,14 +1,21 @@
 
 // 元件最外圍
 .reservePage{
-    position: relative;
+    position: fixed;
+    inset: 0;
     width: 100%;
     height: 100vh;
+    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: end;
     background-color: #202020;
-    // 混合板
+    
+    @media screen and (orientation: landscape) and (max-width: 900px) {
+        display: none;
+    }
+
+    // 背景
     .reservePageBg{
         position: absolute;
         top: 0;
@@ -17,145 +24,80 @@
         width: 100%;
         height: 100%;
     }
+    // 背景
+    // 混合板
     .mainBox{
         position: relative;
         z-index: 1;
         width: 100%;
         height: calc(100vh - 9%);
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        @media (max-width: 992px) {
-            // align-items: start;
-        }
         // 內容區塊
         .contentBox{
-            background-color: red;
+            //background-color: red;
             position: relative;
             z-index: 1;
             width: 100%;
-            height: 10%;
+            height: 70%;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             @media (max-width: 992px) {
-                justify-content: end;
-                height: 100%;
+                height: 50%;
             }
+
             &::before,&::after {
                 content: "";
                 position: absolute;
-                top: 50%;
+                top: 55%;
                 transform: translateY(-50%);
                 height: 2px;
                 background: #7d7d7d;
                 @media (max-width: 992px) {
-                    top: 80%;
+                    top: 56%;
                 }
             }
             &::before{
                 left: 0;
                 width: 35%;
                 @media (max-width: 992px) {
-                    width: 30%;
+                    width: 20%;
                 }
             }
             &::after{
                 right: 0;
                 width: 35%;
                 @media (max-width: 992px) {
-                    width: 30%;
+                   width: 20%;
                 }
             }
-            .iconBox{
-                width: 25%;
-                height: auto;
-                position: relative;
-                z-index: 1;
+
+            .contentInBox{
+                //background-color: #7d7d7d;
+                width: 30%;
+                height: 100%;
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: 3%;
-                @media (max-width: 992px) {
-                    flex: 1 1 0;
-                    width: 100%;
-                    background-color: aquamarine;
-                    // width: 40%;
-                    // margin-bottom: 5%;
-                }
-                .iconSet{
-                    width: 12%;
-                    height: auto;
-                    aspect-ratio: 1 / 1;
-                    background-color: transparent;
-                    background-image: url('/images/footer/otherPlatform.png');
-                    background-position-y: 0%;
-                    background-position-x: 0%;      /* 左上角 */
-                    background-size: 1200% 200%;    /* 寬度填滿，高度等比 */
-                    background-repeat: no-repeat;
-                    border: none;
-                    padding: 0px;
-                    transition: transform 0.2s ease;
-                    &:hover {
-                        background-position-y: 100%;
-                    }
-                    @media (max-width: 992px) {
-                        display: none;
-                    }
-                    // @media (max-width: 576px){
-                    //     width: 33px;
-                    //     background-image: url('/images/footer/Mobile/otherPlatform2.png');
-                    // }
 
-                    &.active {
-                        background-position-y: 100%;
-                    }
-                    &.X{
-                        background-position-x: 0%;
-                    }
-                    &.faceBook{
-                        background-position-x: 11%;
-                    }
-                    &.youtube{
-                        background-position-x: 22%;
-                    }
-                    &.discord{
-                        background-position-x: 33%;
-                    }
-                    &.reddit{
-                        background-position-x: 44.5%;
-                    }
-                    &.instagram{
-                        background-position-x: 55.5%;
-                    }
-                    &.playStation{
-                        background-position-x: 66.5%;
-                    }
-                    &.line{
-                        background-position-x: 78%;
-                    }
-                    &.netFlix{
-                        background-position-x: 89%;
-                    }
-                    &.kakaoTalk{
-                        background-position-x: 100%;
-                    }
+                @media (max-width: 992px) {
+                    width: 80%;
+                    gap: 5%;
                 }
+
 
                 .reserveBtnSet{
-                    position: absolute;
-                    z-index: 0;
-                    top: auto;
-                    bottom: 110%;
-                    left: 50%;
-                    width: 150%;
+                    width: 100%;
                     height: auto;
                     aspect-ratio: 739 / 161;
                     padding: 0px;
                     border: none;
                     background-color: transparent;
-                    transform: translateX(-50%);
                     background-image: url('/images/reserve/pageEggshellYY.png');
                     background-position-y: 0%;
                     background-position-x: 0%;      /* 左上角 */
@@ -166,39 +108,130 @@
                     }
                 }
 
+                .iconBox{
+                    //border: 1px solid red;
+                    width: 80%;
+                    height: auto;
+                    position: relative;
+                    z-index: 1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 3%;
+                    .iconSet{
+                        width: 12%;
+                        height: auto;
+                        aspect-ratio: 1 / 1;
+                        background-color: transparent;
+                        background-image: url('/images/footer/otherPlatform.png');
+                        background-position-y: 0%;
+                        background-position-x: 0%;      /* 左上角 */
+                        background-size: 1200% 200%;    /* 寬度填滿，高度等比 */
+                        background-repeat: no-repeat;
+                        border: none;
+                        padding: 0px;
+                        transition: transform 0.2s ease;
+                        &:hover {
+                            background-position-y: 100%;
+                        }
+
+                        &.active {
+                            background-position-y: 100%;
+                        }
+                        &.X{
+                            background-position-x: 0%;
+                        }
+                        &.faceBook{
+                            background-position-x: 11%;
+                        }
+                        &.youtube{
+                            background-position-x: 22%;
+                        }
+                        &.discord{
+                            background-position-x: 33%;
+                        }
+                        &.reddit{
+                            background-position-x: 44.5%;
+                        }
+                        &.instagram{
+                            background-position-x: 55.5%;
+                        }
+                        &.playStation{
+                            background-position-x: 66.5%;
+                        }
+                        &.line{
+                            background-position-x: 78%;
+                        }
+                        &.netFlix{
+                            background-position-x: 89%;
+                        }
+                        &.kakaoTalk{
+                            background-position-x: 100%;
+                        }
+                    } 
+                }
+
                 .reserveTitleImgSet{
-                    position: absolute;
-                    z-index: 0;
-                    top: 130%;
-                    left: 50%;
-                    width: 110%;
+                    position: relative;
+                    width: 100%;
                     height: auto;
                     aspect-ratio: 550 / 37;
                     padding: 0px;
                     border: none;
                     background-color: transparent;
-                    transform: translateX(-50%);
                     background-image: url('/images/reserve/eggSlogan.png');
                     background-position-y: 0%;
                     background-position-x: 0%;      /* 左上角 */
                     background-size: 100% 100%;    /* 寬度填滿，高度等比 */
                     background-repeat: no-repeat;
-                }
-            }
-            .maskBox{
-                display: none;
-                @media (max-width: 992px) {
-                    display: block;
-                    flex: 0 0 auto;
-                    background-color: aqua;
-                    width: 100%;
-                    height: auto;
-                    aspect-ratio: 741 / 616;
+
+                    .reserveBottomBtn{
+                        border: none;
+                        padding: 0px;
+                        background-color: red;
+                        position: absolute;
+                        width: 10%;
+                        height: auto;
+                        aspect-ratio: 50 / 28;
+                        transform: translateX(-50%);
+                        top: 200%;
+                        left: 50%;
+                        background-color: transparent;
+                        background-image: url('/images/reserve/手機板/pageArrow.png');
+                        background-position-y: 0%;
+                        background-position-x: 0%;      /* 左上角 */
+                        background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                        background-repeat: no-repeat;
+                        animation: floatY 2.5s ease-in-out infinite;
+
+                        /* 動畫設定 */
+                        /* 上下浮動動畫 */
+                        @keyframes floatY {
+                            0%   { transform: translate(-50%,0px); }
+                            50%  { transform: translate(-50%,-10px); }  /* 上移 */
+                            100% { transform: translate(-50%,0px); }    /* 回來 */
+                        }
+                        /* 上下浮動動畫 */
+                        /* 動畫設定 */
+                    }
                 }
             }
         }
         // 內容區塊
 
+        // 空間佔位
+        .maskBox{
+            width: 100%;
+            height: 30%;
+            
+            @media (max-width: 992px) {
+                width: 100%;
+                height: 50%;
+            }
+        }
+        // 空間佔位
+
+        //警戒線貼圖
         .cordonImgSet{
             position: absolute;
             z-index: 3;
@@ -212,14 +245,17 @@
             background-repeat: round;
             background-size: auto 100%;
         }
+        //警戒線貼圖
+
         // 角色貼圖區塊
+        //確認出現範圍
         .characterImgSet{
             position: absolute;
             z-index: 2;
             top: auto;
             bottom: 0%;
             left: 50%;
-            width: 60%;
+            width: 100%;
             height: 30%;
             transform: translateX(-50%);
             display: flex;
@@ -227,7 +263,8 @@
             align-items: end;
             @media (max-width: 992px) { 
                 width: 100%;
-                height: 100%;
+                height: 50%;
+                justify-content: end;
             }
             // 偵測寬度
             .widthBox{
@@ -241,6 +278,7 @@
                 align-items: center;
                 @media (max-width: 992px) { 
                     aspect-ratio: 741 / 616;
+                    justify-content: end;
                 }
                 // 偵測高度
                 .heightBox{
@@ -318,3 +356,19 @@
     // 混合板
 }
 // 元件最外圍
+
+// 提示畫面
+.landscapeBlocker {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    background: #202020;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    @media screen and (orientation: landscape) and (max-width: 900px) {
+        display: flex;
+    }
+}
+// 提示畫面

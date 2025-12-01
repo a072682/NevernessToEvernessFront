@@ -5,6 +5,11 @@
 .WorldPage{
     width: 100%;
     height: 100vh;
+    background-color: #202020;
+
+    @media screen and (orientation: landscape) and (max-width: 900px) {
+        display: none;
+    }
 
     // 桌面板
     .WorldPagePC{
@@ -14,9 +19,9 @@
         background-color: #202020;
         overflow: hidden;
         display: flex;
-        justify-content: end;
+        justify-content: center;
         align-items: end;
-
+        // 背景
         .WorldPageBg{
             position: absolute;
             top:0;
@@ -25,27 +30,31 @@
             height: 100%;
             z-index: 0;
         }
+        // 背景
 
+        //主內容區塊
         .mainBox{
             z-index: 1;
-            width: calc(100% - 146px);
-            height: calc(100vh - 75px);
+            width: 90%;
+            height: calc(100vh - 9%);
             display: flex;
-            justify-content: start;
-            align-items: end;
+            justify-content: center;
+            align-items: center;
+            margin-left: 2%;
+            // 左邊區塊
             .lefBox{
-                width: 20%;
-                height: calc(100% - 15%);
+                width: 17%;
+                height: 100%;
                 display: flex;
                 flex-direction: column;
-                justify-content: start;
+                justify-content: end;
                 align-items: center;
-
+                //標題區塊
                 .titleBox{
                     width: 100%;
                     height: auto;
                     aspect-ratio: 3 / 1;
-                    
+                    //標題設定
                     .titleImgSet{
                         width: auto;
                         height: 100%;
@@ -73,10 +82,12 @@
                             background-image: url('/images/world/plateTit4.png');
                         }
                     }
+                    //標題設定
                 }
+                //標題區塊
 
+                //文字區塊
                 .textBox{
-                    margin: 12px auto 0 0;
                     width: 100%;
                     height: auto;
                     aspect-ratio: 285 / 100;
@@ -105,18 +116,22 @@
                     &::-webkit-scrollbar-thumb:hover {
                         background: #999;
                     }
+                    // 文字設定
                     .textSet{
                         color: #999;
                         font-size: 16px;
                     }
+                    // 文字設定
                 }
+                //文字區塊
 
+                //tab選項區塊設定
                 .tabImgBox{
                     position: relative;
-                    margin-top: 24px;
                     width: 50%;
                     height: auto;
                     aspect-ratio: 130 / 460;
+                    //tab選項背景圖片區塊
                     .tabImgSet{
                         position: absolute;
                         z-index: 0;
@@ -128,7 +143,7 @@
                         background-size: 100% 100%;    /* 寬度填滿，高度等比 */
                         background-repeat: no-repeat;
                         background-image: url('/images/world/guidepost.png');
-
+                        //tab選項背景圖片
                         .numImgSet{
                             position: absolute;
                             top: 9%;
@@ -157,8 +172,11 @@
                                 background-image: url('/images/world/04.png');
                             }
                         }
+                        //tab選項背景圖片
                     }
+                    //tab選項背景圖片區塊
                     
+                    //選項按鈕本體
                     .tabLink{
                         position: absolute;
                         z-index: 1;
@@ -219,26 +237,27 @@
                             background-image: url('/images/world/plateActive.png');
                         }
                     }
+                    //選項按鈕本體
                 }
-
-                .tabImgBox02{
-                    width: 50%;
-                    height: 50%;
-                }
+                //tab選項區塊設定
             }
+            // 左邊區塊
 
-            
-
+            // 右邊區塊
             .rightBox{
-                width: 70%;
-                height: calc(100% - 10%);
+                width: 83%;
+                height: 100%;
                 position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
                 .tabViewBox{
                     position: relative;
                     z-index: 1;
                     width: 100%;
                     height: auto;
-                    aspect-ratio: 1570 / 1174;
+                    aspect-ratio: 1570 / 980;
                     .tabViewBoxBg{
                         position: absolute;
                         top: 0;
@@ -251,7 +270,7 @@
                     .tabViewImgSet{
                         position: absolute;
                         z-index: 1;
-                        top: 36%;
+                        top: 43%;
                         left: 51%;
                         transform: translate(-50%,-50%);
                         width: 86%;
@@ -310,13 +329,13 @@
                     }
 
                     .prevBtn{
-                        top: 67%;
+                        top: 80%;
                         left: 13%;
                         background-image: url('/images/world/brandPrev.png');
                     }
 
                     .nextBtn{
-                        top: 67%;
+                        top: 80%;
                         left: 88%;
                         background-image: url('/images/world/brandNext.png');
                     }
@@ -326,10 +345,9 @@
                         z-index: 2;
                         width: 50%;
                         height: 5%;
-                        top: 67%;
+                        top: 80%;
                         left: 50%;
                         transform: translate(-50%,-50%);
-                        // background-color: red;
                         display: none;
                         justify-content: center;
                         align-items: center;
@@ -360,6 +378,141 @@
                             
                         // }
                     }
+
+                    .utilityPoleBox{
+                        position: absolute;
+                        top: 0;
+                        left: 85%;
+                        z-index: 2;
+                        width: 20%;
+                        height: auto;
+                        aspect-ratio: 349 / 1186;
+                        background-position: center 0;      /* 左上角 */
+                        background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                        background-repeat: no-repeat;
+                        background-image: url('/images/world/trafficSign.png');
+                        pointer-events: none; // 避免擋到前景點擊
+
+                        .stopLightImgSet{
+                            position: absolute;
+                            top: 22%;
+                            left: 74%;
+                            width: 20%;
+                            height: auto;
+                            aspect-ratio: 1 / 1;
+                            background-color: #616161;
+                            border-radius: 8px;
+                            padding: 1.5%;
+
+                            .LightImgSet{
+                                width: 100%;
+                                height: 100%;
+                                border: 1px solid #000000;
+                                border-radius: 8px;
+                                background-position: center 0;      /* 左上角 */
+                                background-size: 100% 200%;    /* 寬度填滿，高度等比 */
+                                background-repeat: no-repeat;
+                                animation: bgCycle 6s infinite linear;
+                                // 
+
+                                @keyframes bgCycle {
+
+                                    /* ---- RED ---- */
+                                    0% {
+                                        background-image: url('/images/world/red.png');
+                                        background-color:#fd5997;
+                                        background-position-y:100%;
+                                    }
+
+                                    11.10% {
+                                        background-position-y:100%;
+                                    }
+                                    11.11% {
+                                        background-position-y:0%;
+                                    }
+
+                                    22.21% {
+                                        background-position-y:0%;
+                                    }
+                                    22.22% {
+                                        background-position-y:100%;
+                                    }
+
+                                    33.32% {
+                                        background-position-y:100%;
+                                    }
+                                    33.33% {
+                                        background-position-y:0%;
+                                    }
+
+                                    44.43% {
+                                        background-position-y:0%;
+                                    }
+                                    44.44% {
+                                        background-image: url('/images/world/red.png');
+                                        background-color:#fd5997;
+                                        background-position-y:100%;
+                                    }
+
+                                    /* ---- GREEN ---- */
+                                    55.54% {
+                                        background-image: url('/images/world/red.png');
+                                        background-color:#fd5997;
+                                        background-position-y:100%;
+                                    }
+                                    55.55% {
+                                        background-image: url('/images/world/green.png');
+                                        background-color:#4fe5fb;
+                                        background-position-y:0%;
+                                    }
+
+                                    66.65% {
+                                        background-position-y:0%;
+                                    }
+                                    66.66% {
+                                        background-position-y:100%;
+                                    }
+
+                                    77.76% {
+                                        background-position-y:100%;
+                                    }
+                                    77.77% {
+                                        background-position-y:0%;
+                                    }
+
+                                    88.87% {
+                                        background-position-y:0%;
+                                    }
+                                    88.88% {
+                                        background-position-y:100%;
+                                    }
+
+                                    99.99% {
+                                        background-position-y:100%;
+                                    }
+                                    100% {
+                                        background-image: url('/images/world/green.png');
+                                        background-color:#4fe5fb;
+                                        background-position-y:0%;
+                                    }
+                                }
+
+
+                                
+                            }
+                        }
+                    }
+
+                    .utilityPoleBox02{
+                        position: absolute;
+                        top: auto;
+                        bottom: -50%;
+                        left: 85%;
+                        z-index: 0;
+                        width: 20%;
+                        height: 80%;
+                        pointer-events: none; // 避免擋到前景點擊
+                    }
                 }
 
                 .tabViewBox02{
@@ -372,141 +525,12 @@
                     height: 50%;
                 }
 
-                .utilityPoleBox{
-                    position: absolute;
-                    top: 0;
-                    left: 85%;
-                    z-index: 2;
-                    width: 20%;
-                    height: auto;
-                    aspect-ratio: 349 / 1186;
-                    background-position: center 0;      /* 左上角 */
-                    background-size: 100% 100%;    /* 寬度填滿，高度等比 */
-                    background-repeat: no-repeat;
-                    background-image: url('/images/world/trafficSign.png');
-                    pointer-events: none; // 避免擋到前景點擊
-
-                    .stopLightImgSet{
-                        position: absolute;
-                        top: 22%;
-                        left: 74%;
-                        width: 20%;
-                        height: auto;
-                        aspect-ratio: 1 / 1;
-                        background-color: #616161;
-                        border-radius: 8px;
-                        padding: 1.5%;
-
-                        .LightImgSet{
-                            width: 100%;
-                            height: 100%;
-                            border: 1px solid #000000;
-                            border-radius: 8px;
-                            background-position: center 0;      /* 左上角 */
-                            background-size: 100% 200%;    /* 寬度填滿，高度等比 */
-                            background-repeat: no-repeat;
-                            animation: bgCycle 6s infinite linear;
-                            // 
-
-                            @keyframes bgCycle {
-
-                                /* ---- RED ---- */
-                                0% {
-                                    background-image: url('/images/world/red.png');
-                                    background-color:#fd5997;
-                                    background-position-y:100%;
-                                }
-
-                                11.10% {
-                                    background-position-y:100%;
-                                }
-                                11.11% {
-                                    background-position-y:0%;
-                                }
-
-                                22.21% {
-                                    background-position-y:0%;
-                                }
-                                22.22% {
-                                    background-position-y:100%;
-                                }
-
-                                33.32% {
-                                    background-position-y:100%;
-                                }
-                                33.33% {
-                                    background-position-y:0%;
-                                }
-
-                                44.43% {
-                                    background-position-y:0%;
-                                }
-                                44.44% {
-                                    background-image: url('/images/world/red.png');
-                                    background-color:#fd5997;
-                                    background-position-y:100%;
-                                }
-
-                                /* ---- GREEN ---- */
-                                55.54% {
-                                    background-image: url('/images/world/red.png');
-                                    background-color:#fd5997;
-                                    background-position-y:100%;
-                                }
-                                55.55% {
-                                    background-image: url('/images/world/green.png');
-                                    background-color:#4fe5fb;
-                                    background-position-y:0%;
-                                }
-
-                                66.65% {
-                                    background-position-y:0%;
-                                }
-                                66.66% {
-                                    background-position-y:100%;
-                                }
-
-                                77.76% {
-                                    background-position-y:100%;
-                                }
-                                77.77% {
-                                    background-position-y:0%;
-                                }
-
-                                88.87% {
-                                    background-position-y:0%;
-                                }
-                                88.88% {
-                                    background-position-y:100%;
-                                }
-
-                                99.99% {
-                                    background-position-y:100%;
-                                }
-                                100% {
-                                    background-image: url('/images/world/green.png');
-                                    background-color:#4fe5fb;
-                                    background-position-y:0%;
-                                }
-                            }
-
-
-                            
-                        }
-                    }
-                }
-                .utilityPoleBox02{
-                    position: absolute;
-                    top: auto;
-                    bottom: 0%;
-                    left: 85%;
-                    z-index: 0;
-                    width: 20%;
-                    height: 50%;
-                    pointer-events: none; // 避免擋到前景點擊
-                }
+                
+                
             }
+            // 右邊區塊
         }
+        //主內容區塊
     }
     // 桌面板
     
@@ -518,9 +542,9 @@
         background-color: #202020;
         overflow: hidden;
         display: flex;
-        justify-content: center;
+        justify-content: end;
         align-items: end;
-
+        // 背景
         .WorldPageBg{
             position: absolute;
             top:0;
@@ -529,326 +553,362 @@
             height: 100%;
             z-index: 0;
         }
+        // 背景
 
+        // 主內容區塊
         .mainBox{
             position: relative;
             z-index: 1;
             width: 100%;
-            height: calc(100% - 75px);
-            @media (max-width: 576px){
-                height: calc(100% - 50px);
-            }
+            height: calc(100% - 9%);
 
-            .titleBox{
-                width: 100%;
-                height: 8%;
-                flex-shrink: 1;//如果空間不夠，允許縮小
-                display: flex;
-                justify-content: end;
-                align-items: center;
-                .titleImgSet{
-                    width: auto;
-                    height: 100%;
-                    aspect-ratio: 220 / 89;
-                }
-            }
-
+            //內容顯示區塊
             .containerBox{
+                position: relative;
+                z-index: 1;
                 width: 100%;
-                height: calc(100% - 8%);
+                height: 80%;
+                padding: 0px 12px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2%;
 
-                .allProportionBox{
-                    margin-top: 2%;
+                // 標題區塊
+                .titleBox{
                     width: 100%;
-                    height: auto;
+                    height: 10%;
                     flex-shrink: 1;//如果空間不夠，允許縮小
-                    aspect-ratio: 656 / 869;
+                    display: flex;
+                    justify-content: end;
+                    align-items: center;
+                    .titleImgSet{
+                        width: auto;
+                        height: 100%;
+                        aspect-ratio: 220 / 89;
+                    }
+                }
+                // 標題區塊
+
+                //顯示區塊
+                .mainViewBox{
+                    //border:  1px solid red;
+                    position: relative;
+                    width: 100%;
+                    height: 88%;
+                    min-width: 0;
                     max-width: 100%;
                     max-height: 100%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    .allLimitBox{
-                        width: auto;
-                        height: 100%;
-                        aspect-ratio: 656 / 869;
+                    // 偵測寬度
+                    .widthBox{
+                        width: 100%;
+                        height: auto;
+                        aspect-ratio: 656 / 790;
                         max-width: 100%;
                         max-height: 100%;
-                        .contentBox{
-                            width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        // 偵測高度
+                        .heightBox{
+                            width: auto;
                             height: 100%;
+                            aspect-ratio: 656 / 790;
                             max-width: 100%;
                             max-height: 100%;
                             display: flex;
-                            justify-content: start;
+                            justify-content: center;
                             align-items: center;
-                            .proportionBox{
-                                width: 87%;
+                            // 內容顯示區
+                            .contentBox{
+                                position: relative;
+                                z-index: 2;
+                                width: 100%;
                                 height: 100%;
-                            
-                                max-width: 100%;
-                                max-height: 100%;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                .viewImgBox{
+                                padding: 1.5% 18.5% 21% 12%;
+                                // 背景圖片01
+                                .viweImgSet{
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    z-index: 1;
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                                // 背景圖片01
+
+                                // 背景圖片02
+                                .viweImgSet02{
+                                    position: absolute;
+                                    top: auto;
+                                    bottom: -50%;
+                                    left: 0;
+                                    z-index: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                                // 背景圖片02
+
+                                // swiper顯示區
+                                .swiperBox{
                                     position: relative;
                                     width: 100%;
                                     height: 100%;
-                                    
-                                    max-width: 100%;
-                                    max-height: 100%;
-                                    padding: 1.5% 18% 46% 11%;
-                                    
-                                    .viweImgSet{
+
+                                    /* 元件最外圍 */
+                                    .viewSwiper{
                                         position: absolute;
                                         top: 0;
                                         left: 0;
                                         z-index: 1;
                                         width: 100%;
                                         height: 100%;
-                                    }
+                                        //輪播本體
+                                        .swiperSlide{
 
-                                    .viewBox{
-                                        //border: 2px solid red;
-                                        position: relative;
-                                        z-index: 2;
-                                        width: 100%;
-                                        height: 100%;
-
-                                        /* 元件最外圍 */
-                                        .viewSwiper{
-                                            position: absolute;
-                                            top: 0;
-                                            left: 0;
-                                            width: 100%;
-                                            height: 100%;
-                                            //輪播本體
-                                            .swiperSlide{
-
-                                                /* 輪播片內容 */
-                                                .slide-item {
-                                                    width: 100%;
-                                                    height: 100%;
-                                                    position: relative;
-                                                    
-                                                    /* 內層swiper元件最外圍 */
-                                                    .wordSwiper{
-                                                        position: absolute;
-                                                        top: 0;
-                                                        left: 0;
-                                                        width: 100%;
-                                                        height: 100%;
-                                                        //輪播本體
-                                                        .swiperSlide{
-
-                                                            /* 輪播片內容 */
-                                                            .slide-item {
-                                                                width: 100%;
-                                                                height: 100%;
-                                                                max-width: 100%;
-                                                                max-height: 100%;
-                                                                position: relative;
-                                                                .imgSet{
-                                                                    position: absolute;
-                                                                    top: 0;
-                                                                    left: 0;
-                                                                    width: 100%;
-                                                                    height: 100%;
-                                                                }
-                                                            }
-                                                            /* 輪播片內容 */
-                                                        }
-                                                        //輪播本體
-                                                    }
-                                                    /* 內層swiper元件最外圍 */
-
-                                                }
-                                                /* 輪播片內容 */
-                                            }
-                                            //輪播本體
-                                        }
-                                        /* 元件最外圍 */
-                                    }
-                                
-                                    .wordPaginationBox{
-                                        position: absolute;
-                                        top: 73%;
-                                        left: 10%;
-                                        width: 73%;
-                                        height: 4.5%;
-                                        z-index: 3;
-                                        transform: translateY(-50%);
-
-                                        .wordPagination{
-                                            width: 100%;
-                                            height: 100%;
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            gap: 7%;
-                                            .swiper-pagination-bullet {
-                                                width: 4.5%;
-                                                height: auto;
-                                                aspect-ratio: 1 / 1;
-                                                border-radius: 100px;
-                                                background-color: #616161;
-                                                opacity: 1;
-                                                cursor: pointer;
-                                                // flex-shrink: 0; // 防止被壓扁
-                                                // display: block;
-                                            }
-                                            .swiper-pagination-bullet-active {
-                                                background-color: #4fe5fb;
-                                            }
-                                        }
-                                    }
-
-                                    .utilityPoleBox{
-                                        position: absolute;
-                                        top: auto;
-                                        bottom: 0%;
-                                        left: 98%;
-                                        
-                                        z-index: 2;
-                                        width: 30%;
-                                        height: auto;
-                                        aspect-ratio: 192 / 776;
-                                        max-width: 100%;
-                                        max-height: 100%;
-                                        transform: translateX(-50%);
-
-                                        .utilityPoleImgSet{
-                                            position: absolute;
-                                            top: 0;
-                                            left: 0;
-                                            width: 100%;
-                                            height: 100%;
-
-                                            
-                                        }
-
-                                        .stopLightImgSet{
-                                            position: absolute;
-                                            top: 20%;
-                                            left: 74%;
-                                            width: 27%;
-                                            height: auto;
-                                            aspect-ratio: 1 / 1;
-                                            background-color: #616161;
-                                            border-radius: 8px;
-                                            padding: 1.5%;
-
-                                            .LightImgSet{
+                                            /* 輪播片內容 */
+                                            .slideItem {
+                                                position: relative;
                                                 width: 100%;
                                                 height: 100%;
-                                                border: 1px solid #000000;
-                                                border-radius: 8px;
-                                                background-position: center 0;      /* 左上角 */
-                                                background-size: 100% 200%;    /* 寬度填滿，高度等比 */
-                                                background-repeat: no-repeat;
-                                                animation: bgCycle 6s infinite linear;
-                                                // 
+                                                
+                                                /* 內層swiper元件最外圍 */
+                                                .wordSwiper{
+                                                    position: absolute;
+                                                    z-index: 1;
+                                                    top: 0;
+                                                    left: 0;
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    //輪播本體
+                                                    .wordSwiperSlide{
 
-                                                @keyframes bgCycle {
+                                                        /* 輪播片內容 */
+                                                        .wordSlideItem {
+                                                            width: 100%;
+                                                            height: 100%;
+                                                            max-width: 100%;
+                                                            max-height: 100%;
+                                                            .imgSet{
+                                                                width: 100%;
+                                                                height: 100%;
+                                                                object-fit: cover;
+                                                            }
+                                                        }
+                                                        /* 輪播片內容 */
+                                                    }
+                                                    //輪播本體
+                                                }
+                                                /* 內層swiper元件最外圍 */
 
-                                                    /* ---- RED ---- */
-                                                    0% {
-                                                        background-image: url('/images/world/red.png');
-                                                        background-color:#fd5997;
-                                                        background-position-y:100%;
-                                                    }
+                                            }
+                                            /* 輪播片內容 */
+                                        }
+                                        //輪播本體
+                                    }
+                                    /* 元件最外圍 */
+                                }
+                                // swiper顯示區
 
-                                                    11.10% {
-                                                        background-position-y:100%;
-                                                    }
-                                                    11.11% {
-                                                        background-position-y:0%;
-                                                    }
+                                // Pagination顯示區塊
+                                .wordPaginationBox{
+                                    position: absolute;
+                                    top: 86%;
+                                    left: 12%;
+                                    width: 70%;
+                                    height: 4.5%;
+                                    z-index: 3;
+                                    transform: translateY(-50%);
 
-                                                    22.21% {
-                                                        background-position-y:0%;
-                                                    }
-                                                    22.22% {
-                                                        background-position-y:100%;
-                                                    }
+                                    .wordPagination{
+                                        width: 100%;
+                                        height: 100%;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        gap: 7%;
+                                        .swiper-pagination-bullet {
+                                            width: 4.5%;
+                                            height: auto;
+                                            aspect-ratio: 1 / 1;
+                                            border-radius: 100px;
+                                            background-color: #616161;
+                                            opacity: 1;
+                                            cursor: pointer;
+                                            // flex-shrink: 0; // 防止被壓扁
+                                            // display: block;
+                                        }
+                                        .swiper-pagination-bullet-active {
+                                            background-color: #4fe5fb;
+                                        }
+                                    }
+                                }
+                                // Pagination顯示區塊
 
-                                                    33.32% {
-                                                        background-position-y:100%;
-                                                    }
-                                                    33.33% {
-                                                        background-position-y:0%;
-                                                    }
+                                // 路燈顯示區塊
+                                .utilityPoleBox{
+                                    //background-color: red;
+                                    position: absolute;
+                                    top: auto;
+                                    bottom: -10%;
+                                    left: 85%;
+                                    z-index: 3;
+                                    width: 30%;
+                                    height: auto;
+                                    aspect-ratio: 192 / 776;
+                                    max-width: 100%;
+                                    max-height: 100%;
+                                    transform: translateX(-50%);
 
-                                                    44.43% {
-                                                        background-position-y:0%;
-                                                    }
-                                                    44.44% {
-                                                        background-image: url('/images/world/red.png');
-                                                        background-color:#fd5997;
-                                                        background-position-y:100%;
-                                                    }
+                                    .utilityPoleImgSet{
+                                        position: absolute;
+                                        z-index: 2;
+                                        top: 0;
+                                        left: 0;
+                                        width: 100%;
+                                        height: 100%;
+                                    }
 
-                                                    /* ---- GREEN ---- */
-                                                    55.54% {
-                                                        background-image: url('/images/world/red.png');
-                                                        background-color:#fd5997;
-                                                        background-position-y:100%;
-                                                    }
-                                                    55.55% {
-                                                        background-image: url('/images/world/green.png');
-                                                        background-color:#4fe5fb;
-                                                        background-position-y:0%;
-                                                    }
+                                    .utilityPoleImgSet02{
+                                        position: absolute;
+                                        z-index: 1;
+                                        top: auto;
+                                        left: 0;
+                                        bottom: -50%;
+                                        width: 100%;
+                                        height: 100%;
+                                    }
 
-                                                    66.65% {
-                                                        background-position-y:0%;
-                                                    }
-                                                    66.66% {
-                                                        background-position-y:100%;
-                                                    }
+                                    .stopLightImgSet{
+                                        position: absolute;
+                                        z-index: 3;
+                                        top: 20%;
+                                        left: 74%;
+                                        width: 27%;
+                                        height: auto;
+                                        aspect-ratio: 1 / 1;
+                                        background-color: #616161;
+                                        border-radius: 8px;
+                                        padding: 1.5%;
 
-                                                    77.76% {
-                                                        background-position-y:100%;
-                                                    }
-                                                    77.77% {
-                                                        background-position-y:0%;
-                                                    }
+                                        .LightImgSet{
+                                            width: 100%;
+                                            height: 100%;
+                                            border: 1px solid #000000;
+                                            border-radius: 8px;
+                                            background-position: center 0;      /* 左上角 */
+                                            background-size: 100% 200%;    /* 寬度填滿，高度等比 */
+                                            background-repeat: no-repeat;
+                                            animation: bgCycle 6s infinite linear;
+                                            // 
 
-                                                    88.87% {
-                                                        background-position-y:0%;
-                                                    }
-                                                    88.88% {
-                                                        background-position-y:100%;
-                                                    }
+                                            @keyframes bgCycle {
 
-                                                    99.99% {
-                                                        background-position-y:100%;
-                                                    }
-                                                    100% {
-                                                        background-image: url('/images/world/green.png');
-                                                        background-color:#4fe5fb;
-                                                        background-position-y:0%;
-                                                    }
+                                                /* ---- RED ---- */
+                                                0% {
+                                                    background-image: url('/images/world/red.png');
+                                                    background-color:#fd5997;
+                                                    background-position-y:100%;
+                                                }
+
+                                                11.10% {
+                                                    background-position-y:100%;
+                                                }
+                                                11.11% {
+                                                    background-position-y:0%;
+                                                }
+
+                                                22.21% {
+                                                    background-position-y:0%;
+                                                }
+                                                22.22% {
+                                                    background-position-y:100%;
+                                                }
+
+                                                33.32% {
+                                                    background-position-y:100%;
+                                                }
+                                                33.33% {
+                                                    background-position-y:0%;
+                                                }
+
+                                                44.43% {
+                                                    background-position-y:0%;
+                                                }
+                                                44.44% {
+                                                    background-image: url('/images/world/red.png');
+                                                    background-color:#fd5997;
+                                                    background-position-y:100%;
+                                                }
+
+                                                /* ---- GREEN ---- */
+                                                55.54% {
+                                                    background-image: url('/images/world/red.png');
+                                                    background-color:#fd5997;
+                                                    background-position-y:100%;
+                                                }
+                                                55.55% {
+                                                    background-image: url('/images/world/green.png');
+                                                    background-color:#4fe5fb;
+                                                    background-position-y:0%;
+                                                }
+
+                                                66.65% {
+                                                    background-position-y:0%;
+                                                }
+                                                66.66% {
+                                                    background-position-y:100%;
+                                                }
+
+                                                77.76% {
+                                                    background-position-y:100%;
+                                                }
+                                                77.77% {
+                                                    background-position-y:0%;
+                                                }
+
+                                                88.87% {
+                                                    background-position-y:0%;
+                                                }
+                                                88.88% {
+                                                    background-position-y:100%;
+                                                }
+
+                                                99.99% {
+                                                    background-position-y:100%;
+                                                }
+                                                100% {
+                                                    background-image: url('/images/world/green.png');
+                                                    background-color:#4fe5fb;
+                                                    background-position-y:0%;
                                                 }
                                             }
                                         }
                                     }
                                 }
-                            }  
+                                // 路燈顯示區塊
+                                
+                            }
+                            // 內容顯示區
                         }
-                        
+                        // 偵測高度
                     }
+                    // 偵測寬度
                 }
-                
-                
+                //顯示區塊
             }
+            //內容顯示區塊
 
+            //底部控制區塊
             .controlBox{
                 position: absolute;
                 z-index: 2;
                 top: auto;
-                bottom: 0;
+                bottom: 10%;
                 left: 0;
                 width: 100%;
                 height: 10%;
@@ -996,8 +1056,81 @@
                     /* 元件最外圍 */
                 }
             }
+            //底部控制區塊
+
+            // 底部按鈕區塊
+            .bottomBox{
+                //border: 1px solid red;
+                position: absolute;
+                z-index: 3;
+                top: auto;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 10%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                // 背景
+                .bottomBoxImg{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1;
+                }
+                // 背景
+                
+                // 底部按鈕設定
+                .bottomBtn{
+                    position: relative;
+                    z-index: 2;
+                    border: none;
+                    padding: 0px;
+                    background-color: transparent;
+                    opacity: 0.5;
+                    width: 10%;
+                    height: auto;
+                    aspect-ratio: 50 / 28;
+                    background-color: transparent;
+                    background-image: url('/images/world/手機板/pageArrow.png');
+                    background-position: center 0;      /* 左上角 */
+                    background-size: 100% 100%;    /* 寬度填滿，高度等比 */
+                    background-repeat: no-repeat;
+                    animation: floatY 2.5s ease-in-out infinite;
+                    /* 動畫設定 */
+                    /* 上下浮動動畫 */
+                    @keyframes floatY {
+                        0%   { transform: translateY(0px); }
+                        50%  { transform: translateY(-10px); }  /* 上移 */
+                        100% { transform: translateY(0px); }    /* 回來 */
+                    }
+                    /* 上下浮動動畫 */
+                    /* 動畫設定 */
+                }
+                // 底部按鈕設定
+            }
+            // 底部按鈕區塊
         }
+        // 主內容區塊
     }
     // 手機板
 }
 /* 元件最外圍 */
+
+// 提示畫面
+.landscapeBlocker {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    background: #202020;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    @media screen and (orientation: landscape) and (max-width: 900px) {
+        display: flex;
+    }
+}
+// 提示畫面

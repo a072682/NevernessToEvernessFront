@@ -5,11 +5,13 @@ import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import './_CityPage.scss';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { SwiperContext } from '../../context/SwiperContext';
 
 
 function CityPage (){
 
+    //#region 解析度判定
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 992);
 
     useEffect(() => {
@@ -20,108 +22,124 @@ function CityPage (){
         window.addEventListener("resize", resizeHandler);
         return () => window.removeEventListener("resize", resizeHandler);
     }, []);
-
-    const [mainSwiper, setMainSwiper] = useState(null);
-    useEffect(()=>{},[mainSwiper])
-    const [mainSwiperData, setMainSwiperData] = useState(null);
-    useEffect(()=>{},[mainSwiperData])
-
-    const paginationRef = useRef(null);
-    const prevRef = useRef(null);
-    const nextRef = useRef(null);
-
-    //dom掛載完成後由useEffect重新綁定宣告
-    useEffect(() => {
-        if (!mainSwiperData) {
-            return;
-        }
-        if(isDesktop){
-            return;
-        }
-        if (mainSwiperData && !isDesktop) {
-
-            //將swiper資料指定給swiper
-            const swiper = mainSwiperData;
-
-            // 重新綁定 navigation
-            swiper.params.navigation.prevEl = prevRef.current;
-            swiper.params.navigation.nextEl = nextRef.current;
-
-            // 重新綁定 pagination
-            swiper.params.pagination.el = paginationRef.current;
-            swiper.params.pagination.clickable = true;
-            
-            // 重新初始化 navigation（重要）
-            swiper.navigation.init();
-            swiper.navigation.update();
-            // 重新初始化 pagination（重要）
-            swiper.pagination.init();
-            swiper.pagination.render();
-            swiper.pagination.update();
-        }
-    }, [mainSwiperData]);
-    //dom掛載完成後由useEffect重新綁定宣告
-    
-    const [numData, setNumData] = useState(null);
-    useEffect(()=>{},[numData])
-
-    //#region 
-    const numToIndex = {
-        0: "first",
-        1: "second",
-        2: "third",
-        3: "fourth",
-        4: "fifth",
-        5: "sixth",
-    };
     //#endregion
 
-    //#region 導覽列資料更新設定
-    useEffect(() => {
-        setNumData(numToIndex[mainSwiper?.realIndex]);
-    }, [mainSwiper]);
+    //#region 從Context取得手機版layout資料
+        const { mbSwiperLayout } = useContext(SwiperContext);
     //#endregion
 
-    const swiperData = [
-        {
-            id:1,
-            imgData:`/images/city/slide1 (1).jpg`,
-            imgSmData:"/images/city/手機板/slide1.jpg",
-            numImgData:"/images/city/手機板/citySlideNum1.png", 
-        },
-        {
-            id:2,
-            imgData:`/images/city/slide2 (1).jpg`,
-            imgSmData:"/images/city/手機板/slide2.jpg",
-            numImgData:"/images/city/手機板/citySlideNum2.png", 
-        },
-        {
-            id:3,
-            imgData:`/images/city/slide3 (1).jpg`,
-            imgSmData:"/images/city/手機板/slide3.jpg",
-            numImgData:"/images/city/手機板/citySlideNum3.png", 
-        },
-        {
-            id:4,
-            imgData:`/images/city/slide4 (1).jpg`,
-            imgSmData:"/images/city/手機板/slide4.jpg",
-            numImgData:"/images/city/手機板/citySlideNum4.png", 
-        },
-        {
-            id:5,
-            imgData:`/images/city/slide5 (1).jpg`,
-            imgSmData:"/images/city/手機板/slide5.jpg",
-            numImgData:"/images/city/手機板/citySlideNum5.png", 
-        },
-        {
-            id:6,
-            imgData:`/images/city/slide6 (1).jpg`,
-            imgSmData:"/images/city/手機板/slide6.jpg",
-            numImgData:"/images/city/手機板/citySlideNum6.png", 
-        },
-    ]
+    //#region swiper相關
+        //#region swiper綁定宣告
+        const [mainSwiper, setMainSwiper] = useState(null);
+        useEffect(()=>{},[mainSwiper])
+        //#endregion
 
+        //#region 取得swiper資料
+        const [mainSwiperData, setMainSwiperData] = useState(null);
+        useEffect(()=>{},[mainSwiperData])
+        //#endregion
+
+        //#region swiper控制元件綁定宣告
+        const paginationRef = useRef(null);
+        const prevRef = useRef(null);
+        const nextRef = useRef(null);
+        //#endregion
+
+        //#region swiper初始化綁定
+        useEffect(() => {
+            if (!mainSwiperData) {
+                return;
+            }
+            if(isDesktop){
+                return;
+            }
+            if (mainSwiperData && !isDesktop) {
+
+                //將swiper資料指定給swiper
+                const swiper = mainSwiperData;
+
+                // 重新綁定 navigation
+                swiper.params.navigation.prevEl = prevRef.current;
+                swiper.params.navigation.nextEl = nextRef.current;
+
+                // 重新綁定 pagination
+                swiper.params.pagination.el = paginationRef.current;
+                swiper.params.pagination.clickable = true;
+                
+                // 重新初始化 navigation（重要）
+                swiper.navigation.init();
+                swiper.navigation.update();
+                // 重新初始化 pagination（重要）
+                swiper.pagination.init();
+                swiper.pagination.render();
+                swiper.pagination.update();
+            }
+        }, [mainSwiperData]);
+        //#endregion
     
+        //#region 數字資料宣告
+        const [numData, setNumData] = useState(null);
+        useEffect(()=>{},[numData])
+        //#endregion
+
+        //#region 數字樣式列表
+        const numToIndex = {
+            0: "first",
+            1: "second",
+            2: "third",
+            3: "fourth",
+            4: "fifth",
+            5: "sixth",
+        };
+        //#endregion
+
+        //#region 導覽列資料更新設定
+        useEffect(() => {
+            setNumData(numToIndex[mainSwiper?.realIndex]);
+        }, [mainSwiper]);
+        //#endregion
+
+        //#region swiper顯示資料
+        const swiperData = [
+            {
+                id:1,
+                imgData:`/images/city/slide1 (1).jpg`,
+                imgSmData:"/images/city/手機板/slide1.jpg",
+                numImgData:"/images/city/手機板/citySlideNum1.png", 
+            },
+            {
+                id:2,
+                imgData:`/images/city/slide2 (1).jpg`,
+                imgSmData:"/images/city/手機板/slide2.jpg",
+                numImgData:"/images/city/手機板/citySlideNum2.png", 
+            },
+            {
+                id:3,
+                imgData:`/images/city/slide3 (1).jpg`,
+                imgSmData:"/images/city/手機板/slide3.jpg",
+                numImgData:"/images/city/手機板/citySlideNum3.png", 
+            },
+            {
+                id:4,
+                imgData:`/images/city/slide4 (1).jpg`,
+                imgSmData:"/images/city/手機板/slide4.jpg",
+                numImgData:"/images/city/手機板/citySlideNum4.png", 
+            },
+            {
+                id:5,
+                imgData:`/images/city/slide5 (1).jpg`,
+                imgSmData:"/images/city/手機板/slide5.jpg",
+                numImgData:"/images/city/手機板/citySlideNum5.png", 
+            },
+            {
+                id:6,
+                imgData:`/images/city/slide6 (1).jpg`,
+                imgSmData:"/images/city/手機板/slide6.jpg",
+                numImgData:"/images/city/手機板/citySlideNum6.png", 
+            },
+        ]
+        //#endregion
+    //#endregion
 
     return(
         <>
@@ -242,7 +260,7 @@ function CityPage (){
                                             swiperData?.map((item,index)=>{
                                                 return(
                                                     mainSwiper?.realIndex === index && (
-                                                        <img className='bgNumImg' src={item.numImgData} alt="" />
+                                                        <img key={index} className='bgNumImg' src={item.numImgData} alt="" />
                                                     )
                                                 )
                                             })
@@ -251,7 +269,9 @@ function CityPage (){
                                         <img className='bgImg02' src="/images/city/手機板/spray2 (1).png" alt="" />
                                     </div>
                                     <div className={`backViewBox ${mainSwiper?.realIndex >= 3?("second"):("first")}`}></div>
-                                    <button className='iconBox'>
+                                    <button className='iconBox'
+                                            type='button'
+                                            onClick={()=>{mbSwiperLayout.slideNext()}}>
                                         <img className='IconSet' src="/images/character/手機板/pageArrow.png" alt="" />
                                     </button>
                                     <div    ref={paginationRef}
@@ -265,8 +285,11 @@ function CityPage (){
                     /* 手機板 */
                 )}
                 {/* MB 版內容 */}
-                
             </div>
+
+            {/* 提示畫面 */}
+            <div className="landscapeBlocker">請將手機旋轉至直向模式</div>
+            {/* 提示畫面 */}
         </>
     )
 }

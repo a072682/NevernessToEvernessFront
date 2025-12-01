@@ -1,8 +1,15 @@
 
 
+import { useDispatch } from 'react-redux';
+import { MODALS, open } from "../../../slice/modalSlice";
 import './_leftSide.scss';
 
 function LeftSide (){
+
+    //#region 讀取中央函式前置宣告
+        //讀取中央函式前置宣告
+        const dispatch = useDispatch();
+    //#endregion
 
     return(
         <>
@@ -15,7 +22,9 @@ function LeftSide (){
                         {/* 元件本體 */}
                         <div className='leftSide'>
                             {/* 元件按鈕 */}
-                            <button className='leftSideBtn'></button>
+                            <button className='leftSideBtn'
+                                    onClick={()=>{dispatch(open(MODALS.ReserveModal));}}>
+                            </button>
                             {/* 元件按鈕 */}
                         </div>
                         {/* 元件本體 */}

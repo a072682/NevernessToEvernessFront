@@ -7,8 +7,10 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade, Pagination, Autoplay } from 'swiper/modules';
-import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { SwiperContext } from '../../context/SwiperContext';
+import { useSelector } from 'react-redux';
 
 
 function InformationPage (){
@@ -16,25 +18,46 @@ function InformationPage (){
     //#region 
     //#endregion
 
+    //#region 移動頁面前置宣告
+    const navigate = useNavigate();
+    //#endregion
+
+    //#region 讀取中央登入資料
+        //讀取中央資料
+        // const newsData = useSelector((state)=>{
+        //     return(
+        //         state.login.isLogin
+        //     )
+        // })
+
+        // useEffect(()=>{
+        //     console.log("loginState狀態:",loginState);
+        // },[newsData])
+    //#endregion
+
     //#region 解析度判定
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 992);
-    useEffect(()=>{
-        if (!isDesktop) {
-            setSwiperPC(null);
-        }else if(isDesktop){
-            setSwiperMB(null);
-        }
-    },[isDesktop]);
+        const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 992);
+        useEffect(()=>{
+            if (!isDesktop) {
+                setSwiperPC(null);
+            }else if(isDesktop){
+                setSwiperMB(null);
+            }
+        },[isDesktop]);
 
-    useEffect(() => {
-        const resizeHandler = () => {
-            setIsDesktop(window.innerWidth >= 992);
-            //console.log("寬度", window.innerWidth);
-        };
+        useEffect(() => {
+            const resizeHandler = () => {
+                setIsDesktop(window.innerWidth >= 992);
+                //console.log("寬度", window.innerWidth);
+            };
 
-        window.addEventListener("resize", resizeHandler);
-        return () => window.removeEventListener("resize", resizeHandler);
-    }, []);
+            window.addEventListener("resize", resizeHandler);
+            return () => window.removeEventListener("resize", resizeHandler);
+        }, []);
+    //#endregion
+
+    //#region 從Context取得手機版layout資料
+        const { mbSwiperLayout } = useContext(SwiperContext);
     //#endregion
  
     //#region 輪播片相關
@@ -42,9 +65,9 @@ function InformationPage (){
         const [swiperPC,setSwiperPC] = useState(null);
         useEffect(()=>{
             if(!swiperPC){
-                console.log("桌面消失");
+                //console.log("桌面消失");
             }else if(swiperPC){
-                console.log("桌面出現");
+                //console.log("桌面出現");
             }
         },[swiperPC]);
         //#endregion
@@ -53,9 +76,9 @@ function InformationPage (){
         const [swiperMB,setSwiperMB] = useState(null);
         useEffect(()=>{
             if(!swiperMB){
-                console.log("手機板消失");
+                //console.log("手機板消失");
             }else if(swiperMB){
-                console.log("手機板出現");
+                //console.log("手機板出現");
             }
         },[swiperMB]);
         //#endregion
@@ -198,6 +221,12 @@ function InformationPage (){
     ]
     //#endregion
 
+    //#region 處理頁面移動函式
+    const handleGoToNews = (id) => {
+        navigate(`/information/NewListPage/${id}`);
+    };
+    //#endregion
+
     return(
         <>
             {/* 元件最外圍 */}
@@ -313,7 +342,11 @@ function InformationPage (){
                                                         articleData?.map((item,index)=>{
                                                             if(tabActiveData === "news" || tabActiveData === item.class){
                                                                 return(
-                                                                    <Link key={index} className='newsItem' href="">
+                                                                    <button key={index} 
+                                                                            type='button'
+                                                                            className='newsItem' 
+                                                                            onClick={()=>{handleGoToNews(123)}}
+                                                                    >
                                                                         <div className={`class ${item.class}`}>
                                                                             {
                                                                                 item.class === "system"? "系統"
@@ -324,7 +357,7 @@ function InformationPage (){
                                                                         </div>
                                                                         <div className='content'>{item.content}</div>
                                                                         <div className='time'>{item.time}</div>
-                                                                    </Link>
+                                                                    </button>
                                                                 )
                                                             }
                                                         })
@@ -427,7 +460,11 @@ function InformationPage (){
                                             articleData?.map((item,index)=>{
                                                 if(tabActiveData === "news" || tabActiveData === item.class){
                                                     return(
-                                                        <Link key={index} className='newsItem' href="">
+                                                        <button key={index}
+                                                                type='button'
+                                                                className='newsItem'
+                                                                onClick={()=>{handleGoToNews(123)}}
+                                                        >
                                                             <div className={`class ${item.class}`}>
                                                                 {
                                                                     item.class === "system"? "系統"
@@ -438,7 +475,7 @@ function InformationPage (){
                                                             </div>
                                                             <div className='content'>{item.content}</div>
                                                             <div className='time'>{item.time}</div>
-                                                        </Link>
+                                                        </button>
                                                     )
                                                 }
                                             })
@@ -446,7 +483,17 @@ function InformationPage (){
                                     </div>
                                 </div>
                             </div>
-                                
+                            
+                            {/* 底部按鈕區塊 */}
+                            <div className='bottomBox'>
+                                {/* 底部按鈕設定 */}
+                                <button type="button" 
+                                        className='bottomBtn'
+                                        onClick={()=>{mbSwiperLayout.slideNext()}}>        
+                                </button>
+                                {/* 底部按鈕設定 */}
+                            </div>
+                            {/* 底部按鈕區塊 */}
                         </div>
                     </div>
                     /* 手機板 */

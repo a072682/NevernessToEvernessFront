@@ -15,6 +15,7 @@
     flex-direction: column;
     justify-content: end;
     align-items: center;
+    pointer-events: none;
     @media (max-width: 992px){
         height: 100%;
     }
@@ -87,6 +88,7 @@
                 border: none;
                 padding: 0px;
                 transition: transform 0.2s ease;
+                pointer-events: auto;
                 &:hover {
                     background-position-y: 100%;
                 }

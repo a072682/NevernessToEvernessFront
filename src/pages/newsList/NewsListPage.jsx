@@ -5,9 +5,14 @@ import './_newsListPage.scss';
 import LeftSide from '../../components/common/leftSide/LeftSide';
 import ReactPagination from '../../components/common/頁碼元件/ReactPagination';
 import Copyright from '../../components/common/版權區塊/Copyright';
+import { useNavigate } from 'react-router-dom';
 
 
 function NewListPage (){
+
+    //#region 移動頁面前置宣告
+        const navigate = useNavigate();
+    //#endregion
 
     //#region 頁碼元件控制用
       //#region 模擬來源資料
@@ -37,9 +42,15 @@ function NewListPage (){
         const currentItems = inputData.slice(startIndex, endIndex);
       //#endregion
     //#endregion
-
+      
     //#region 版權區塊控制
       const[copyright,setCopyright]=useState(false);
+    //#endregion
+
+    //#region 處理頁面移動函式
+    const handleGoToIndex = () => {
+        navigate(`/`);
+    };
     //#endregion
 
     return(
@@ -80,7 +91,8 @@ function NewListPage (){
                                 <div className="widthBox">
                                     <div className='heightBox'>
                                         {/* 手機版上一頁按鈕 */}
-                                        <button className='backBtnSet'></button>
+                                        <button className='backBtnSet'
+                                                onClick={()=>{handleGoToIndex()}}></button>
                                         {/* 手機版上一頁按鈕 */}
                                     </div>
                                 </div>
@@ -119,7 +131,9 @@ function NewListPage (){
                             {/* 上一頁按鈕外圍 */}
                             <div className='backBtnBox d-none d-lg-flex'>
                                 {/* 上一頁按鈕 */}
-                                <button className='backBtnSet'></button>
+                                <button className='backBtnSet'
+                                        onClick={()=>{handleGoToIndex()}}>        
+                                </button>
                                 {/* 上一頁按鈕 */}
                             </div>
                             {/* 上一頁按鈕外圍 */}

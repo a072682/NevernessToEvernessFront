@@ -15,13 +15,6 @@ import NewListPage from '../pages/newsList/NewsListPage';
 import NewsPage from '../pages/news/NewsPage';
 
 
-
-
-
-
-
-
-
 const router = createHashRouter([ //createHashRouter為建立router的方法
 	{
 		path:"/",
@@ -38,6 +31,14 @@ const router = createHashRouter([ //createHashRouter為建立router的方法
             {
                 path: "information",
                 element: <InformationPage />,
+            },
+            {
+                path: "information/NewListPage",
+                element: <NewListPage />,
+            },
+            {
+                path: "information/NewListPage/:id",
+                element: <NewsPage />,
             },
             {
                 path: "world",

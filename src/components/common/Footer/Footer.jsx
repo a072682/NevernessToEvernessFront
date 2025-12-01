@@ -2,6 +2,36 @@
 import './_footer.scss';
 
 function Footer(){
+
+    //#region icon設定
+    const iconSet = [
+        {
+            name:"faceBook",
+            link:"https://www.facebook.com/325581947301814",
+        },
+        {
+            name:"youtube",
+            link:"https://www.youtube.com/channel/UCP363wgDiNGwXynMKNWAF8Q?sub_confirmation=1",
+        },
+        {
+            name:"discord",
+            link:"https://discord.gg/pAWyEmpd8X",
+        },
+        {
+            name:"instagram",
+            link:"https://www.instagram.com/iwntezh/",
+        },
+        {
+            name:"X",
+            link:"https://x.com/NTE_ZH",
+        },
+        {
+            name:"playStation",
+            link:"https://nte.pse.is/828787",
+        },
+    ]
+    //#endregion
+
     return(
         <>
             {/* 元件最外圍 */}
@@ -22,13 +52,20 @@ function Footer(){
                     {/* icon區塊 */}
                     <div className='iconBox'>
                         {/* icon設定 */}
-                        <a className='iconSet faceBook' href=""></a>
-                        <a className='iconSet youtube' href=""></a>
-                        <a className='iconSet discord' href=""></a>
-                        <a className='iconSet instagram' href=""></a>
-                        <a className='iconSet X' href=""></a>
-                        <a className='iconSet playStation' href=""></a>
+                        {
+                            iconSet?.map((item,index)=>{
+                                return(
+                                    <a  key={index}
+                                        className={`iconSet ${item.name}`}
+                                        href={item.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer">    
+                                    </a>
+                                )
+                            })
+                        }
                         {/* icon設定 */}
+                        
                     </div>
                     {/* icon區塊 */}
 

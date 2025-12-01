@@ -8,8 +8,8 @@
     z-index: 1040;
 }
 
-/* 左側滑出面板 */
-.offcanvas-panel {
+/* 左側滑出面板本體 */
+.offcanvasPanel {
     position: fixed;
     top: auto;
     bottom: 0;
@@ -21,6 +21,7 @@
     box-shadow: 3px 0 12px rgba(0, 0, 0, 0.2);
     z-index: 1050;
     
+    // 下方貼圖設定
     .offcanvasBgImgSet{
         position: absolute;
         top:auto;
@@ -34,10 +35,11 @@
         background-repeat: no-repeat;
         z-index: 1;
     }
+    // 下方貼圖設定
   
-
+    // 本體內容設定
     /* Offcanvas 內部樣式調整（建議追加） */
-    .offcanvas-box{
+    .offcanvasBox{
         width: 100%;
         height: 100%;
         display: flex;
@@ -45,7 +47,8 @@
         background:rgba(29, 29, 29, 0.97);
         z-index: 2;
 
-        .offcanvas-bodySet{
+        // 連結選項區塊
+        .offcanvasBodySet{
             width: 100%;
             height: 60%;
             padding: 5% 0 2% 0;
@@ -53,51 +56,90 @@
             flex-direction: column;
             justify-content: start;
             align-items: center;
-            gap: 12px;
-            .offcanvasItem-set{
+            gap: 2%;
+            //連結選項設定
+            .offcanvasItemSet{
+                border: none;
+                padding: 0px;
+                background-color: transparent;
                 width: 50%;
                 height: 100%;
                 border-bottom: 1px solid #777474;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                .imgSet{
+                .imgBox{
                     width: 100%;
-                    max-width: 240px;
-                    height: auto;
-                    aspect-ratio: 240 / 40;
-                    background-position: center 50%;      /* 左上角 */
-                    background-size: 100% 300%;    /* 寬度填滿，高度等比 */
-                    background-repeat: no-repeat;
-                    background-color: transparent;
+                    height: 100%;
+                    max-width: 100%;
+                    max-height: 100%;
+                    min-width: 0;
+                    min-height: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .widthBox{
+                        width: 100%;
+                        height: auto;
+                        aspect-ratio: 240 / 40;
+                        max-width: 100%;
+                        max-height: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        .heightBox{
+                            width: auto;
+                            height: 100%;
+                            aspect-ratio: 240 / 40;
+                            max-width: 100%;
+                            max-height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
 
-                    &.indexPage{
-                        background-image: url('/images/header/headerNav1.png');
-                    }
-                    &.character{
-                        background-image: url('/images/header/headerNav2.png');
-                    }
-                    &.information{
-                        background-image: url('/images/header/headerNav3.png');
-                    }
-                    &.world{
-                        background-image: url('/images/header/headerNav4.png');
-                    }
-                    &.city{
-                        background-image: url('/images/header/headerNav5.png');
+                            .imgSet{
+                                width: 100%;
+                                height: 100%;
+                                background-position: center 50%;      /* 左上角 */
+                                background-size: 100% 300%;    /* 寬度填滿，高度等比 */
+                                background-repeat: no-repeat;
+                                background-color: transparent;
+
+                                &.indexPage{
+                                    background-image: url('/images/header/headerNav1.png');
+                                }
+                                &.character{
+                                    background-image: url('/images/header/headerNav2.png');
+                                }
+                                &.information{
+                                    background-image: url('/images/header/headerNav3.png');
+                                }
+                                &.world{
+                                    background-image: url('/images/header/headerNav4.png');
+                                }
+                                &.city{
+                                    background-image: url('/images/header/headerNav5.png');
+                                }
+                            }
+                        }
                     }
                 }
+                
             }
+            //連結選項設定
         }
+        // 連結選項區塊
 
+        //icon區塊
         .offcanvasIconBox{
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 9px;
+            gap: 2%;
+            //icon設定
             .offcanvasIconSet{
-                width: 33px;
+                width: 8%;
                 height: auto;
                 aspect-ratio: 1 / 1;
                 background-color: transparent;
@@ -147,23 +189,14 @@
                     background-position-x: 100%;
                 }
             }
+            //icon設定
         }
+        //icon區塊
     }
-
-    
+    // 本體內容設定
 }
+/* 左側滑出面板本體 */
 
-/* 動畫 */
-// @keyframes slideIn {
-//   from {
-//     transform: translateX(100%);
-//     //左側-100%
-//     //右側100%
-//   }
-//   to {
-//     transform: translateX(0);
-//   }
-// }
 
 
 

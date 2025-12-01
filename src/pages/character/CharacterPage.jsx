@@ -6,14 +6,19 @@ import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation,EffectFade } from 'swiper/modules';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Tab, Nav } from 'react-bootstrap';
 import LeftSide from '../../components/common/leftSide/LeftSide';
+import { SwiperContext } from '../../context/SwiperContext';
 
 
 function CharacterPage (){
 
     //#region 
+    //#endregion
+
+    //#region 從Context取得手機版layout資料
+        const { mbSwiperLayout } = useContext(SwiperContext);
     //#endregion
 
     //#region 解析度判斷
@@ -561,10 +566,115 @@ function CharacterPage (){
 
                         {/* 控制層 顯示元素不存在 */}
                         <Tab.Container activeKey={activeMbTab} onSelect={(key) => setActiveMbTab(key)}>
-                        
-                        {/* 控制欄位 */}
-                        <div className='characterMbBox'>
-                            <div className='characterViewBox'>
+                            {/* 控制欄位 */}
+                            <div className='characterMbBox'>
+                                <div className='characterViewBox'>
+                                    {/* Tab 內容區 */}
+                                    <Tab.Content className='tabContent w-100 h-100'>
+                                        {
+                                            tabDataMB?.map((item,index)=>{
+                                                return(
+                                                    //{/* 內容外層
+                                                    <Tab.Pane key={item.key} eventKey={item.key} className='w-100 h-100'>
+
+                                                        {/* 左右按鈕設定 */}
+                                                        <button disabled={cooldown}
+                                                            className={`ThumbMbPrevBtn ${item.key === activeMbTab?("active"):("")}`}
+                                                            ref={(prevBtn) => (PrevMbBtn.current[index] = prevBtn)}
+                                                            onClick={() => handleMbPrevClick(index)}
+                                                            >
+                                                        </button>
+                                                        <button disabled={cooldown}
+                                                            className={`ThumbMbNextBtn ${item.key === activeMbTab?("active"):("")}`}
+                                                            ref={(nextBtn) => (NextMbBtn.current[index] = nextBtn)}
+                                                            onClick={() => handleMbNextClick(index)}
+                                                            >
+                                                        </button>
+                                                        {/* 左右按鈕設定 */}
+
+                                                        {
+                                                            activeMbTab === item.key && (
+                                                                /* 縮圖輪播片 */
+                                                                <Swiper
+                                                                    className="thumbsMbSwiper"
+                                                                    modules={[Navigation]}
+                                                                    onSwiper={(swiper) => {
+                                                                        // 寫入swiper
+                                                                        thumbMbSwipers.current[index] = swiper;
+
+                                                                        // 綁定 navigation
+                                                                        swiper.params.navigation.prevEl = PrevMbBtn.current[index];
+                                                                        swiper.params.navigation.nextEl = NextMbBtn.current[index];
+
+                                                                        // 重新初始化 navigation（重要）
+                                                                        swiper.navigation.init();
+                                                                        swiper.navigation.update();
+                                                                    }}
+                                                                    spaceBetween={8}                 
+                                                                    loop={true}                       
+                                                                    slidesPerView={3}
+                                                                    centeredSlides
+                                                                >
+                                                                    {item.swiperData.map((src, i) => (
+                                                                        <SwiperSlide    className='swiperSlide'
+                                                                                        key={i}
+                                                                                        onClick={() => {
+                                                                                            mainMbSwipers.current[index]?.slideToLoop(i);
+                                                                                            thumbMbSwipers.current[index]?.slideToLoop(i);}}
+                                                                                        //onClick={() => {mainSwiper?.slideTo(i);videoSwiper?.slideTo(i);}}
+                                                                        >
+                                                                            <button     type="button" className='imgBox'
+                                                                                        style={{ backgroundImage: `url(${src.imgSm})` }}
+                                                                            />
+                                                                        </SwiperSlide>
+                                                                    ))}
+                                                                </Swiper>
+                                                                /* 縮圖輪播片 */
+                                                            )
+                                                        }
+                                                        
+                                                    </Tab.Pane>
+                                                    //{/* 內容外層 */}
+                                                )
+                                            })
+                                        }           
+                                    </Tab.Content>
+                                    {/* Tab 內容區 */}
+                                    
+                                </div> 
+                            </div>
+                            {/* 控制欄位 */}
+
+                            {/* 底部tab選項 */}
+                            <div className='bottomBox'>
+                                <img className='bottomBoxBg' src="/images/character/bg.jpg" alt="" />
+                                <Nav className='tab-box'>
+                                    <Nav.Item className='tab-item btnBox'>
+                                        {
+                                            tabDataMB?.map((item)=>{
+                                                return(
+                                                    
+                                                    <Nav.Link   key={item.key}
+                                                                className={`tab-link ${item.class}`}
+                                                                aria-disabled="true"
+                                                                eventKey={item.key}>
+                                                    </Nav.Link>
+                                                    
+                                                )
+                                            }) 
+                                        }
+                                    </Nav.Item>                       
+                                    <button className='iconBox' 
+                                            type='button'
+                                            onClick={()=>{mbSwiperLayout.slideNext()}}>
+                                        <img className='characterPageIconSet' src="/images/character/手機板/pageArrow.png" alt="" />
+                                    </button>
+                                </Nav>
+                            </div>
+                            {/* 底部tab選項 */}
+                                        
+                            {/* 大圖顯示區塊 */}
+                            <div className='characterPageMbViewBox'>
                                 {/* Tab 內容區 */}
                                 <Tab.Content className='tabContent w-100 h-100'>
                                     {
@@ -572,63 +682,56 @@ function CharacterPage (){
                                             return(
                                                 //{/* 內容外層
                                                 <Tab.Pane key={item.key} eventKey={item.key} className='w-100 h-100'>
-
-                                                    {/* 左右按鈕設定 */}
-                                                    <button disabled={cooldown}
-                                                        className={`ThumbMbPrevBtn ${item.key === activeMbTab?("active"):("")}`}
-                                                        ref={(prevBtn) => (PrevMbBtn.current[index] = prevBtn)}
-                                                        onClick={() => handleMbPrevClick(index)}
-                                                        >
-                                                    </button>
-                                                    <button disabled={cooldown}
-                                                        className={`ThumbMbNextBtn ${item.key === activeMbTab?("active"):("")}`}
-                                                        ref={(nextBtn) => (NextMbBtn.current[index] = nextBtn)}
-                                                        onClick={() => handleMbNextClick(index)}
-                                                        >
-                                                    </button>
-                                                    {/* 左右按鈕設定 */}
-
                                                     {
                                                         activeMbTab === item.key && (
-                                                            /* 縮圖輪播片 */
-                                                            <Swiper
-                                                                className="thumbsMbSwiper"
-                                                                modules={[Navigation]}
-                                                                onSwiper={(swiper) => {
-                                                                    // 寫入swiper
-                                                                    thumbMbSwipers.current[index] = swiper;
+                                                
+                                                            /* 大輪播圖外圍 */
+                                                            <div className='characterSwiperMbBox'>
+                                                                {/* 大圖輪播 */}
+                                                                <Swiper
+                                                                    className="bgSwiper"
+                                                                    modules={[EffectFade]}
+                                                                    onSwiper={(swiper) => {
+                                                                        mainMbSwipers.current[index] = swiper;
+                                                                    }}
+                                                                    loop={true} 
+                                                                    slidesPerView={1}
+                                                                    effect="fade"                                   //啟用淡入淡出
+                                                                    fadeEffect={{ crossFade: true }}                // 可選：交錯漸變更順
+                                                                    speed={600}                                     // 可選：動畫時間(毫秒)
+                                                                    spaceBetween={10}
+                                                                    centeredSlides
+                                                                    onSlideChange={(swiper) => {
+                                                                        thumbMbSwipers.current[index]?.slideToLoop(swiper.realIndex);
+                                                                    }}
+                                                                >
+                                                                    {
+                                                                        item.swiperData?.map((itemIn, i) => {
+                                                                            return(
+                                                                                <SwiperSlide key={i} className='swiperSlide'>
 
-                                                                    // 綁定 navigation
-                                                                    swiper.params.navigation.prevEl = PrevMbBtn.current[index];
-                                                                    swiper.params.navigation.nextEl = NextMbBtn.current[index];
+                                                                                    {/* 背景輪播 */}
+                                                                                    <div className="imgBox">
+                                                                                        <img className='imgSet' src={itemIn.bgimg} alt="" />
+                                                                                    </div>
+                                                                                    {/* 背景輪播 */}
 
-                                                                    // 重新初始化 navigation（重要）
-                                                                    swiper.navigation.init();
-                                                                    swiper.navigation.update();
-                                                                }}
-                                                                spaceBetween={8}                 
-                                                                loop={true}                       
-                                                                slidesPerView={3}
-                                                                centeredSlides
-                                                            >
-                                                                {item.swiperData.map((src, i) => (
-                                                                    <SwiperSlide    className='swiperSlide'
-                                                                                    key={i}
-                                                                                    onClick={() => {
-                                                                                        mainMbSwipers.current[index]?.slideToLoop(i);
-                                                                                        thumbMbSwipers.current[index]?.slideToLoop(i);}}
-                                                                                    //onClick={() => {mainSwiper?.slideTo(i);videoSwiper?.slideTo(i);}}
-                                                                    >
-                                                                        <button     type="button" className='imgBox'
-                                                                                    style={{ backgroundImage: `url(${src.imgSm})` }}
-                                                                        />
-                                                                    </SwiperSlide>
-                                                                ))}
-                                                            </Swiper>
-                                                            /* 縮圖輪播片 */
+                                                                                    {/* 角色說明 */}
+                                                                                    <div className='profileMbBox'>
+                                                                                        <img className='profileMbImgSet' src={itemIn.role} alt="" />
+                                                                                    </div>
+                                                                                    {/* 角色說明 */}
+                                                                                
+                                                                                </SwiperSlide>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </Swiper>
+                                                                {/* 大圖輪播 */}
+                                                            </div>
+                                                            /* 大輪播圖外圍 */
                                                         )
                                                     }
-                                                    
                                                 </Tab.Pane>
                                                 //{/* 內容外層 */}
                                             )
@@ -636,104 +739,7 @@ function CharacterPage (){
                                     }           
                                 </Tab.Content>
                                 {/* Tab 內容區 */}
-                                
-                            </div> 
-                        </div>
-                        {/* 控制欄位 */}
-
-                        {/* 底部tab選項 */}
-                        <div className='bottomBox'>
-                            <img className='bottomBoxBg' src="/images/character/bg.jpg" alt="" />
-                            <Nav className='tab-box'>
-                                <Nav.Item className='tab-item btnBox'>
-                                    {
-                                        tabDataMB?.map((item)=>{
-                                            return(
-                                                
-                                                <Nav.Link   key={item.key}
-                                                            className={`tab-link ${item.class}`}
-                                                            aria-disabled="true"
-                                                            eventKey={item.key}>
-                                                </Nav.Link>
-                                                
-                                            )
-                                        }) 
-                                    }
-                                </Nav.Item>                       
-                                <button className='iconBox'>
-                                    <img className='characterPageIconSet' src="/images/character/手機板/pageArrow.png" alt="" />
-                                </button>
-                            </Nav>
-                        </div>
-                        {/* 底部tab選項 */}
-                                    
-                        {/* 大圖顯示區塊             */}
-                        <div className='characterPageMbViewBox'>
-                            {/* Tab 內容區 */}
-                            <Tab.Content className='tabContent w-100 h-100'>
-                                {
-                                    tabDataMB?.map((item,index)=>{
-                                        return(
-                                            //{/* 內容外層
-                                            <Tab.Pane key={item.key} eventKey={item.key} className='w-100 h-100'>
-                                                {
-                                                    activeMbTab === item.key && (
-                                            
-                                                        /* 大輪播圖外圍 */
-                                                        <div className='characterSwiperMbBox'>
-                                                            {/* 大圖輪播 */}
-                                                            <Swiper
-                                                                className="bgSwiper"
-                                                                modules={[EffectFade]}
-                                                                onSwiper={(swiper) => {
-                                                                    mainMbSwipers.current[index] = swiper;
-                                                                }}
-                                                                loop={true} 
-                                                                slidesPerView={1}
-                                                                effect="fade"                                   //啟用淡入淡出
-                                                                fadeEffect={{ crossFade: true }}                // 可選：交錯漸變更順
-                                                                speed={600}                                     // 可選：動畫時間(毫秒)
-                                                                spaceBetween={10}
-                                                                centeredSlides
-                                                                onSlideChange={(swiper) => {
-                                                                    thumbMbSwipers.current[index]?.slideToLoop(swiper.realIndex);
-                                                                }}
-                                                            >
-                                                                {
-                                                                    item.swiperData?.map((itemIn, i) => {
-                                                                        return(
-                                                                            <SwiperSlide key={i} className='swiperSlide'>
-
-                                                                                {/* 背景輪播 */}
-                                                                                <div className="imgBox">
-                                                                                    <img className='imgSet' src={itemIn.bgimg} alt="" />
-                                                                                </div>
-                                                                                {/* 背景輪播 */}
-
-                                                                                {/* 角色說明 */}
-                                                                                <div className='profileMbBox'>
-                                                                                    <img className='profileMbImgSet' src={itemIn.role} alt="" />
-                                                                                </div>
-                                                                                {/* 角色說明 */}
-                                                                            
-                                                                            </SwiperSlide>
-                                                                        )
-                                                                    })
-                                                                }
-                                                            </Swiper>
-                                                            {/* 大圖輪播 */}
-                                                        </div>
-                                                        /* 大輪播圖外圍 */
-                                                    )
-                                                }
-                                            </Tab.Pane>
-                                            //{/* 內容外層 */}
-                                        )
-                                    })
-                                }           
-                            </Tab.Content>
-                            {/* Tab 內容區 */}
-                        </div>
+                            </div>
                         </Tab.Container>
                         {/* 控制層 顯示元素不存在 */}
                     </div>

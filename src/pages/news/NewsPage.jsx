@@ -1,9 +1,10 @@
 
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './_NewsPage.scss';
 import LeftSide from '../../components/common/leftSide/LeftSide';
 import Copyright from '../../components/common/版權區塊/Copyright';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 
@@ -12,33 +13,40 @@ function NewsPage (){
     //#region 
     //#endregion
 
+    //#region 讀取網址中的 id
+        const { id } = useParams();
+    //#endregion
+
+    //#region 移動頁面前置宣告
+        const navigate = useNavigate();
+    //#endregion
+
     
+    //#region 判斷解析度
+        const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
+        
+        useEffect(()=>{
+            if(!isDesktop){
+                setCopyright(true);
+            }else if(isDesktop){
+                setCopyright(false);
+            }
+        },[isDesktop]);
+        
 
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
-    
-    useEffect(()=>{
-        console.log("解析度",isDesktop);
-        if(!isDesktop){
-            console.log("我有更新");
-            setCopyright(true);
-        }else if(isDesktop){
-            console.log("我沒更新");
-            setCopyright(false);
-        }
-    },[isDesktop]);
+        useEffect(() => {
+            const resizeHandler = () => {
+                setIsDesktop(window.innerWidth >= 768);
+            };
 
-    useEffect(() => {
-        const resizeHandler = () => {
-            setIsDesktop(window.innerWidth >= 768);
-        };
-
-        window.addEventListener("resize", resizeHandler);
-        return () => window.removeEventListener("resize", resizeHandler);
-    }, []);
+            window.addEventListener("resize", resizeHandler);
+            return () => window.removeEventListener("resize", resizeHandler);
+        }, []);
+    //#endregion
 
     //#region 版權區塊控制
       const[copyright,setCopyright]=useState(false);
-      useEffect(()=>{console.log("結果",copyright)},[copyright]);
+      useEffect(()=>{},[copyright]);
     //#endregion
 
     const textData = [
@@ -150,6 +158,22 @@ function NewsPage (){
         },
     ]
 
+    //#region 處理頁面移動函式
+    const handleGoToNewsList = () => {
+        navigate(`/information/NewListPage`);
+    };
+    //#endregion
+
+    //#region 宣告控制mainBox
+    const mainBoxRef = useRef(null);
+    //#endregion
+
+    //#region 回到頁面最上方
+        const goPageTop = () => {
+            mainBoxRef.current.scrollTo(0, 0);
+        }
+    //#endregion
+
 
     return(
         <>
@@ -164,7 +188,7 @@ function NewsPage (){
                     <img className='newsPageBg' src="/images/news/articlePage.jpg" alt="" />
                     {/* 背景 */}
                     {/* 主內容區塊 */}
-                    <div className='mainBox'>
+                    <div className='mainBox' ref={mainBoxRef}>
                         {/* 中央區塊 */}
                         <div className='contentBox'>
                             {/* 標題區塊 */}
@@ -191,7 +215,7 @@ function NewsPage (){
                                 {/* 來源連結 */}
                                 {/* 顯示時間 */}
                                 <div className='timeSet'>
-                                    <time className='textSet' datetime="">2025-06-10</time>
+                                    <time className='textSet'>2025-06-10</time>
                                 </div>
                                 {/* 顯示時間 */}
                             </div>
@@ -292,7 +316,8 @@ function NewsPage (){
                             {/* 版權按鈕 */}
 
                             {/* 回最上按鈕 */}
-                            <button className='topBtnbox'>
+                            <button className='topBtnbox'
+                                    onClick={()=>{goPageTop()}}>
                                 <img className='topBtnSet' src="/images/news/articleTop.png" alt="" />
                             </button>
                             {/* 回最上按鈕 */}
@@ -307,10 +332,11 @@ function NewsPage (){
                         {/* 版權區塊 */}
 
                         {/* 上一頁按鈕 */}
-                        <button className='backBtnSet'></button>
+                        <button className='backBtnSet' 
+                                onClick={()=>{handleGoToNewsList()}}
+                        >
+                        </button>
                         {/* 上一頁按鈕 */}
-                        
-                        
 
                     </div>
                     {/* 主內容區塊 */}
@@ -326,9 +352,4 @@ function NewsPage (){
 }
 export default NewsPage;
 
-{/* <div className="widthBox">
-    <div className='heightBox'>
-
-    </div>
-</div> */}
             
