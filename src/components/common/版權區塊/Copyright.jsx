@@ -33,8 +33,16 @@ function Copyright ({copyright}){
                             {/* 元件最外圍 */}
                             <section className="copyrightShowBox">
                                 <div className='companyLinkBox'>
-                                    <a className='linkItem01' href=""></a>
-                                    <a className='linkItem02' href=""></a>
+                                    <a  className='linkItem01' 
+                                        href="https://www.iwplay.com.tw/"
+                                        target="_blank"
+                                        rel="noopener noreferrer">
+                                    </a>
+                                    <a  className='linkItem02' 
+                                        href="https://www.iwplay.com.tw/"
+                                        target="_blank"
+                                        rel="noopener noreferrer">
+                                    </a>
                                 </div>
                                 <div className='serviceMessageBox'>
                                     <p className='textSet'>服務條款｜隱私權政策</p>

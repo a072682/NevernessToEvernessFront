@@ -1,6 +1,6 @@
 
 
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import './_newsListPage.scss';
 import LeftSide from '../../components/common/leftSide/LeftSide';
 import ReactPagination from '../../components/common/頁碼元件/ReactPagination';
@@ -15,7 +15,7 @@ function NewListPage (){
         const navigate = useNavigate();
     //#endregion
 
-    //#region 讀取中央登入資料
+    //#region 讀取中央新聞資料
         const newsData = useSelector((state)=>{
             return(
                 state.news.news
@@ -23,17 +23,77 @@ function NewListPage (){
         })
 
         useEffect(()=>{
-            console.log("news資訊:",newsData);
+            //console.log("news資訊:",newsData);
         },[newsData])
     //#endregion
 
-    //#region 頁碼元件控制用
-      //#region 模擬來源資料
-      const inputData = [
-        "item01","item02","item03","item04","item05","item06","item07","item08","item09","item010","item011","item012",
-      ]
-      //#endregion
+    //#region tab按鈕設定
+    const btnSet = [
+        {
+            title:"最新",
+            key:"最新",
+        },
+        {
+            title:"新聞",
+            key:"gamenews",
+        },
+        {
+            title:"活動",
+            key:"activity",
+        },
+        {
+            title:"系統",
+            key:"system",
+        },
+    ]
+    //#endregion
 
+    //#region tab按鈕控制
+    const [tabBtn,setTabBtn]= useState(
+        {
+            title:"最新",
+            key:"最新",
+        },
+    );
+    //#endregion
+
+    //#region 新聞過濾相關
+        //#region 新聞過濾函式
+        const handlePageData = (input) => {
+            if (!input) {
+                return [];
+            }
+
+            if (tabBtn.key === "最新") {
+                return input;
+            }
+
+            const pageData = input.filter((key)=>{
+                if (key.class === tabBtn.key) {
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+            return pageData;
+        }
+        //#endregion
+
+        //#region 紀錄過濾後頁面資訊
+        const[pageData,setPageData] = useState([]);
+        useEffect(()=>{
+            //console.log("新頁面資料",pageData)
+        },[pageData])
+        //#endregion
+
+        //#region 標籤變化時進行更新
+        useEffect(()=>{
+            setPageData(handlePageData(newsData));
+        },[tabBtn])
+        //#endregion
+    //#endregion
+
+    //#region 頁碼元件控制用
       //#region 當前頁面，初始為第 1 頁
       const [currentPage, setCurrentPage] = useState(1);
       //#endregion
@@ -43,7 +103,7 @@ function NewListPage (){
       //#endregion
 
       //#region 總頁數設定
-      const totalPages = Math.ceil(inputData.length / itemsPerPage);
+      const totalPages = Math.ceil(pageData?.length / itemsPerPage);
       //#endregion
 
       //#region 計算當前要顯示的項目
@@ -52,10 +112,13 @@ function NewListPage (){
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         //currentItems 為最終內容顯示陣列
-        const currentItems = inputData.slice(startIndex, endIndex);
+        const currentItems = pageData?.slice(startIndex, endIndex);
+        useEffect(()=>{
+            //console.log("最終結果",currentItems)
+        },[currentItems])
       //#endregion
     //#endregion
-      
+    
     //#region 版權區塊控制
       const[copyright,setCopyright]=useState(false);
     //#endregion
@@ -124,26 +187,19 @@ function NewListPage (){
                         <div className='titleItemShowBox mt-12'>
                             {/* 項目選項 */}
                             <div className='titleItemBox'>
-                                {/* 項目設定 */}
-                                <button className='titleItemSet active'>
-                                    <p className='textSet'>最新</p>
-                                </button>
-                                {/* 項目設定 */}
-                                {/* 項目設定 */}
-                                <button className='titleItemSet'>
-                                    <p className='textSet'>新聞</p>
-                                </button>
-                                {/* 項目設定 */}
-                                {/* 項目設定 */}
-                                <button className='titleItemSet'>
-                                    <p className='textSet'>活動</p>
-                                </button>
-                                {/* 項目設定 */}
-                                {/* 項目設定 */}
-                                <button className='titleItemSet'>
-                                    <p className='textSet'>系統</p>
-                                </button>
-                                {/* 項目設定 */}
+                                {
+                                    btnSet?.map((btn,index)=>{
+                                        return(
+                                            /* 項目設定 */
+                                            <button key={index} 
+                                                    className={`titleItemSet ${tabBtn.title === btn.title && ("active")}`}
+                                                    onClick={()=>{setTabBtn(btn)}}>
+                                                <p className='textSet'>{btn.title}</p>
+                                            </button>
+                                            /* 項目設定 */
+                                        )
+                                    })
+                                }
                             </div>
                             {/* 項目選項 */}
 
@@ -162,7 +218,8 @@ function NewListPage (){
                         {/* 新聞項目列表外圍 */}
                         <div className='newsListBox'>
                             {
-                                newsData?.map((item,index)=>{
+                                currentItems?.map((item,index)=>{
+                                    if(tabBtn.key === "最新" || tabBtn.key === item.class )
                                     return(
                                         /* 新聞消息項目設定 */
                                         <button key={index} 
@@ -182,13 +239,13 @@ function NewListPage (){
                                                 <div className='bottomBox'>
                                                     <div className='profile'>
                                                         {
-                                                            item.content.slice(0, 1).map((itemIn, indexIn) => {
+                                                            item?.content?.slice(0, 1).map((itemIn, indexIn) => {
                                                                 return (
-                                                                <>
+                                                                <Fragment key={indexIn}>
                                                                     {
-                                                                        itemIn.contents.map((linesData, lineIndex) => {
+                                                                        itemIn?.contents?.map((linesData, lineIndex) => {
                                                                             return (
-                                                                            <>
+                                                                            <Fragment key={lineIndex}>
                                                                                 {
                                                                                     linesData.lines.map((textData, textIndex) => {
                                                                                         return (
@@ -198,11 +255,11 @@ function NewListPage (){
                                                                                         )
                                                                                     })
                                                                                 }
-                                                                            </>
+                                                                            </Fragment>
                                                                             )
                                                                         })
                                                                     }
-                                                                </>
+                                                                </Fragment>
                                                                 )
                                                             })
                                                             }

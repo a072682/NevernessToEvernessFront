@@ -5,6 +5,7 @@ import './_NewsPage.scss';
 import LeftSide from '../../components/common/leftSide/LeftSide';
 import Copyright from '../../components/common/版權區塊/Copyright';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 
@@ -15,13 +16,38 @@ function NewsPage (){
 
     //#region 讀取網址中的 id
         const { id } = useParams();
+        //console.log("取得的id",id);
     //#endregion
 
     //#region 移動頁面前置宣告
         const navigate = useNavigate();
     //#endregion
 
-    
+    const[newsData,setNewsData]=useState(null);
+    useEffect(()=>{
+        //console.log("得到的新聞資料",newsData);
+    },[newsData]);
+
+    const handleNewsData = (inputData) =>{
+        const result = inputData.find((item) => {
+            return(item.id === Number(id));
+        });
+        return result;
+    }
+
+    //#region 讀取中央新聞資料
+        const news = useSelector((state)=>{
+            return(
+                state.news.news
+            )
+        })
+
+        useEffect(()=>{
+            //console.log("news資訊:",news);
+            setNewsData(handleNewsData(news));
+        },[news])
+    //#endregion
+
     //#region 判斷解析度
         const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
         
@@ -164,6 +190,12 @@ function NewsPage (){
     };
     //#endregion
 
+    //#region 處理頁面移動函式(移動到首頁)
+    const handleGoToIndex = () => {
+        navigate(`/`);
+    };
+    //#endregion
+
     //#region 宣告控制mainBox
     const mainBoxRef = useRef(null);
     //#endregion
@@ -172,6 +204,35 @@ function NewsPage (){
         const goPageTop = () => {
             mainBoxRef.current.scrollTo(0, 0);
         }
+    //#endregion
+
+    //#region icon設定
+    const iconSet = [
+        {
+            name:"faceBook",
+            link:"https://www.facebook.com/325581947301814",
+        },
+        {
+            name:"youtube",
+            link:"https://www.youtube.com/channel/UCP363wgDiNGwXynMKNWAF8Q?sub_confirmation=1",
+        },
+        {
+            name:"discord",
+            link:"https://discord.gg/pAWyEmpd8X",
+        },
+        {
+            name:"instagram",
+            link:"https://www.instagram.com/iwntezh/",
+        },
+        {
+            name:"X",
+            link:"https://x.com/NTE_ZH",
+        },
+        {
+            name:"playStation",
+            link:"https://nte.pse.is/828787",
+        },
+    ]
     //#endregion
 
 
@@ -203,58 +264,192 @@ function NewsPage (){
                                 </picture>
                                 {/* 標題背景圖 */}
                                 {/* 主要標題 */}
-                                <h1 className='titleSet'>「收容測試」測試說明與常見問題解答</h1>
+                                <h1 className='titleSet'>{newsData?.title}</h1>
                                 {/* 主要標題 */}
                                 {/* 來源連結 */}
                                 <div className='Breadcrumb'>
+                                    <button className='linkBtnSet'
+                                            type='button'
+                                            onClick={()=>{handleGoToIndex()}}>
+                                        <p className='textSet'>
+                                            異環 &gt; 
+                                        </p>
+                                    </button>
+                                    <button className='linkBtnSet'
+                                            type='button'
+                                            onClick={()=>{handleGoToNewsList()}}>
+                                        <p className='textSet'>
+                                            情報速遞 &gt;
+                                        </p>
+                                    </button>
                                     <p className='textSet'>
-                                        異環 &gt; 情報速遞 &gt; 
+                                        {
+                                            newsData?.class === "system"? "系統"
+                                            : newsData?.class === "activity"? "活動"
+                                            : newsData?.class === "gamenews"? "新聞"
+                                            : ""
+                                        }
                                     </p>
-                                    <p className='textSet'>系統</p>
                                 </div>
                                 {/* 來源連結 */}
                                 {/* 顯示時間 */}
                                 <div className='timeSet'>
-                                    <time className='textSet'>2025-06-10</time>
+                                    <time className='textSet'>{newsData?.time}</time>
                                 </div>
                                 {/* 顯示時間 */}
                             </div>
                             {/* 標題區塊 */}
 
                             {/* 圖片區塊 */}
-                            <div className='imgBox'>
-                                {/* 圖片本體 */}
-                                <img className='imgSet' src="/images/news/2025061017550821522486.webp" alt="" />
-                                {/* 圖片本體 */}
+                            {
+                                newsData?.imgData && (
+                                    <div className='imgBox'>
+                                        {/* 圖片本體 */}
+                                        <img className='imgSet' src={newsData?.imgData} alt="" />
+                                        {/* 圖片本體 */}
 
-                                {/* 左側圖片區塊 */}
-                                <div className='leftImgBox'>
-                                    <img className="imgSet" src="/images/news/articleAside.png" alt="" />
-                                </div>
-                                {/* 左側圖片區塊 */}
-                            </div>
+                                        {/* 左側圖片區塊 */}
+                                        <div className='leftImgBox'>
+                                            <img className="imgSet" src="/images/news/articleAside.png" alt="" />
+                                        </div>
+                                        {/* 左側圖片區塊 */}
+                                    </div>
+                                )
+                            }
                             {/* 圖片區塊 */}
 
                             {/* 文字區塊 */}
                             <div className='textBox'>
                                 {
-                                    textData?.map((text,index)=>{
-                                        return(
-                                            /* 文字群組 */
-                                            <div key={index} className='textGroup'>
-                                                <h2 className='title'>{text.title}</h2>
-                                                {
-                                                    text.content?.map((content,indexIn)=>{
-                                                        return(
-                                                            <p key={indexIn} className='content'>
-                                                                {content}
-                                                            </p>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                            /* 文字群組 */
-                                        )
+                                    newsData?.content?.map((text,index)=>{
+
+                                        if(text.type === "title"){
+                                            return(
+                                                /* 文字群組 */
+                                                <div key={index} className='textGroup'>
+                                                    {/* 標題 */}
+                                                    <h2 className='title'>
+                                                        {text.title}
+                                                        {
+                                                           text.link && (<a href={text.link}>{text.link}</a>)
+                                                        }
+                                                    </h2>
+                                                    {/* 標題 */}
+                                                </div>
+                                                /* 文字群組 */
+                                            )
+                                        }
+
+                                        if(text.type === "section"){
+                                            return(
+                                                text.type === "section" && (
+                                                    /* 文字群組 */
+                                                    <div key={index} className='textGroup'>
+                                                        {/* 標題 */}
+                                                        <h2 className='title'>{text.title}</h2>
+                                                        {/* 標題 */}
+                                                        {
+                                                            text.contents?.map((content01,index01)=>{
+                                                                // 內容分類
+                                                                if (content01.type === "paragraph") {
+                                                                    return (
+                                                                        content01.lines.map((content02,index02)=>{
+                                                                            return(
+                                                                                <p key={index02} className='content'>
+                                                                                    {content02}
+                                                                                </p>
+                                                                            )
+                                                                        })
+                                                                    );
+                                                                }
+
+                                                                if (content01.type === "list") {
+                                                                    return (
+                                                                        content01.items.map((content02,index02)=>{
+                                                                            return(
+                                                                                <p key={index02} className='content'>
+                                                                                    {content02}
+                                                                                </p>
+                                                                            )
+                                                                        })
+                                                                    )
+                                                                }
+
+                                                                if (content01.type === "qa") {
+                                                                    return (
+                                                                        content01.items.map((content02,index02)=>{
+                                                                            return(
+                                                                                <div key={index02} className="qaGroup">
+                                                                                    
+                                                                                    <p className='content'>
+                                                                                        Q: {content02.q}
+                                                                                    </p>
+                                                                                    <p className='content'>
+                                                                                        A: {content02.a}
+                                                                                        {content02.link && (
+                                                                                            <a  className='linkSet' 
+                                                                                                href={content02.link}
+                                                                                                target="_blank"
+                                                                                                rel="noopener noreferrer"
+                                                                                            >
+                                                                                                {content02.link}
+                                                                                            </a>
+                                                                                        )}
+                                                                                    </p>
+                                                                                </div>
+                                                                            )
+                                                                        })
+                                                                    )
+                                                                }
+                                                                // 內容分類
+
+                                                            })
+                                                        }
+                                                    </div>
+                                                    /* 文字群組 */
+                                                )     
+                                            )
+                                        }
+
+                                        if(text.type === "gamenewsTitle"){
+                                            return(  
+                                                /* 文字群組 */
+                                                <div key={index} className='textGroup'>
+                                                    {/* 標題 */}
+                                                    <h2 className='title gamenews'>{text.title}</h2>
+                                                    {/* 標題 */}
+                                                </div>
+                                                /* 文字群組 */  
+                                            )
+                                        }
+
+                                        if(text.type === "gamenewsParagraph"){
+                                            return(
+                                                /* 文字群組 */
+                                                <div key={index} className='textGroup'>
+                                                    <p className='content gamenews'>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;{text.content}
+                                                    </p>
+                                                </div>
+                                                /* 文字群組 */
+                                            )
+                                        }
+
+                                        if(text.type === "gamenewsImgData"){
+                                            return(
+                                                /* 圖片群組 */
+                                                <div key={index} className='imgGroup'>
+                                                    <img className='imgSet' src={text.imgData} alt="" />
+                                                </div>
+                                                /* 圖片群組 */
+                                            )
+                                        }
+
+                                        
+
+                                        
+
+                                        
                                         
                                     })
                                 }
@@ -266,10 +461,23 @@ function NewsPage (){
                                 {/* 文字條列 */}
                                 <div className='itemSet'>
                                     <span className='textSet'>【異環】官方粉絲團</span>
-                                    <a className='linkSet' href="">&raquo; 點擊前往 &laquo;</a>
+                                    <a  className='linkSet' 
+                                        href="https://www.facebook.com/@nte.iwplay"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        &raquo; 點擊前往 &laquo;
+                                    </a>
                                 </div>
                                 <div className='itemSet'>
-                                    <span>【異環】官方YouTube頻道：</span><a href="">&raquo; 點擊前往 &laquo;</a>
+                                    <span>【異環】官方YouTube頻道：</span>
+                                    <a  className='linkSet'
+                                        href="https://www.youtube.com/channel/UCP363wgDiNGwXynMKNWAF8Q"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        &raquo; 點擊前往 &laquo;
+                                    </a>
                                 </div>
                                 <div className='itemSet'>
                                     <span>&nbsp;</span>
@@ -295,12 +503,20 @@ function NewsPage (){
                                         </p>
                                     </div>
                                     <div className='iconBox'>
-                                        <a className='iconSet faceBook' href=""></a>
-                                        <a className='iconSet youtube' href=""></a>
-                                        <a className='iconSet discord' href=""></a>
-                                        <a className='iconSet instagram' href=""></a>
-                                        <a className='iconSet X' href=""></a>
-                                        <a className='iconSet playStation' href=""></a>
+                                        {/* icon設定 */}
+                                        {
+                                            iconSet?.map((item,index)=>{
+                                                return(
+                                                    <a  key={index}
+                                                        className={`iconSet ${item.name}`}
+                                                        href={item.link}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer">    
+                                                    </a>
+                                                )
+                                            })
+                                        }
+                                        {/* icon設定 */}
                                     </div>
                                 </div>
                                 {/* 圖片區塊 */}

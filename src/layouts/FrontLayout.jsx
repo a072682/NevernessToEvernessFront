@@ -25,13 +25,55 @@ import InformationPage from "../pages/information/InformationPage";
 import WorldPage from '../pages/world/WorldPage';
 import CityPage from '../pages/city/CityPage';
 import ReservePage from '../pages/reserve/reservePage';
+import LoadPage from '../pages/load/LoadPage';
 //各大分頁
+
+
+//需要預先導入的圖片列表
+import { preloadImages } from '../preloadImages';
+
+//需要預先導入的圖片列表
 
 
 
 function FrontLayout(){
 
     //#region
+    //#endregion
+
+    //#region 圖片預先載入相關
+        //#region 判斷是否載入中狀態宣告
+        const [isLoading, setIsLoading] = useState(true);
+        //#endregion
+
+        //#region 計數用狀態宣告
+        const [loadedCount, setLoadedCount] = useState(0);
+        //#endregion
+
+        //#region 圖片載入函式
+        const handleImgLoaded = () => {
+            setLoadedCount(prev => {
+                const newCount = prev + 1;
+                if (newCount === preloadImages.length) {
+                    setIsLoading(false);
+                }
+                return newCount;
+            });
+        };
+        //#endregion
+
+        //#region 重新整理後載入圖片
+        useEffect(() => {
+            preloadImages.forEach(src => {
+                const img = new Image();
+                img.src = src;
+                //.onload圖片成功載入後
+                img.onload = handleImgLoaded;
+                //.onerror圖片載入失敗時
+                img.onerror = handleImgLoaded;
+            });
+        }, []);
+        //#endregion
     //#endregion
 
     //#region 解析度判定
@@ -183,8 +225,9 @@ function FrontLayout(){
                                             mbSwiperLayoutData,
                                             mbSwiperLayout,
                                             onOpen,
-                                            setOnOpen, 
+                                            setOnOpen,
             }}>
+                <LoadPage isLoading={isLoading}/>
                 {/* 整體layout */}
                 <Header />
                 {/* 桌面板 */}

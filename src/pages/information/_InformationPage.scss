@@ -279,7 +279,7 @@
                                                 background-repeat: no-repeat;
                                                 transform: skew(15deg);
 
-                                                &.news {
+                                                &.最新 {
                                                     background-image: url('/images/information/news.png');
                                                 }
 
@@ -651,7 +651,7 @@
                                     background-repeat: no-repeat;
                                     transform: skew(15deg);
 
-                                    &.news {
+                                    &.最新 {
                                         background-image: url('/images/information/news.png');
                                     }
 
@@ -798,11 +798,11 @@
                         align-items: center;
 
                         .newBtnSet{
-                            width: 20%;
-                            height: 50%;
+                            width: auto;
+                            height: auto;
+                            padding: 8px 20px;
                             border: 1px solid #ffffff;
                             background-color: transparent;
-                            padding: 0px;
                             color: #ffffff;
                             border-radius: 8px;
                         }

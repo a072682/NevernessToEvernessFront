@@ -114,7 +114,7 @@
                     .titleSet{
                         position: absolute;
                         z-index: 1;
-                        top: 50%;
+                        top: 40%;
                         left: 15%;
                         width: auto;
                         height: auto;
@@ -146,13 +146,23 @@
                         @media (max-width: 768px) { 
                             //display: none;
                         }
+                        .linkBtnSet{
+                            border: none;
+                            padding: 0px;
+                            background-color: transparent;
+                            .textSet{
+                                font-size: clamp(16px, 1.5vw, 20px);
+                                color: #ffffff;
+                                @media (max-width: 1200px) { 
+                                    //font-size: 18px;
+                                }
+                            }
+                        }
                         .textSet{
                             font-size: clamp(16px, 1.5vw, 20px);
                             color: #ffffff;
-                            @media (max-width: 1200px) { 
-                                //font-size: 18px;
-                            }
                         }
+                        
                     }
                     //來源連結
 
@@ -191,6 +201,7 @@
                         width: 100%;
                         height: auto;
                         aspect-ratio: 865 / 487;
+                        border-radius: 8px;
                     }
                     //圖片本體
 
@@ -233,12 +244,48 @@
                         gap: 12px;
                         .title{
                             font-size: 18px;
+                            &.gamenews{
+                                font-size: 28px;
+                                font-weight: 700;
+                            }
                         }
                         .content{
                             font-size: 16px;
+
+                            &.gamenews{
+                                font-size: 14px;
+                            }
+                        }
+                        .qaGroup{
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: start;
+                            align-items: start;
+                            gap: 12px;
+                            .content{
+                                font-size: 16px;
+                            }
                         }
                     }
                     // 文字群組
+
+                    // 圖片群組
+                    .imgGroup{
+                        width: 100%;
+                        height: auto;
+                        aspect-ratio: 1024 / 576;
+                        max-width: 100%;
+                        max-height: 100%;
+                        .imgSet{
+                            width: 100%;
+                            height: 100%;
+                            max-width: 100%;
+                            max-height: 100%;
+                            object-fit: cover;
+                            border-radius: 8px;
+                        }
+                    }
+                    // 圖片群組
                 }
                 //文字區塊
                 

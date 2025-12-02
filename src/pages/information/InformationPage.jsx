@@ -34,6 +34,72 @@ function InformationPage (){
         },[newsData])
     //#endregion
 
+    //#region tab按鈕設定
+    const btnSet = [
+        {
+            title:"最新",
+            key:"最新",
+        },
+        {
+            title:"新聞",
+            key:"gamenews",
+        },
+        {
+            title:"活動",
+            key:"activity",
+        },
+        {
+            title:"系統",
+            key:"system",
+        },
+    ]
+    //#endregion
+
+    //#region tab按鈕控制
+    const [tabBtn,setTabBtn]= useState(
+        {
+            title:"最新",
+            key:"最新",
+        },
+    );
+    //#endregion
+
+    //#region 新聞過濾相關
+        //#region 新聞過濾函式
+        const handlePageData = (input) => {
+            if (!input) {
+                return [];
+            }
+
+            if (tabBtn.key === "最新") {
+                return input;
+            }
+
+            const pageData = input.filter((key)=>{
+                if (key.class === tabBtn.key) {
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+            return pageData;
+        }
+        //#endregion
+
+        //#region 紀錄過濾後頁面資訊
+        const[pageData,setPageData] = useState(null);
+        useEffect(()=>{
+            //console.log("新頁面資料",pageData)
+        },[pageData])
+        //#endregion
+
+        //#region 標籤變化時進行更新
+        useEffect(()=>{
+            setPageData(handlePageData(newsData));
+        },[tabBtn])
+        //#endregion
+    //#endregion
+
     //#region 解析度判定
         const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 992);
         useEffect(()=>{
@@ -138,87 +204,6 @@ function InformationPage (){
         //#endregion
 
     //#endregion
-    
-    //#region tab相關
-
-        //#region tab控制
-        const [tabActiveData,setTabActiveData] = useState("news");
-        useEffect(()=>{},[tabActiveData]);
-        //#endregion
-
-        //#region tab顯示資料
-        const tabLinkData = [
-            {
-                class:"news",
-            },
-            {
-                class:"gamenews",
-            },
-            {
-                class:"activity",
-            },
-            {
-                class:"system",
-            },
-        ]
-        //#endregion
-
-    //#endregion
-
-    //#region 新聞顯示資料
-    const articleData = [
-        {
-            class:"system",
-            content:"「收容測試」測試說明與常見問題解答",
-            time:"2025-06-10",
-        },
-        {
-            class:"system",
-            content:"「收容測試」正式揭密",
-            time:"2025-06-10",
-        },
-        {
-            class:"activity",
-            content:"《異環》二創徵集活動開跑！",
-            time:"2025-05-28",
-        },
-        {
-            class:"activity",
-            content:"《異環》創作者招募計畫啟動！",
-            time:"2025-05-19",
-        },
-        {
-            class:"gamenews",
-            content:"《異環》宣布將於2024東京電玩展首次參展 TGS玩家特派員招募開跑！",
-            time:"2024-09-05",
-        },
-        {
-            class:"system",
-            content:"「收容測試」測試說明與常見問題解答",
-            time:"2025-06-10",
-        },
-        {
-            class:"system",
-            content:"「收容測試」正式揭密",
-            time:"2025-06-10",
-        },
-        {
-            class:"activity",
-            content:"《異環》二創徵集活動開跑！",
-            time:"2025-05-28",
-        },
-        {
-            class:"activity",
-            content:"《異環》創作者招募計畫啟動！",
-            time:"2025-05-19",
-        },
-        {
-            class:"gamenews",
-            content:"《異環》宣布將於2024東京電玩展首次參展 TGS玩家特派員招募開跑！",
-            time:"2024-09-05",
-        },
-    ]
-    //#endregion
 
     //#region 處理頁面移動函式
     const handleGoToNews = (id) => {
@@ -284,7 +269,7 @@ function InformationPage (){
                                                             slidesPerView={1}
                                                             centeredSlides
                                                         >
-                                                            {newsData?.map((item, index) => (
+                                                            {pageData?.map((item, index) => (
                                                                 <SwiperSlide    className='swiperSlide'
                                                                                 key={index}
                                                                 >
@@ -327,19 +312,20 @@ function InformationPage (){
                                                     <img className='newsTitleImgSet' src="/images/information/newsHead.png" alt="" />
                                                     <div className='newsTitleItemBox'>
                                                         {
-                                                            tabLinkData?.map((item,index)=>{
+                                                            btnSet?.map((item,index)=>{
                                                                 return(
                                                                     <button key={index} 
-                                                                            className={`itemBoxSet ${tabActiveData === item.class?("active"):("")}`} 
-                                                                            onClick={()=>{setTabActiveData(item.class)}}
+                                                                            className={`itemBoxSet ${tabBtn.key === item.key?("active"):("")}`} 
+                                                                            onClick={()=>{setTabBtn(item)}}
                                                                     >
-                                                                        <div className={`itemSet ${item.class} `}></div>
+                                                                        <div className={`itemSet ${item.key}`}></div>
                                                                     </button>
                                                                 )
                                                             })
                                                         }
-                                                        <button className='newsMore'>
-                                                            <a className='itemSet' href=""></a>
+                                                        <button className='newsMore' 
+                                                                onClick={()=>{handleGoToNewsList()}}>
+                                                            <div className='itemSet' href=""></div>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -348,27 +334,25 @@ function InformationPage (){
                                                 {/* 新聞消息顯示區塊 */}
                                                 <div className='newsItemsBox'>
                                                     {
-                                                        newsData?.map((item,index)=>{
-                                                            if(tabActiveData === "news" || tabActiveData === item.class){
-                                                                return(
-                                                                    <button key={index} 
-                                                                            type='button'
-                                                                            className='newsItem' 
-                                                                            onClick={()=>{handleGoToNews(123)}}
-                                                                    >
-                                                                        <div className={`class ${item.class}`}>
-                                                                            {
-                                                                                item.class === "system"? "系統"
-                                                                                : item.class === "activity"? "活動"
-                                                                                : item.class === "gamenews"? "新聞"
-                                                                                : ""
-                                                                            }
-                                                                        </div>
-                                                                        <div className='content'>{item.title}</div>
-                                                                        <div className='time'>{item.time}</div>
-                                                                    </button>
-                                                                )
-                                                            }
+                                                        pageData?.map((item,index)=>{
+                                                            return(
+                                                                <button key={index} 
+                                                                        type='button'
+                                                                        className='newsItem' 
+                                                                        onClick={()=>{handleGoToNews(item.id)}}
+                                                                >
+                                                                    <div className={`class ${item.class}`}>
+                                                                        {
+                                                                            item.class === "system"? "系統"
+                                                                            : item.class === "activity"? "活動"
+                                                                            : item.class === "gamenews"? "新聞"
+                                                                            : ""
+                                                                        }
+                                                                    </div>
+                                                                    <div className='content'>{item.title}</div>
+                                                                    <div className='time'>{item.time}</div>
+                                                                </button>
+                                                            )
                                                         })
                                                     }
                                                 </div>
@@ -422,18 +406,20 @@ function InformationPage (){
                                                     slidesPerView={1}
                                                     centeredSlides
                                                 >
-                                                    {swiperData.map((item, index) => (
-                                                        <SwiperSlide    className='swiperSlide'
-                                                                        key={item.id}
-                                                        >
-                                                            <button className='slide-item'
-                                                                    type='button'
-                                                                    onClick={()=>{handleGoToNews(123)}}>
-                                                                <img className='imgSet' src={item.imgSm} alt="" />
-                                                            </button>
-                                                            
-                                                        </SwiperSlide>
-                                                    ))}
+                                                    {
+                                                        pageData?.map((item, index) => (
+                                                            <SwiperSlide    className='swiperSlide'
+                                                                            key={item.id}
+                                                            >
+                                                                <button className='slide-item'
+                                                                        type='button'
+                                                                        onClick={()=>{handleGoToNews(item.id)}}>
+                                                                    <img className='imgSet' src={item.imgData} alt="" />
+                                                                </button>
+                                                                
+                                                            </SwiperSlide>
+                                                        ))
+                                                    }
                                                 </Swiper>
                                                 {/* 縮圖輪播 */}
                                             </div>
@@ -453,13 +439,13 @@ function InformationPage (){
                                         <img className='newsTitleImgSet' src="/images/information/手機板/newsHead.png" alt="" />
                                         <div className='newsTitleItemBox'>
                                             {
-                                                tabLinkData?.map((item,index)=>{
+                                                btnSet?.map((item,index)=>{
                                                     return(
                                                         <button key={index} 
-                                                                className={`itemBoxSet ${tabActiveData === item.class?("active"):("")}`} 
-                                                                onClick={()=>{setTabActiveData(item.class)}}
+                                                                className={`itemBoxSet ${tabBtn.key === item.key?("active"):("")}`} 
+                                                                onClick={()=>{setTabBtn(item)}}
                                                         >
-                                                            <div className={`itemSet ${item.class} `}></div>
+                                                            <div className={`itemSet ${item.key}`}></div>
                                                         </button>
                                                     )
                                                 })
@@ -471,27 +457,25 @@ function InformationPage (){
                                     </div>
                                     <div className='newsItemsBox'>
                                         {
-                                            articleData?.slice(0,5).map((item,index)=>{
-                                                if(tabActiveData === "news" || tabActiveData === item.class){
-                                                    return(
-                                                        <button key={index}
-                                                                type='button'
-                                                                className='newsItem'
-                                                                onClick={()=>{handleGoToNews(123)}}
-                                                        >
-                                                            <div className={`class ${item.class}`}>
-                                                                {
-                                                                    item.class === "system"? "系統"
-                                                                    : item.class === "activity"? "活動"
-                                                                    : item.class === "gamenews"? "新聞"
-                                                                    : ""
-                                                                }
-                                                            </div>
-                                                            <div className='content'>{item.content}</div>
-                                                            <div className='time'>{item.time}</div>
-                                                        </button>
-                                                    )
-                                                }
+                                            pageData?.slice(0,5).map((item,index)=>{
+                                                return(
+                                                    <button key={index}
+                                                            type='button'
+                                                            className='newsItem'
+                                                            onClick={()=>{handleGoToNews(item.id)}}
+                                                    >
+                                                        <div className={`class ${item.class}`}>
+                                                            {
+                                                                item.class === "system"? "系統"
+                                                                : item.class === "activity"? "活動"
+                                                                : item.class === "gamenews"? "新聞"
+                                                                : ""
+                                                            }
+                                                        </div>
+                                                        <div className='content'>{item.title}</div>
+                                                        <div className='time'>{item.time}</div>
+                                                    </button>
+                                                )
                                             })
                                         }
                                     </div>

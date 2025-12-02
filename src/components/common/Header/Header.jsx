@@ -50,19 +50,17 @@ function Header(){
     const location = useLocation();
     //#endregion
 
-    //#region 導覽列資料設定
-    const routeToIndex = {
-        "/": 1,
-        "/character": 2,
-        "/information": 3,
-        "/world": 4,
-        "/city": 5,
-    };
-    //#endregion
-
     //#region 導覽列資料更新設定
     useEffect(() => {
-        const currentIndex = routeToIndex[location.pathname] || 1;
+        const path = location.pathname;
+
+        let currentIndex = 1;
+
+        if (path.startsWith("/character")) currentIndex = 2;
+        else if (path.startsWith("/information")) currentIndex = 3;
+        else if (path.startsWith("/world")) currentIndex = 4;
+        else if (path.startsWith("/city")) currentIndex = 5;
+        else currentIndex = 1;
         setActiveIndex(currentIndex);
     }, [location.pathname]);
     //#endregion
@@ -179,7 +177,11 @@ function Header(){
                             linkData?.map((data,index)=>{
                                 return(
                                     <div key={index} className="navbarItemBoxSet">
-                                        <Nav.Link as={NavLink} to={data.goto} className={`navbarItem-set ${data.classData}`} onClick={() => setActiveIndex(data.ActiveIndex)}></Nav.Link>
+                                        <Nav.Link   as={NavLink} 
+                                                    to={data.goto} 
+                                                    className={`navbarItem-set ${data.classData}`} 
+                                                    onClick={() => setActiveIndex(data.ActiveIndex)}>
+                                        </Nav.Link>
                                     </div>
                                 )
                             })
