@@ -321,69 +321,64 @@ function InformationPage (){
                             
                             {/* 右邊區塊 */}
                             <div className='rightBox'>
-                                <div className="widthBox">
-                                    <div className='heightBox'>
-                                        {/* 右邊內容區塊 */}
-                                        <div className="rightContentBox">
-                                            {/* 新聞消息顯示區塊 */}
-                                            <div className='newsShowBox'>
-                                                {/* 新聞消息標題顯示區塊 */}
-                                                <div className='newsTitleBox'>
-                                                    <img className='newsTitleImgSet' src="/images/information/newsHead.png" alt="" />
-                                                    <div className='newsTitleItemBox'>
-                                                        {
-                                                            btnSet?.map((item,index)=>{
-                                                                return(
-                                                                    <button key={index} 
-                                                                            className={`itemBoxSet ${tabBtn.key === item.key?("active"):("")}`} 
-                                                                            onClick={()=>{setTabBtn(item)}}
-                                                                    >
-                                                                        <div className={`itemSet ${item.key}`}></div>
-                                                                    </button>
-                                                                )
-                                                            })
-                                                        }
-                                                        <button className='newsMore' 
-                                                                onClick={()=>{handleGoToNewsList()}}>
-                                                            <div className='itemSet' href=""></div>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                {/* 新聞消息標題顯示區塊 */}
-
-                                                {/* 新聞消息顯示區塊 */}
-                                                <div className='newsItemsBox'>
-                                                    {
-                                                        pageData?.map((item,index)=>{
-                                                            return(
-                                                                <button key={index} 
-                                                                        type='button'
-                                                                        className='newsItem' 
-                                                                        onClick={()=>{handleGoToNews(item.id)}}
-                                                                >
-                                                                    <div className={`class ${item.class}`}>
-                                                                        {
-                                                                            item.class === "system"? "系統"
-                                                                            : item.class === "activity"? "活動"
-                                                                            : item.class === "gamenews"? "新聞"
-                                                                            : ""
-                                                                        }
-                                                                    </div>
-                                                                    <div className='content'>{item.title}</div>
-                                                                    <div className='time'>{item.time}</div>
-                                                                </button>
-                                                            )
-                                                        })
-                                                    }
-                                                </div>
-                                                {/* 新聞消息顯示區塊 */}
+                                {/* 右邊內容區塊 */}
+                                <div className="rightContentBox">
+                                    {/* 新聞消息顯示區塊 */}
+                                    <div className='newsShowBox'>
+                                        {/* 新聞消息標題顯示區塊 */}
+                                        <div className='newsTitleBox'>
+                                            <img className='newsTitleImgSet' src="/images/information/newsHead.png" alt="" />
+                                            <div className='newsTitleItemBox'>
+                                                {
+                                                    btnSet?.map((item,index)=>{
+                                                        return(
+                                                            <button key={index} 
+                                                                    className={`itemBoxSet ${tabBtn.key === item.key?("active"):("")}`} 
+                                                                    onClick={()=>{setTabBtn(item)}}
+                                                            >
+                                                                <div className={`itemSet ${item.key}`}></div>
+                                                            </button>
+                                                        )
+                                                    })
+                                                }
+                                                <button className='newsMore' 
+                                                        onClick={()=>{handleGoToNewsList()}}>
+                                                    <div className='itemSet' href=""></div>
+                                                </button>
                                             </div>
-                                            {/* 新聞消息顯示區塊 */}
-                                        </div> 
-                                        {/* 右邊內容區塊 */}  
+                                        </div>
+                                        {/* 新聞消息標題顯示區塊 */}
+
+                                        {/* 新聞消息顯示區塊 */}
+                                        <div className='newsItemsBox'>
+                                            {
+                                                pageData?.map((item,index)=>{
+                                                    return(
+                                                        <button key={index} 
+                                                                type='button'
+                                                                className='newsItem' 
+                                                                onClick={()=>{handleGoToNews(item.id)}}
+                                                        >
+                                                            <div className={`class ${item.class}`}>
+                                                                {
+                                                                    item.class === "system"? "系統"
+                                                                    : item.class === "activity"? "活動"
+                                                                    : item.class === "gamenews"? "新聞"
+                                                                    : ""
+                                                                }
+                                                            </div>
+                                                            <div className='content'>{item.title}</div>
+                                                            <div className='time'>{item.time}</div>
+                                                        </button>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                        {/* 新聞消息顯示區塊 */}
                                     </div>
-                                </div>
-                                
+                                    {/* 新聞消息顯示區塊 */}
+                                </div> 
+                                {/* 右邊內容區塊 */}  
                             </div>
                             {/* 右邊區塊 */}
                              
