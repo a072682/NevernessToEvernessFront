@@ -9,6 +9,25 @@ import { SwiperContext } from '../../context/SwiperContext';
 
 function IndexPage (){
 
+    //#region SEO流程宣告
+    useEffect(() => {
+        //標題
+        document.title = "首頁 | 自我練習的還原自製遊戲網站";
+
+        //簡介
+        let metaTag = document.querySelector("meta[name='description']");
+        if (!metaTag) {
+            metaTag = document.createElement("meta");
+            metaTag.setAttribute("name", "description");
+            document.head.appendChild(metaTag);
+        }
+        metaTag.setAttribute(
+            "content",
+            "異環官方網站｜探索沉浸式虛擬世界、角色介紹、城市映像與最新遊戲資訊。觀看宣傳影片、了解遊戲特色，並立即預約加入異環的冒險旅程。"
+        );
+    }, []);
+    //#endregion
+
     //#region 讀取中央函式前置宣告
         //讀取中央函式前置宣告
         const dispatch = useDispatch();
@@ -52,6 +71,9 @@ function IndexPage (){
             {/* 元件最外圍 */}
             <section className="index"
                     onWheel={handleWheel}>
+                <h1 className="visually-hidden">
+                    異環 Neverness to Everness｜官方網站
+                </h1>
                 {/* 混合版內容 */}
                 <div className='indexPage'>
                     {/* lg以上背景影片 */}

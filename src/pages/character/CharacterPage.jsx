@@ -17,6 +17,25 @@ function CharacterPage (){
     //#region 
     //#endregion
 
+    //#region SEO流程宣告
+    useEffect(() => {
+        //標題
+        document.title = "角色介紹 | 自我練習的還原自製遊戲網站";
+
+        //簡介
+        let metaTag = document.querySelector("meta[name='description']");
+        if (!metaTag) {
+            metaTag = document.createElement("meta");
+            metaTag.setAttribute("name", "description");
+            document.head.appendChild(metaTag);
+        }
+        metaTag.setAttribute(
+            "content",
+            "走進異環世界的角色專區，認識角色的背景故事、個性設定與精美立繪。探索伊波恩古董店、異象管理局與未來都市的神秘冒險。",
+        );
+    }, []);
+    //#endregion
+
     //#region 從Context取得手機版layout資料
         const { mbSwiperLayout,mbSwiperLayoutData } = useContext(SwiperContext);
     //#endregion
@@ -341,6 +360,7 @@ function CharacterPage (){
         <>
             {/* 元件最外圍 */}
             <section className="characterPage">
+                <h1 className="visually-hidden">角色介紹｜《異環》Neverness to Everness</h1>
                 {/* PC 版內容 */}
                 {isDesktop && (
                     /* 桌面板 */

@@ -15,6 +15,25 @@ function WorldPage (){
 
     //#region
     //#endregion
+
+    //#region SEO流程宣告
+    useEffect(() => {
+        //標題
+        document.title = "世界觀介紹頁 | 自我練習的還原自製遊戲網站";
+
+        //簡介
+        let metaTag = document.querySelector("meta[name='description']");
+        if (!metaTag) {
+            metaTag = document.createElement("meta");
+            metaTag.setAttribute("name", "description");
+            document.head.appendChild(metaTag);
+        }
+        metaTag.setAttribute(
+            "content",
+            "探索異環 NTE 的世界觀！深入了解未間浦、橋間地、米格爾區等城市地區的背景設定、地標風景與故事脈絡，帶你走進超自然開放都市。",
+        );
+    }, []);
+    //#endregion
     
 
     //#region 從Context取得手機版layout資料
@@ -311,6 +330,7 @@ function WorldPage (){
         <>
             {/* 元件最外圍 */}
             <section className="WorldPage">
+                <h1 className="visually-hidden">世界觀與背景設定｜《異環》Neverness to Everness</h1>
                 {/* PC版內容 */}
                 {isDesktop && (
                     <div className={`WorldPagePC ${isDesktop?(""):("d-none")}`}>

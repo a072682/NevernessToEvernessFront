@@ -14,6 +14,8 @@ function NewsPage (){
     //#region 
     //#endregion
 
+    
+
     //#region 讀取網址中的 id
         const { id } = useParams();
         //console.log("取得的id",id);
@@ -27,6 +29,73 @@ function NewsPage (){
     useEffect(()=>{
         //console.log("得到的新聞資料",newsData);
     },[newsData]);
+
+    //#region 從 newsData 轉成純文字（前 100 字）
+    function extractNewsText(newsContentArray) {
+        let result = "";
+
+        newsContentArray.forEach(block => {
+            // type: paragraph
+            if (block.type === "section") {
+            block.contents.forEach(item => {
+                if (item.type === "paragraph") {
+                result += item.lines.join(" ");
+                }
+                if (item.type === "list") {
+                result += item.items.join(" ");
+                }
+                if (item.type === "qa") {
+                item.items.forEach(qa => {
+                    result += qa.q + " " + qa.a + " ";
+                });
+                }
+            });
+            }
+
+            // type: title
+            if (block.type === "title") {
+            result += block.title + " ";
+            }
+
+            // type: gamenewsParagraph
+            if (block.type === "gamenewsParagraph") {
+            result += block.content + " ";
+            }
+        });
+
+        return result;
+    }
+    //#endregion
+
+    //#region 新聞簡介編寫函式
+    //只取新聞的前100個文字
+    function extractMetaDescription(text, maxLength = 100) {
+        if (!text) return "";
+
+        const clean = text.replace(/<[^>]+>/g, "").trim();
+
+        return clean.length > maxLength
+            ? clean.slice(0, maxLength) + "..."
+            : clean;
+    }
+    //#endregion
+
+    //#region SEO流程宣告
+    //獨立新聞要將內容寫進前方
+    useEffect(() => {
+        //標題
+        document.title = `${newsData.title} | 自我練習的還原自製遊戲網站`;
+
+        //簡介
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+            const fullText = extractNewsText(newsData.content);
+            const shortDesc = extractMetaDescription(fullText, 120);
+
+            metaDesc.setAttribute("content", shortDesc);
+        }
+    }, [newsData]);
+    //#endregion
 
     const handleNewsData = (inputData) =>{
         const result = inputData.find((item) => {
@@ -240,6 +309,7 @@ function NewsPage (){
         <>
             {/* 元件最外圍 */}
             <section className='newsPage'>
+                <h1 className="visually-hidden">{newsData?.title}｜《異環》Neverness to Everness</h1>
                 {/* 側邊面板 */}
                 <LeftSide />
                 {/* 側邊面板 */}

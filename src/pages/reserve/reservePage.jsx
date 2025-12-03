@@ -11,6 +11,25 @@ import { SwiperContext } from '../../context/SwiperContext';
 
 function ReservePage ({ onOpen, handleClose}){
 
+    //#region SEO流程宣告
+    useEffect(() => {
+        //標題
+        document.title = "遊戲預約 | 自我練習的還原自製遊戲網站";
+
+        //簡介
+        let metaTag = document.querySelector("meta[name='description']");
+        if (!metaTag) {
+            metaTag = document.createElement("meta");
+            metaTag.setAttribute("name", "description");
+            document.head.appendChild(metaTag);
+        }
+        metaTag.setAttribute(
+            "content",
+            "登入《異環》或立即預約參與測試。快速進入遊戲世界，掌握最新消息與活動資訊。",
+        );
+    }, []);
+    //#endregion
+
     //#region 讀取中央函式前置宣告
         //讀取中央函式前置宣告
         const dispatch = useDispatch();
@@ -95,6 +114,7 @@ function ReservePage ({ onOpen, handleClose}){
                                         transition={{ type: 'tween', duration: 0.3 }}//控制動畫速度與手感
                                         onWheel={() => { isDesktop ? handleClose() : null }}
                             >
+                                <h1 className="visually-hidden">登入與預約｜《異環》Neverness to Everness</h1>
                                 {/* 背景 */}
                                 <img className='reservePageBg' src="/images/reserve/bg.jpg" alt="" />
                                 {/* 背景 */}

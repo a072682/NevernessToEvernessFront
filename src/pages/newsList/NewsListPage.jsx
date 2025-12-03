@@ -11,6 +11,25 @@ import { useSelector } from 'react-redux';
 
 function NewListPage (){
 
+    //#region SEO流程宣告
+    useEffect(() => {
+        //標題
+        document.title = "最新消息 | 自我練習的還原自製遊戲網站";
+
+        //簡介
+        let metaTag = document.querySelector("meta[name='description']");
+        if (!metaTag) {
+            metaTag = document.createElement("meta");
+            metaTag.setAttribute("name", "description");
+            document.head.appendChild(metaTag);
+        }
+        metaTag.setAttribute(
+            "content",
+            "瀏覽《異環》的最新消息列表，包含系統公告、活動快訊、更新資訊與官方新聞。掌握異環世界的所有最新動態，不錯過任何重要消息！"
+        );
+    }, []);
+    //#endregion
+
     //#region 移動頁面前置宣告
         const navigate = useNavigate();
     //#endregion
@@ -139,6 +158,7 @@ function NewListPage (){
         <>
             {/* 元件最外圍 */}
             <section className='newsListPage'>
+                <h1 className="visually-hidden">最新消息｜《異環》Neverness to Everness</h1>
                 {/* 側邊面板 */}
                 <LeftSide />
                 {/* 側邊面板 */}

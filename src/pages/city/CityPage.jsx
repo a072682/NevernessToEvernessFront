@@ -11,6 +11,27 @@ import { SwiperContext } from '../../context/SwiperContext';
 
 function CityPage (){
 
+    //#region SEO流程宣告
+    useEffect(() => {
+        //標題
+        document.title = "遊戲亮點介紹頁 | 自我練習的還原自製遊戲網站";
+
+        //簡介
+        let metaTag = document.querySelector("meta[name='description']");
+        if (!metaTag) {
+            metaTag = document.createElement("meta");
+            metaTag.setAttribute("name", "description");
+            document.head.appendChild(metaTag);
+        }
+        metaTag.setAttribute(
+            "content",
+            "走進異環的特色世界，體驗在超自然都市中探索高空地標、參與多樣任務與事件。六大特色玩法揭開異環世界的真實面貌。",
+        );
+    }, []);
+    //#endregion
+
+    
+
     //#region 解析度判定
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 992);
 
@@ -144,6 +165,7 @@ function CityPage (){
     return(
         <>
             <div className='cityPage'>
+                <h1 className="visually-hidden">城市介紹｜《異環》Neverness to Everness</h1>
                 {/* PC版內容 */}
                 {isDesktop && (
                     <div className='cityPagePC'>

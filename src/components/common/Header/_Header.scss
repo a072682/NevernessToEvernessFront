@@ -84,7 +84,8 @@
                         align-items: center;
                         .navbarLogoImg-set{
                             width: 80%;
-                            height: 80%;
+                            height: auto;
+                            aspect-ratio: 120 / 85;
                             object-fit: cover;
                         }
                     }

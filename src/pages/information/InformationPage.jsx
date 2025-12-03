@@ -18,6 +18,25 @@ function InformationPage (){
     //#region 
     //#endregion
 
+    //#region SEO流程宣告
+    useEffect(() => {
+        //標題
+        document.title = "公告消息 | 自我練習的還原自製遊戲網站";
+
+        //簡介
+        let metaTag = document.querySelector("meta[name='description']");
+        if (!metaTag) {
+            metaTag = document.createElement("meta");
+            metaTag.setAttribute("name", "description");
+            document.head.appendChild(metaTag);
+        }
+        metaTag.setAttribute(
+            "content",
+            "探索異環 NTE 世界的所有最新公告，包括活動消息、遊戲更新、系統調整與官方通知。快速了解異環世界正在發生的大小事件。",
+        );
+    }, []);
+    //#endregion
+
     //#region 移動頁面前置宣告
     const navigate = useNavigate();
     //#endregion
@@ -221,6 +240,7 @@ function InformationPage (){
         <>
             {/* 元件最外圍 */}
             <section className='informationPage'>
+                <h1 className="visually-hidden">公告消息｜《異環》Neverness to Everness</h1>
                 {/* PC版內容 */}
                 {isDesktop && (
                     <div className='informationPagePC'>
@@ -508,7 +528,7 @@ function InformationPage (){
             {/* 元件最外圍 */}
 
             {/* 提示畫面 */}
-            <div className="landscapeBlocker">請將手機旋轉至直向模式</div>
+            <div className="landscapeBlocker" aria-hidden="true">請將手機旋轉至直向模式</div>
             {/* 提示畫面 */}
         </>
     )
