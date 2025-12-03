@@ -10,6 +10,7 @@
     justify-content: center;
     align-items: end;
     background-color: #202020;
+    overflow: hidden;
     
     @media screen and (orientation: landscape) and (max-width: 900px) {
         display: none;

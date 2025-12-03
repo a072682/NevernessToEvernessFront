@@ -32,24 +32,27 @@ function NewsPage (){
 
     //#region 從 newsData 轉成純文字（前 100 字）
     function extractNewsText(newsContentArray) {
+        if (!Array.isArray(newsContentArray)){
+            return "";
+        } 
         let result = "";
 
-        newsContentArray.forEach(block => {
+        newsContentArray.forEach((block) => {
             // type: paragraph
             if (block.type === "section") {
-            block.contents.forEach(item => {
-                if (item.type === "paragraph") {
-                result += item.lines.join(" ");
-                }
-                if (item.type === "list") {
-                result += item.items.join(" ");
-                }
-                if (item.type === "qa") {
-                item.items.forEach(qa => {
-                    result += qa.q + " " + qa.a + " ";
+                block.contents.forEach(item => {
+                    if (item.type === "paragraph") {
+                        result += item.lines.join(" ");
+                    }
+                    if (item.type === "list") {
+                        result += item.items.join(" ");
+                    }
+                    if (item.type === "qa") {
+                        item.items.forEach(qa => {
+                            result += qa.q + " " + qa.a + " ";
+                        });
+                    }
                 });
-                }
-            });
             }
 
             // type: title
@@ -84,12 +87,12 @@ function NewsPage (){
     //獨立新聞要將內容寫進前方
     useEffect(() => {
         //標題
-        document.title = `${newsData.title} | 自我練習的還原自製遊戲網站`;
+        document.title = `${newsData?.title} | 自我練習的還原自製遊戲網站`;
 
         //簡介
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) {
-            const fullText = extractNewsText(newsData.content);
+            const fullText = extractNewsText(newsData?.content);
             const shortDesc = extractMetaDescription(fullText, 120);
 
             metaDesc.setAttribute("content", shortDesc);
