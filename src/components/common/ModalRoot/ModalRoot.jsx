@@ -1,9 +1,10 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { close, open, MODALS } from "../../../slice/modalSlice";
 import ReserveModal from "../Modal/ReserveModal/ReserveModal";
 import ContractModal from "../Modal/ContractModal/ContractModal";
+import CheckModal from "../Modal/CheckModal/CheckModal";
 
 
 
@@ -11,6 +12,13 @@ export default function ModalRoot() {
 
     //#region 讀取中央函式前置宣告
         const dispatch = useDispatch();
+    //#endregion
+
+    //#region 
+    const [modalMsg,setModalMsg] = useState("");
+    useEffect(()=>{
+      console.log("modal訊息內容:",modalMsg);
+    },[modalMsg]);
     //#endregion
 
     //#region 讀取中央登入資料
@@ -69,10 +77,14 @@ export default function ModalRoot() {
       if (active === MODALS.ReserveModal) {
         return (
           <ReserveModal
+            //寫入modal訊息
+            setModalMsg = { setModalMsg }
             //如果要關閉就使用 onClose?()即可並不是onClose執行完就會執行onSwitch
             onClose={() => dispatch(close())}
             //如果要關閉就使用 onClose?()即可並不是onClose執行完就會執行onSwitch
             onSwitch={() => dispatch(open(MODALS.ContractModal))}
+            //
+            onSwitchCheckModal={() => dispatch(open(MODALS.CheckModal))}
           />
         );
       }
@@ -82,6 +94,20 @@ export default function ModalRoot() {
             <>
                 <ReserveModal />
                 <ContractModal
+                    onClose={() => dispatch(close())}
+                    onSwitch={() => dispatch(open(MODALS.ReserveModal))}
+                />
+            </>
+        );
+      }
+      //
+      if (active === MODALS.CheckModal) {
+        return (
+            <>
+                <ReserveModal />
+                <CheckModal
+                    modalMsg = { modalMsg }
+                    setModalMsg = { setModalMsg }
                     onClose={() => dispatch(close())}
                     onSwitch={() => dispatch(open(MODALS.ReserveModal))}
                 />

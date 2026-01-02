@@ -10,6 +10,11 @@
     justify-content: center;
     overflow-y: auto;             /* 🔥 遮罩本身可上下滾動 */
     -webkit-overflow-scrolling: touch; /* iOS 慣性滾動 */
+
+    @media screen and (orientation: landscape) and (max-width: 900px) {
+        display: none;
+    }
+
     &.Reserve{
         //定位效果
         .modalDialog{
@@ -372,3 +377,4 @@
         }
     }  
 }
+

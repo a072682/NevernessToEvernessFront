@@ -10,6 +10,9 @@
     justify-content: center;
     align-items: end;
     overflow: hidden;
+    //@media screen 代表螢幕裝置 固定寫法
+    //(orientation: landscape) 代表裝置是 橫向(寬度 > 高度) 固定寫法
+    //(max-width: 900px) 代表最大寬度
     @media screen and (orientation: landscape) and (max-width: 900px) {
         display: none;
     }

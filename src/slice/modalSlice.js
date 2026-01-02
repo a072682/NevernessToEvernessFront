@@ -6,6 +6,7 @@ import { createSlice } from "@reduxjs/toolkit";
     export const MODALS = {
         ReserveModal: "ReserveModal",
         ContractModal: "ContractModal",
+        CheckModal: "CheckModal",
     };
 //#endregion
 

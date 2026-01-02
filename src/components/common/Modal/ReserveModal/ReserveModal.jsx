@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './_ReserveModal.scss';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
+import { reservationDataUpLoad } from "../../../../slice/reservationSlice";
 
 //setHandleLoginPageModal,loginModalShow,setLoginModalShow 都移除
 
-function ReserveModal ({onClose, onSwitch}){
+function ReserveModal ({ setModalMsg, onClose, onSwitch, onSwitchCheckModal }){
 
     //#region
     //#endregion
@@ -26,36 +27,46 @@ function ReserveModal ({onClose, onSwitch}){
         };
     //#endregion
 
-
+    //#region 預設預約資料
     const [reserveData, setReserveData] = useState({
-        area:"",
-        phone:"",
-        sign:false,
-        host:null,
+        region_code:"其他",//國碼
+        phone_number:"",//手機號碼
+        platforms:[],//登陸平台
+        agree_terms:true,//是否同意合約
     });
+    useEffect(()=>{
+        console.log("預約資料:",reserveData);
+    },[reserveData]);
+    //#endregion
 
+    //#region 驗證規則列表
     const phoneRegexMap = {
         "台灣+886": /^09\d{8}$/,      // 09 開頭 + 8 位數
         "香港+852": /^\d{8}$/,         // 8 位數
         "澳門+853": /^\d{8}$/,         // 8 位數
         "其他": /.*/,                  // 不驗證，或你想設成 false 都可
     };
+    //#endregion
 
+    //#region 寫入預約資料
     const handleReserveData = (field, value) => {
+
         setReserveData(prev => {
+
             const updated = { ...prev, [field]: value };
 
-            if (field === "area" && value === "區域") {
-                updated.area = "其他";
+            if (field === "region_code" && value === "區域") {
+                updated.region_code = "其他";
             }
 
-            if (field === "phone") {
+            if (field === "phone_number") {
                 // 目前選到的國家
-                const currentArea = prev.area; 
+                const currentArea = prev.region_code; 
                 //確認驗證規則
                 const regex = phoneRegexMap[currentArea];
                 
                 //如果規則存在則執行驗證
+                //.test是固定寫法意思是檢查一段文字，是否符合這個規則並回傳 true / false
                 if (regex) {
                     updated.phoneError = !regex.test(value);
                 }
@@ -64,62 +75,106 @@ function ReserveModal ({onClose, onSwitch}){
             return updated;
         });
     };
+    //#endregion
 
+    //#region 送出預約資料
     const handleOutPutReserveData = ()=>{
         if( 
-            reserveData.area === "" || 
-            reserveData.phone === "" ||
-            reserveData.sign === false ||
-            reserveData.host === null
+            reserveData.region_code === "" || 
+            reserveData.phone_number === "" ||
+            reserveData.platforms.length === 0 ||
+            reserveData.agree_terms === false
         ){
-            alert("需確實填寫資料");
-        }else if(reserveData.area === "區域"){
-            console.log("登記完成");
+            setModalMsg("需確實填寫資料");
+            onSwitchCheckModal?.();
+        }else if(reserveData.phoneError){
+            setModalMsg("請確認電話格式");
+            onSwitchCheckModal?.();
+        }else if(reserveData.region_code === "區域"){
+            setModalMsg("登記完成");
+            dispatch(reservationDataUpLoad(reserveData));
+            onSwitchCheckModal?.();
         }else{
-            console.log("登記完成");
+            setModalMsg("登記完成");
+            dispatch(reservationDataUpLoad(reserveData));
+            onSwitchCheckModal?.();
         }
     }
+    //#endregion
 
     // 控制電話input群組下拉元件
+
+    //#region 控制國碼下拉選項是否展開
     const [openPhone, setOpenPhone] = useState(false);
+    //#endregion
 
+    //#region 國碼顯示內容狀態宣告
     const [phoneInputLabelData, setPhoneInputLabelData] = useState("區域");
+    //#endregion
 
+    //#region 手機號碼資料狀態宣告
     const [placeholderData, setPlaceholderData] = useState("請輸入手機號碼");
+    //#endregion
 
+    //#region 合約是否同意狀態宣告
     const [isChecked, setIsChecked] = useState(true);
+    //#endregion
 
-    //電話input群組元件展開內容
+    //#region 電話input群組元件展開內容
     const phoneData = [
         {
-        label: "區域",
-        placeholder:"請輸入手機號碼",
+            label: "區域",
+            placeholder:"請輸入手機號碼",
         },
         {
-        label: "台灣+886",
-        placeholder:"格式0912345678",
+            label: "台灣+886",
+            placeholder:"格式0912345678",
         },
         {
-        label: "香港+852",
-        placeholder:"格式91234567",
+            label: "香港+852",
+            placeholder:"格式91234567",
         },
         {
-        label: "澳門+853",
-        placeholder:"格式61234567",
+            label: "澳門+853",
+            placeholder:"格式61234567",
         },
     ];
-    //元件展開內容
+    //#endregion
 
-    
-
+    //#region 主機圖片列表
     const imgBox = [
         { type: "ios" },
         { type: "android" },
         { type: "pc" },
         { type: "ps" },
     ]
+    //#endregion
 
-    const [imgBoxData, setImgBoxData] = useState(null);
+    //#region 主機資料狀態宣告
+    const [imgBoxData, setImgBoxData] = useState([]);
+    //#endregion
+
+    //#region 主機資料寫入陣列
+    const handleImgBoxData = (data) => {
+        setImgBoxData((item) => {
+            //將存在的數值移除
+            //item本身代表的是陣列本身
+            //範例:["ios", "pc"].includes("ios"); true
+            if (item.includes(data)) {
+                //回傳["pc"]
+                return item.filter((itemIn) => {return(itemIn !== data)});
+            }
+            //資料寫入陣列
+            return [...item, data];
+        });
+    }
+    //#endregion
+
+    //#region 寫入陣列時觸發
+    useEffect(() => {
+        handleReserveData("platforms", imgBoxData);
+    }, [imgBoxData]);
+    //#endregion
     
     return(
         <>
@@ -190,9 +245,8 @@ function ReserveModal ({onClose, onSwitch}){
                                                                 onClick={() => {
                                                                     setPhoneInputLabelData(main.label);
                                                                     setPlaceholderData(main.placeholder);
-                                                                    handleReserveData("area",main.label);
+                                                                    handleReserveData("region_code",main.label);
                                                                     setOpenPhone(!openPhone);
-                                                                    
                                                                 }}
                                                         >
                                                             {main.label}
@@ -210,7 +264,7 @@ function ReserveModal ({onClose, onSwitch}){
                                                     type="text"
                                                     className="input"
                                                     placeholder={placeholderData}
-                                                    onChange={(event)=>{handleReserveData("phone",event.target.value);}}
+                                                    onChange={(event)=>{handleReserveData("phone_number",event.target.value);}}
                                                 />
                                                 {/* input本體 */}
                                             </div>
@@ -226,7 +280,7 @@ function ReserveModal ({onClose, onSwitch}){
                                                     checked={isChecked}
                                                     onChange={(event) => {
                                                         setIsChecked(event.target.checked);
-                                                        handleReserveData("sign",event.target.checked);
+                                                        handleReserveData("agree_terms",event.target.checked);
                                                     }}
                                                 />
                                                 {/* check本體 */}
@@ -257,12 +311,9 @@ function ReserveModal ({onClose, onSwitch}){
                                                         return(
                                                             <button key={index}
                                                                     type="button" 
-                                                                    className={`imgSet ${data.type} ${imgBoxData === data.type ? ("active"):("")}`} 
+                                                                    className={`imgSet ${data.type} ${imgBoxData.includes(data.type) ? ("active"):("")}`} 
                                                                     alt=""
-                                                                    onClick={()=>{
-                                                                        setImgBoxData(data.type);
-                                                                        handleReserveData("host",data.type);
-                                                                    }}
+                                                                    onClick={()=>{handleImgBoxData(data.type);}}
                                                             />
                                                         )
                                                     })
