@@ -36,6 +36,8 @@ export const { stateUpLoad, messageUpLoad } = reservationSlice.actions;
                 try {
                     const reservationRef = await axios.post(`${BASE_URL}/reservation/addSingleData`,reserveData);
                     //console.log("預約資料上傳成功",reservationRef.data);
+                    dispatch(stateUpLoad(true));
+                    dispatch(messageUpLoad("登記完成"));
             } catch (error) {
                 //console.log("預約資料上傳失敗",error.response.data);
                 if(!error.response.data.success){

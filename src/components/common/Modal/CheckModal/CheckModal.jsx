@@ -83,9 +83,9 @@ function CheckModal ({ modalMsg, setModalMsg, onClose, onSwitch}){
                                                     className="btnSet"
                                                     onClick={()=>{ 
                                                         message?
-                                                            (onSwitch?.())
-                                                            :
-                                                            (modalMsg === "登記完成" ?(onClose?.()):(onSwitch?.()) )
+                                                        ( message === "登記完成" ? (onClose?.()):(onSwitch?.()) )
+                                                        :
+                                                        ( modalMsg === "登記完成" ?(onClose?.()):(onSwitch?.()) )
                                                     }}>
                                                 返回
                                             </button>
