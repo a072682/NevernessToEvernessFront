@@ -35,9 +35,9 @@ export const { stateUpLoad, messageUpLoad } = reservationSlice.actions;
             async (reserveData,{ dispatch, rejectWithValue }) => {
                 try {
                     const reservationRef = await axios.post(`${BASE_URL}/reservation/addSingleData`,reserveData);
-                    console.log("預約資料上傳成功",reservationRef.data);
+                    //console.log("預約資料上傳成功",reservationRef.data);
             } catch (error) {
-                console.log("預約資料上傳失敗",error.response.data);
+                //console.log("預約資料上傳失敗",error.response.data);
                 if(!error.response.data.success){
                     dispatch(stateUpLoad(false));
                     dispatch(messageUpLoad(error.response.data.message));

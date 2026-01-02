@@ -27,7 +27,7 @@ function CheckModal ({ modalMsg, setModalMsg, onClose, onSwitch}){
             )
         })
         useEffect(()=>{
-            console.log("message:",message);
+            //console.log("message:",message);
             if (message) {
                 setModalMsg(message);
             }
