@@ -28,9 +28,6 @@ function CheckModal ({ modalMsg, setModalMsg, onClose, onSwitch}){
         })
         useEffect(()=>{
             //console.log("message:",message);
-            if (message) {
-                setModalMsg(message);
-            }
         },[message])
     //#endregion
     
@@ -74,7 +71,7 @@ function CheckModal ({ modalMsg, setModalMsg, onClose, onSwitch}){
                                         <div className="textBox">
                                             <div className="textSet">
                                             {
-                                                message?(message):(modalMsg)
+                                                modalMsg !== "登記完成"?(modalMsg):(message)
                                             }
                                             </div>
                                         </div>
