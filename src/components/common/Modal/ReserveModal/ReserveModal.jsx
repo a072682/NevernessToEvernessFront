@@ -35,7 +35,7 @@ function ReserveModal ({ setModalMsg, onClose, onSwitch, onSwitchCheckModal }){
         agree_terms:true,//是否同意合約
     });
     useEffect(()=>{
-        console.log("預約資料:",reserveData);
+        //console.log("預約資料:",reserveData);
     },[reserveData]);
     //#endregion
 
