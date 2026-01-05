@@ -104,6 +104,7 @@ function ReserveModal ({ setModalMsg, onClose, onSwitch, onSwitchCheckModal }){
             }
         }catch(error){
             console.log("送出錯誤",error);
+            setModalMsg(error.message);
         }
         
     }
