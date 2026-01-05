@@ -71,7 +71,8 @@ function CheckModal ({ modalMsg, setModalMsg, onClose, onSwitch}){
                                         <div className="textBox">
                                             <div className="textSet">
                                             {
-                                                modalMsg !== "登記完成"?(modalMsg):(message)
+                                                //modalMsg !== "登記完成"?(modalMsg):(message)
+                                                modalMsg
                                             }
                                             </div>
                                         </div>
