@@ -93,14 +93,14 @@ function ReserveModal ({ setModalMsg, onClose, onSwitch, onSwitchCheckModal }){
                 onSwitchCheckModal?.();
             }else if(reserveData.region_code === "區域"){
                 setModalMsg("資料預約中");
+                onSwitchCheckModal?.();
                 await dispatch(reservationDataUpLoad(reserveData)).unwrap();
                 setModalMsg("登記完成");
-                onSwitchCheckModal?.();
             }else{
                 setModalMsg("資料預約中");
+                onSwitchCheckModal?.();
                 await dispatch(reservationDataUpLoad(reserveData)).unwrap();
                 setModalMsg("登記完成");
-                onSwitchCheckModal?.();
             }
         }catch(error){
             console.log("送出錯誤",error);
