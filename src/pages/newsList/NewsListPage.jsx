@@ -73,6 +73,7 @@ function NewListPage (){
     useEffect(()=>{
         //console.log("news資訊:",newsData);
         setPageData(handlePageData(newsData));
+        setIsLoading(false);
     },[newsData])
     //#endregion
 
@@ -157,8 +158,6 @@ function NewListPage (){
                 setNewsData(result);
             } catch (error) {
                 console.log("取得所有文章失敗",error);
-            }finally{
-                setIsLoading(false);
             }
         }
         useEffect(()=>{

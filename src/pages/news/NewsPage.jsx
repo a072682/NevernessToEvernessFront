@@ -18,7 +18,7 @@ function NewsPage (){
 
     //#region 讀取網址中的 id
         const { id } = useParams();
-        console.log("取得的id",id);
+        //console.log("取得的id",id);
     //#endregion
 
     //#region 移動頁面前置宣告

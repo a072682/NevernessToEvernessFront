@@ -253,6 +253,7 @@
 
                     // 內容設定
                     .textGroup{
+                        width: 100%;
                         display: flex;
                         flex-direction: column;
                         justify-content: start;
@@ -261,8 +262,14 @@
 
                         //標題設定
                         .title{
+                            width: 100%;
                             font-size: 28px;
                             font-weight: 700;
+                            a{
+                                display: inline-block;
+                                width: 100%;
+                                word-break: break-word;
+                            }
                         }
                         //標題設定
 

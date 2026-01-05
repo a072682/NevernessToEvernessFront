@@ -44,6 +44,9 @@ function FrontLayout(){
     //#region 圖片預先載入相關
         //#region 判斷是否載入中狀態宣告
         const [isLoading, setIsLoading] = useState(true);
+        useEffect(()=>{
+            console.log("狀態:",isLoading);
+        },[isLoading]);
         //#endregion
 
         //#region 計數用狀態宣告
@@ -231,7 +234,7 @@ function FrontLayout(){
                 {/* 載入頁面 */}
                 <LoadPage isLoading={isLoading}/>
                 {/* 載入頁面 */}
-                
+
                 {/* 整體layout */}
                 <Header />
                 {/* 桌面板 */}

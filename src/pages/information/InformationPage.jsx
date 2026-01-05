@@ -119,6 +119,7 @@ function InformationPage (){
         useEffect(()=>{
             //console.log("news資訊:",newsData);
             setPageData(handlePageData(newsData));
+            setIsLoading(false);
         },[newsData])
         //#endregion
 
@@ -151,8 +152,6 @@ function InformationPage (){
                 setNewsData(result);
             } catch (error) {
                 console.log("取得所有文章失敗",error);
-            }finally{
-                setIsLoading(false);
             }
         }
         useEffect(()=>{
@@ -443,40 +442,44 @@ function InformationPage (){
                                             <div className='viewBox'>
                                             
                                                 {/* 縮圖輪播 */}
-                                                <Swiper
-                                                    className="informationSwiper"
-                                                    modules={[Pagination,EffectFade,Autoplay]}
-                                                    onSwiper={(swiper) => {
-                                                        setSwiperMB(swiper);
-                                                    }}
-                                                    spaceBetween={16}                 
-                                                    loop={true}      
-                                                    effect="fade"                                   //啟用淡入淡出
-                                                    fadeEffect={{ crossFade: true }}                // 可選：交錯漸變更順
-                                                    speed={600}                                     // 可選：動畫時間(毫秒)  
-                                                    autoplay={{
-                                                        delay: 3000,    // 每 3 秒切換
-                                                        disableOnInteraction: false,// 使用者操作後是否繼續播放
-                                                        pauseOnMouseEnter: true,//滑鼠移進暫停、移出繼續播放
-                                                    }}               
-                                                    slidesPerView={1}
-                                                    centeredSlides
-                                                >
-                                                    {
-                                                        pageData?.map((item, index) => (
-                                                            <SwiperSlide    className='swiperSlide'
-                                                                            key={item.id}
-                                                            >
-                                                                <button className='slide-item'
-                                                                        type='button'
-                                                                        onClick={()=>{handleGoToNews(item.id)}}>
-                                                                    <img className='imgSet' src={item.firstImage} alt="" />
-                                                                </button>
-                                                                
-                                                            </SwiperSlide>
-                                                        ))
-                                                    }
-                                                </Swiper>
+                                                {
+                                                    pageData?.length >= 1 && (
+                                                        <Swiper
+                                                            className="informationSwiper"
+                                                            modules={[Pagination,EffectFade,Autoplay]}
+                                                            onSwiper={(swiper) => {
+                                                                setSwiperMB(swiper);
+                                                            }}
+                                                            spaceBetween={16}                 
+                                                            loop={true}      
+                                                            effect="fade"                                   //啟用淡入淡出
+                                                            fadeEffect={{ crossFade: true }}                // 可選：交錯漸變更順
+                                                            speed={600}                                     // 可選：動畫時間(毫秒)  
+                                                            autoplay={{
+                                                                delay: 3000,    // 每 3 秒切換
+                                                                disableOnInteraction: false,// 使用者操作後是否繼續播放
+                                                                pauseOnMouseEnter: true,//滑鼠移進暫停、移出繼續播放
+                                                            }}               
+                                                            slidesPerView={1}
+                                                            centeredSlides
+                                                        >
+                                                            {
+                                                                pageData?.map((item, index) => (
+                                                                    <SwiperSlide    className='swiperSlide'
+                                                                                    key={item.id}
+                                                                    >
+                                                                        <button className='slide-item'
+                                                                                type='button'
+                                                                                onClick={()=>{handleGoToNews(item.id)}}>
+                                                                            <img className='imgSet' src={item.firstImage} alt="" />
+                                                                        </button>
+                                                                        
+                                                                    </SwiperSlide>
+                                                                ))
+                                                            }
+                                                        </Swiper>
+                                                    )
+                                                }
                                                 {/* 縮圖輪播 */}
                                             </div>
                                         </div>
