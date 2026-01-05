@@ -19,6 +19,10 @@ function CheckModal ({ modalMsg, setModalMsg, onClose, onSwitch}){
         const dispatch = useDispatch();
     //#endregion
 
+    useEffect(()=>{
+        console.log("確認內容:",modalMsg);
+    },[modalMsg])
+
     //#region 讀取中央登入資料
         //讀取中央資料
         const message = useSelector((state)=>{
