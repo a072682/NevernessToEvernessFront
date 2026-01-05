@@ -124,6 +124,7 @@ function InformationPage (){
 
         //#region 取得所有文章資料函式
         const handleGetAllArticlesData = async () => {
+            setIsLoading(true);
             try {
                 const originData = await dispatch(getAllArticlesData()).unwrap();
                 
@@ -150,6 +151,8 @@ function InformationPage (){
                 setNewsData(result);
             } catch (error) {
                 console.log("取得所有文章失敗",error);
+            }finally{
+                setIsLoading(false);
             }
         }
         useEffect(()=>{
@@ -187,7 +190,7 @@ function InformationPage (){
     //#endregion
 
     //#region 從Context取得手機版layout資料
-        const { mbSwiperLayout,mbSwiperLayoutData } = useContext(SwiperContext);
+        const { mbSwiperLayout,mbSwiperLayoutData,setIsLoading } = useContext(SwiperContext);
     //#endregion
  
     //#region 輪播片相關

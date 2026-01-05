@@ -1,6 +1,6 @@
 
 
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import './_newsListPage.scss';
 import LeftSide from '../../components/common/leftSide/LeftSide';
 import ReactPagination from '../../components/common/頁碼元件/ReactPagination';
@@ -8,6 +8,7 @@ import Copyright from '../../components/common/版權區塊/Copyright';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllArticlesData } from '../../slice/newsSlice';
+import { SwiperContext } from '../../context/SwiperContext';
 
 
 function NewListPage (){
@@ -37,6 +38,10 @@ function NewListPage (){
 
     //#region 讀取中央函式前置宣告
         const dispatch = useDispatch();
+    //#endregion
+
+    //#region 從Context取得手機版layout資料
+        const { setIsLoading } = useContext(SwiperContext);
     //#endregion
 
     //#region 取文章前 xx 個純文字字元
@@ -132,6 +137,7 @@ function NewListPage (){
 
         //#region 取得所有文章資料函式
         const handleGetAllArticlesData = async () => {
+            setIsLoading(true);
             try {
                 const originData = await dispatch(getAllArticlesData()).unwrap();
                 
@@ -151,18 +157,10 @@ function NewListPage (){
                 setNewsData(result);
             } catch (error) {
                 console.log("取得所有文章失敗",error);
+            }finally{
+                setIsLoading(false);
             }
         }
-        
-        // const handleGetAllArticlesData = async () => {
-        //     try {
-        //         const originData = await dispatch(getAllArticlesData()).unwrap();
-        //         console.log("確認資料",originData);
-        //         setNewsData(originData);
-        //     } catch (error) {
-        //         console.log("所有文章取得失敗",error);
-        //     }
-        // }
         useEffect(()=>{
             handleGetAllArticlesData();
         },[])

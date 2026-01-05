@@ -226,8 +226,12 @@ function FrontLayout(){
                                             mbSwiperLayout,
                                             onOpen,
                                             setOnOpen,
+                                            setIsLoading,
             }}>
+                {/* 載入頁面 */}
                 <LoadPage isLoading={isLoading}/>
+                {/* 載入頁面 */}
+                
                 {/* 整體layout */}
                 <Header />
                 {/* 桌面板 */}

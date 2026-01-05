@@ -1,12 +1,13 @@
 
 
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import './_NewsPage.scss';
 import LeftSide from '../../components/common/leftSide/LeftSide';
 import Copyright from '../../components/common/版權區塊/Copyright';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleArticlesData } from '../../slice/newsSlice';
+import { SwiperContext } from '../../context/SwiperContext';
 
 
 
@@ -26,6 +27,10 @@ function NewsPage (){
 
     //#region 讀取中央函式前置宣告
         const dispatch = useDispatch();
+    //#endregion
+
+    //#region 從Context取得手機版layout資料
+        const { setIsLoading } = useContext(SwiperContext);
     //#endregion
 
     //#region 單一文章狀態宣告
@@ -123,6 +128,7 @@ function NewsPage (){
 
     //#region 取得單一文章資料函式
     const handleGetSingleArticlesData = async (id) => {
+        setIsLoading(true);
         try {
             const originData = await dispatch(getSingleArticlesData(id)).unwrap();
             //console.log("確認資料",originData);
@@ -135,6 +141,8 @@ function NewsPage (){
             //console.log("確認資料02",result);
         } catch (error) {
             console.log("取得單一文章失敗",error);
+        }finally{
+            setIsLoading(false);
         }
     }
     useEffect(()=>{
