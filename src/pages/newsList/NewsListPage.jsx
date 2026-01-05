@@ -6,7 +6,8 @@ import LeftSide from '../../components/common/leftSide/LeftSide';
 import ReactPagination from '../../components/common/頁碼元件/ReactPagination';
 import Copyright from '../../components/common/版權區塊/Copyright';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllArticlesData } from '../../slice/newsSlice';
 
 
 function NewListPage (){
@@ -34,16 +35,40 @@ function NewListPage (){
         const navigate = useNavigate();
     //#endregion
 
-    //#region 讀取中央新聞資料
-        const newsData = useSelector((state)=>{
-            return(
-                state.news.news
-            )
-        })
+    //#region 讀取中央函式前置宣告
+        const dispatch = useDispatch();
+    //#endregion
 
-        useEffect(()=>{
-            //console.log("news資訊:",newsData);
-        },[newsData])
+    //#region 取文章前 xx 個純文字字元
+    function getSnippet(html, maxLength = 50) {
+
+        // 移除 HTML 標籤
+        const noTags = html.replace(/<[^>]+>/g, ""); 
+
+        // 解析 HTML entity
+        const textarea = document.createElement("textarea");
+        textarea.innerHTML = noTags;
+        let text = textarea.value;
+
+        // 3. 清理特殊空白與雜訊
+        text = text
+            .replace(/\u00A0/g, " ") // &nbsp;
+            .replace(/\s+/g, " ")   // 多空白壓縮
+            .trim();
+
+        //如果字數大於maxLength 則顯示 內容...
+        //如果小於maxLength則直接輸出
+        return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+    }
+    //#endregion
+
+    //#region 文章列表狀態宣告
+    const [newsData,setNewsData] = useState([]);
+
+    useEffect(()=>{
+        //console.log("news資訊:",newsData);
+        setPageData(handlePageData(newsData));
+    },[newsData])
     //#endregion
 
     //#region tab按鈕設定
@@ -103,6 +128,44 @@ function NewListPage (){
         useEffect(()=>{
             //console.log("新頁面資料",pageData)
         },[pageData])
+        //#endregion
+
+        //#region 取得所有文章資料函式
+        const handleGetAllArticlesData = async () => {
+            try {
+                const originData = await dispatch(getAllArticlesData()).unwrap();
+                
+                const grouped = {};
+
+                originData.forEach(item => {
+                    if (!grouped[item.class]) {
+                        grouped[item.class] = [];
+                    }
+                    grouped[item.class].push(item);
+                });
+
+                const result = Object.values(grouped).flat();
+
+                console.log("確認資料",result);
+
+                setNewsData(result);
+            } catch (error) {
+                console.log("取得所有文章失敗",error);
+            }
+        }
+        
+        // const handleGetAllArticlesData = async () => {
+        //     try {
+        //         const originData = await dispatch(getAllArticlesData()).unwrap();
+        //         console.log("確認資料",originData);
+        //         setNewsData(originData);
+        //     } catch (error) {
+        //         console.log("所有文章取得失敗",error);
+        //     }
+        // }
+        useEffect(()=>{
+            handleGetAllArticlesData();
+        },[])
         //#endregion
 
         //#region 標籤變化時進行更新
@@ -251,38 +314,14 @@ function NewListPage (){
                                                 {/* 上半部區塊 */}
                                                 <div className='topBox'>
                                                     <h2 className='title'>{item.title}</h2>
-                                                    <div className='time'>{item.time}</div>
+                                                    <div className='time'>{item.created_at.split("T")[0]}</div>
                                                 </div>
                                                 {/* 上半部區塊 */}
 
                                                 {/* 下半部區塊 */}
                                                 <div className='bottomBox'>
                                                     <div className='profile'>
-                                                        {
-                                                            item?.content?.slice(0, 1).map((itemIn, indexIn) => {
-                                                                return (
-                                                                <Fragment key={indexIn}>
-                                                                    {
-                                                                        itemIn?.contents?.map((linesData, lineIndex) => {
-                                                                            return (
-                                                                            <Fragment key={lineIndex}>
-                                                                                {
-                                                                                    linesData.lines.map((textData, textIndex) => {
-                                                                                        return (
-                                                                                            <p key={`${indexIn}-${lineIndex}-${textIndex}`}>
-                                                                                                {textData}
-                                                                                            </p>
-                                                                                        )
-                                                                                    })
-                                                                                }
-                                                                            </Fragment>
-                                                                            )
-                                                                        })
-                                                                    }
-                                                                </Fragment>
-                                                                )
-                                                            })
-                                                            }
+                                                        {getSnippet(item?.content)}
                                                     </div>
                                                     <div className={`class ${item.class}`}>
                                                         {

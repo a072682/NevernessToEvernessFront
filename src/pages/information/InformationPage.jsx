@@ -8,9 +8,10 @@ import 'swiper/css/effect-fade';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade, Pagination, Autoplay } from 'swiper/modules';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SwiperContext } from '../../context/SwiperContext';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllArticlesData } from '../../slice/newsSlice';
 
 
 function InformationPage (){
@@ -41,16 +42,16 @@ function InformationPage (){
     const navigate = useNavigate();
     //#endregion
 
-    //#region 讀取中央登入資料
-        const newsData = useSelector((state)=>{
-            return(
-                state.news.news
-            )
-        })
+    //#region 讀取中央函式前置宣告
+        const dispatch = useDispatch();
+    //#endregion
 
-        useEffect(()=>{
-            console.log("news資訊:",newsData);
-        },[newsData])
+    //#region 取文章第一張圖片
+    function getFirstImage(html) {
+        const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+        //console.log("內容:",match[1]);
+        return match ? match[1] : null;
+    }
     //#endregion
 
     //#region tab按鈕設定
@@ -112,16 +113,61 @@ function InformationPage (){
         },[pageData])
         //#endregion
 
+        //#region 文章列表狀態宣告
+        const [newsData,setNewsData] = useState([]);
+
+        useEffect(()=>{
+            //console.log("news資訊:",newsData);
+            setPageData(handlePageData(newsData));
+        },[newsData])
+        //#endregion
+
+        //#region 取得所有文章資料函式
+        const handleGetAllArticlesData = async () => {
+            try {
+                const originData = await dispatch(getAllArticlesData()).unwrap();
+                
+                const grouped = {};
+
+                originData.forEach(item => {
+                    if (!grouped[item.class]) {
+                        grouped[item.class] = [];
+                    }
+                    grouped[item.class].push(item);
+                });
+
+                const groupedArray = Object.values(grouped).flat();
+
+                const result = groupedArray?.map((item)=>{
+                    return{
+                        ...item,
+                        firstImage:getFirstImage(item.content),
+                    }
+                })
+
+                console.log("確認資料",result);
+
+                setNewsData(result);
+            } catch (error) {
+                console.log("取得所有文章失敗",error);
+            }
+        }
+        useEffect(()=>{
+            handleGetAllArticlesData();
+        },[])
+        //#endregion
+
         //#region 標籤變化時進行更新
         useEffect(()=>{
             setPageData(handlePageData(newsData));
         },[tabBtn])
         //#endregion
     //#endregion
-
+    
     //#region 解析度判定
         const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 992);
         useEffect(()=>{
+            //console.log("狀態:",isDesktop);
             if (!isDesktop) {
                 setSwiperPC(null);
             }else if(isDesktop){
@@ -151,8 +197,9 @@ function InformationPage (){
             if(!swiperPC){
                 //console.log("桌面消失");
             }else if(swiperPC){
-                //console.log("桌面出現");
+                //console.log("桌面出現",swiperPC);
             }
+            //console.log("swiperPC狀態:",swiperPC);
         },[swiperPC]);
         //#endregion
 
@@ -164,6 +211,7 @@ function InformationPage (){
             }else if(swiperMB){
                 //console.log("手機板出現");
             }
+            //console.log("swiperMB狀態:",swiperMB);
         },[swiperMB]);
         //#endregion
 
@@ -187,6 +235,7 @@ function InformationPage (){
                 swiper.pagination.init();
                 swiper.pagination.render();
                 swiper.pagination.update();
+                //console.log("初始化成功");
             }
         }, [swiperPC]);
 
@@ -203,23 +252,6 @@ function InformationPage (){
                 swiper.pagination.update();
             }
         }, [swiperMB]);
-        //#endregion
-
-        //#region 輪播片顯示資料
-        const swiperData = [
-            {
-                id:1,
-                imgSm:`/images/information/nte250616_01.png`,
-            },
-            {
-                id:2,
-                imgSm:`/images/information/nte250616_02.jpeg`,
-            },
-            {
-                id:3,
-                imgSm:`/images/information/nte250616_03.png`,
-            },
-        ];
         //#endregion
 
     //#endregion
@@ -270,38 +302,44 @@ function InformationPage (){
                                                     {/* 顯示區塊 */}
                                                     <div className='viewBox'>
                                                         {/* 縮圖輪播  */}
-                                                        <Swiper
-                                                            className="informationSwiper"
-                                                            modules={[Pagination,EffectFade,Autoplay]}
-                                                            onSwiper={(swiper) => {
-                                                                setSwiperPC(swiper);
-                                                            }}
-                                                            spaceBetween={16}                 
-                                                            loop={true}      
-                                                            effect="fade"                                   //啟用淡入淡出
-                                                            fadeEffect={{ crossFade: true }}                // 可選：交錯漸變更順
-                                                            speed={600}                                     // 可選：動畫時間(毫秒)  
-                                                            autoplay={{
-                                                                delay: 3000,    // 每 3 秒切換
-                                                                disableOnInteraction: false,// 使用者操作後是否繼續播放
-                                                                pauseOnMouseEnter: true,//滑鼠移進暫停、移出繼續播放
-                                                            }}               
-                                                            slidesPerView={1}
-                                                            centeredSlides
-                                                        >
-                                                            {pageData?.map((item, index) => (
-                                                                <SwiperSlide    className='swiperSlide'
-                                                                                key={index}
+                                                        {
+                                                            pageData?.length >= 1 && (
+                                                                <Swiper
+                                                                    className="informationSwiper"
+                                                                    modules={[Pagination,EffectFade,Autoplay]}
+                                                                    onSwiper={(swiper) => {
+                                                                        setSwiperPC(swiper);
+                                                                    }}
+                                                                    spaceBetween={0}                 
+                                                                    loop={true}      
+                                                                    effect="fade"                                   //啟用淡入淡出
+                                                                    fadeEffect={{ crossFade: true }}                // 可選：交錯漸變更順
+                                                                    speed={600}                                     // 可選：動畫時間(毫秒)  
+                                                                    autoplay={{
+                                                                        delay: 3000,    // 每 3 秒切換
+                                                                        disableOnInteraction: false,// 使用者操作後是否繼續播放
+                                                                        pauseOnMouseEnter: true,//滑鼠移進暫停、移出繼續播放
+                                                                    }}               
+                                                                    slidesPerView={1}
+                                                                    centeredSlides
                                                                 >
-                                                                    <button className='slide-item'
-                                                                            type='button'
-                                                                            onClick={()=>{handleGoToNews(item.id)}}>
-                                                                        <img className='imgSet' src={item.imgData} alt="" />
-                                                                    </button>
-                                                                    
-                                                                </SwiperSlide>
-                                                            ))}
-                                                        </Swiper>
+                                                                {
+                                                                    pageData?.map((item, index) => (
+                                                                        <SwiperSlide    className='swiperSlide'
+                                                                                        key={item.id}
+                                                                        >
+                                                                            <button className='slide-item'
+                                                                                    type='button'
+                                                                                    onClick={()=>{handleGoToNews(item.id)}}>
+                                                                                <img className='imgSet' src={item.firstImage} alt="" />
+                                                                            </button>
+                                                                        </SwiperSlide>
+                                                                    ))
+                                                                }
+                                                                </Swiper>
+                                                            )
+                                                        }
+                                                        
                                                         {/* 縮圖輪播 */}
                                                     </div>
                                                     {/* 顯示區塊 */}
@@ -343,7 +381,7 @@ function InformationPage (){
                                                 }
                                                 <button className='newsMore' 
                                                         onClick={()=>{handleGoToNewsList()}}>
-                                                    <div className='itemSet' href=""></div>
+                                                    <div className='itemSet'></div>
                                                 </button>
                                             </div>
                                         </div>
@@ -368,7 +406,7 @@ function InformationPage (){
                                                                 }
                                                             </div>
                                                             <div className='content'>{item.title}</div>
-                                                            <div className='time'>{item.time}</div>
+                                                            <div className='time'>{item.created_at.split("T")[0]}</div>
                                                         </button>
                                                     )
                                                 })
@@ -429,7 +467,7 @@ function InformationPage (){
                                                                 <button className='slide-item'
                                                                         type='button'
                                                                         onClick={()=>{handleGoToNews(item.id)}}>
-                                                                    <img className='imgSet' src={item.imgData} alt="" />
+                                                                    <img className='imgSet' src={item.firstImage} alt="" />
                                                                 </button>
                                                                 
                                                             </SwiperSlide>

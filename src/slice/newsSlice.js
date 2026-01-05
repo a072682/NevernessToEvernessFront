@@ -1,7 +1,11 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 //#region
 //#endregion
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+//console.log("基本網址",BASE_URL);
 
 export const newsSlice = createSlice({
     name: "news",
@@ -583,5 +587,37 @@ export const newsSlice = createSlice({
 });
 
 export const { } = newsSlice.actions;
+
+//#region 取得全部文章資料 
+export const getAllArticlesData = createAsyncThunk(
+    "articles/getAllArticlesData",
+    async (_,{ dispatch, rejectWithValue }) => {
+        try {
+            const getAllArticlesDataRef = await axios.get(`${BASE_URL}/articles/getAllArticles`);
+            //console.log("取得全部文章資料成功",getAllArticlesDataRef);
+            return getAllArticlesDataRef.data.articles;
+        } catch (error) {
+            console.log("取得全部文章資料失敗",error.response.data);
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+//#endregion
+
+//#region 取得單一文章資料 
+export const getSingleArticlesData = createAsyncThunk(
+    "articles/getSingleArticlesData",
+    async (id,{ dispatch, rejectWithValue }) => {
+        try {
+            const getSingleArticlesDataRef = await axios.get(`${BASE_URL}/articles/getSingleArticle/${id}`);
+            console.log("取得單一文章資料成功",getSingleArticlesDataRef.data);
+            return getSingleArticlesDataRef.data.article;
+        } catch (error) {
+            console.log("取得單一文章資料失敗",error.response.data);
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+//#endregion
 
 export default newsSlice.reducer;
