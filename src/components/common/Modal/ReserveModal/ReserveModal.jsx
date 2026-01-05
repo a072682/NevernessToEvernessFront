@@ -103,7 +103,7 @@ function ReserveModal ({ setModalMsg, onClose, onSwitch, onSwitchCheckModal }){
                 dispatch(messageUpLoad("登記完成"));
             }
         }catch(error){
-            console.log("送出錯誤",error);
+            //console.log("送出錯誤",error);
             dispatch(messageUpLoad(error.message));
         }
         
