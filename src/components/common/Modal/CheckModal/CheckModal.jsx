@@ -19,10 +19,6 @@ function CheckModal ({ modalMsg, setModalMsg, onClose, onSwitch}){
         const dispatch = useDispatch();
     //#endregion
 
-    useEffect(()=>{
-        console.log("確認內容:",modalMsg);
-    },[modalMsg])
-
     //#region 讀取中央登入資料
         //讀取中央資料
         const message = useSelector((state)=>{
@@ -76,7 +72,7 @@ function CheckModal ({ modalMsg, setModalMsg, onClose, onSwitch}){
                                             <div className="textSet">
                                             {
                                                 //modalMsg !== "登記完成"?(modalMsg):(message)
-                                                modalMsg
+                                                message
                                             }
                                             </div>
                                         </div>
@@ -87,10 +83,7 @@ function CheckModal ({ modalMsg, setModalMsg, onClose, onSwitch}){
                                             <button type="button" 
                                                     className="btnSet"
                                                     onClick={()=>{ 
-                                                        message?
-                                                        ( message === "登記完成" ? (onClose?.()):(onSwitch?.()) )
-                                                        :
-                                                        ( modalMsg === "登記完成" ?(onClose?.()):(onSwitch?.()) )
+                                                        message === "登記完成" ? (onClose?.()):(onSwitch?.())
                                                     }}>
                                                 返回
                                             </button>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import './_ReserveModal.scss';
 import { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import { reservationDataUpLoad } from "../../../../slice/reservationSlice";
+import { messageUpLoad, reservationDataUpLoad } from "../../../../slice/reservationSlice";
 
 //setHandleLoginPageModal,loginModalShow,setLoginModalShow 都移除
 
@@ -86,25 +86,25 @@ function ReserveModal ({ setModalMsg, onClose, onSwitch, onSwitchCheckModal }){
                 reserveData.platforms.length === 0 ||
                 reserveData.agree_terms === false
             ){
-                setModalMsg("需確實填寫資料");
+                dispatch(messageUpLoad("需確實填寫資料"));
                 onSwitchCheckModal?.();
             }else if(reserveData.phoneError){
-                setModalMsg("請確認電話格式");
+                dispatch(messageUpLoad("請確認電話格式"));
                 onSwitchCheckModal?.();
             }else if(reserveData.region_code === "區域"){
-                setModalMsg("資料預約中");
+                dispatch(messageUpLoad("資料預約中"));
                 onSwitchCheckModal?.();
                 await dispatch(reservationDataUpLoad(reserveData)).unwrap();
-                setModalMsg("登記完成");
+                dispatch(messageUpLoad("登記完成"));
             }else{
-                setModalMsg("資料預約中");
+                dispatch(messageUpLoad("資料預約中"));
                 onSwitchCheckModal?.();
                 await dispatch(reservationDataUpLoad(reserveData)).unwrap();
-                setModalMsg("登記完成");
+                dispatch(messageUpLoad("登記完成"));
             }
         }catch(error){
             console.log("送出錯誤",error);
-            setModalMsg(error.message);
+            dispatch(messageUpLoad(error.message));
         }
         
     }
