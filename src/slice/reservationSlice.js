@@ -38,6 +38,7 @@ export const { stateUpLoad, messageUpLoad } = reservationSlice.actions;
                     //console.log("預約資料上傳成功",reservationRef.data);
                     dispatch(stateUpLoad(true));
                     dispatch(messageUpLoad("登記完成"));
+                    return reservationRef.data;
             } catch (error) {
                 //console.log("預約資料上傳失敗",error.response.data);
                 if(!error.response.data.success){

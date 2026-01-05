@@ -78,27 +78,34 @@ function ReserveModal ({ setModalMsg, onClose, onSwitch, onSwitchCheckModal }){
     //#endregion
 
     //#region 送出預約資料
-    const handleOutPutReserveData = ()=>{
-        if( 
-            reserveData.region_code === "" || 
-            reserveData.phone_number === "" ||
-            reserveData.platforms.length === 0 ||
-            reserveData.agree_terms === false
-        ){
-            setModalMsg("需確實填寫資料");
-            onSwitchCheckModal?.();
-        }else if(reserveData.phoneError){
-            setModalMsg("請確認電話格式");
-            onSwitchCheckModal?.();
-        }else if(reserveData.region_code === "區域"){
-            setModalMsg("登記完成");
-            dispatch(reservationDataUpLoad(reserveData));
-            onSwitchCheckModal?.();
-        }else{
-            setModalMsg("登記完成");
-            dispatch(reservationDataUpLoad(reserveData));
-            onSwitchCheckModal?.();
+    const handleOutPutReserveData = async()=>{
+        try{
+            if( 
+                reserveData.region_code === "" || 
+                reserveData.phone_number === "" ||
+                reserveData.platforms.length === 0 ||
+                reserveData.agree_terms === false
+            ){
+                setModalMsg("需確實填寫資料");
+                onSwitchCheckModal?.();
+            }else if(reserveData.phoneError){
+                setModalMsg("請確認電話格式");
+                onSwitchCheckModal?.();
+            }else if(reserveData.region_code === "區域"){
+                setModalMsg("資料預約中");
+                await dispatch(reservationDataUpLoad(reserveData)).unwrap();
+                setModalMsg("登記完成");
+                onSwitchCheckModal?.();
+            }else{
+                setModalMsg("資料預約中");
+                await dispatch(reservationDataUpLoad(reserveData)).unwrap();
+                setModalMsg("登記完成");
+                onSwitchCheckModal?.();
+            }
+        }catch(error){
+            console.log("送出錯誤",error);
         }
+        
     }
     //#endregion
 
