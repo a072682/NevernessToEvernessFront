@@ -36,7 +36,7 @@ function NewsPage (){
     //#region 單一文章狀態宣告
     const[newsData,setNewsData]=useState(null);
     useEffect(()=>{
-        console.log("得到的新聞資料",newsData);
+        //console.log("得到的新聞資料",newsData);
     },[newsData]);
     //#endregion
 

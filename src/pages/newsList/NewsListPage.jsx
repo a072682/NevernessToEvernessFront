@@ -153,7 +153,7 @@ function NewListPage (){
 
                 const result = Object.values(grouped).flat();
 
-                console.log("確認資料",result);
+                //console.log("確認資料",result);
 
                 setNewsData(result);
             } catch (error) {
