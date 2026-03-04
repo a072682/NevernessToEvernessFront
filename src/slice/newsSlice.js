@@ -610,7 +610,7 @@ export const getSingleArticlesData = createAsyncThunk(
     async (id,{ dispatch, rejectWithValue }) => {
         try {
             const getSingleArticlesDataRef = await axios.get(`${BASE_URL}/articles/getSingleArticle/${id}`);
-            console.log("取得單一文章資料成功",getSingleArticlesDataRef.data);
+            //console.log("取得單一文章資料成功",getSingleArticlesDataRef.data);
             return getSingleArticlesDataRef.data.article;
         } catch (error) {
             console.log("取得單一文章資料失敗",error.response.data);
