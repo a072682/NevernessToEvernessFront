@@ -17,7 +17,7 @@ export default function ModalRoot() {
     //#region 
     const [modalMsg,setModalMsg] = useState("");
     useEffect(()=>{
-      console.log("modal訊息內容:",modalMsg);
+      //console.log("modal訊息內容:",modalMsg);
     },[modalMsg]);
     //#endregion
 
