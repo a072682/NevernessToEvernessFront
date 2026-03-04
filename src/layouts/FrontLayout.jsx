@@ -45,7 +45,7 @@ function FrontLayout(){
         //#region 判斷是否載入中狀態宣告
         const [isLoading, setIsLoading] = useState(true);
         useEffect(()=>{
-            console.log("狀態:",isLoading);
+            //console.log("狀態:",isLoading);
         },[isLoading]);
         //#endregion
 

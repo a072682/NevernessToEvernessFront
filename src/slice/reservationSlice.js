@@ -40,7 +40,7 @@ export const { stateUpLoad, messageUpLoad } = reservationSlice.actions;
                     dispatch(messageUpLoad("登記完成"));
                     return reservationRef.data;
             } catch (error) {
-                console.log("預約資料上傳失敗",error.response.data);
+                //console.log("預約資料上傳失敗",error.response.data);
                 if(!error.response.data.success){
                     dispatch(stateUpLoad(false));
                     dispatch(messageUpLoad(error.response.data.message));

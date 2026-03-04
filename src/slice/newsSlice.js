@@ -597,7 +597,7 @@ export const getAllArticlesData = createAsyncThunk(
             //console.log("取得全部文章資料成功",getAllArticlesDataRef);
             return getAllArticlesDataRef.data.articles;
         } catch (error) {
-            console.log("取得全部文章資料失敗",error.response.data);
+            //console.log("取得全部文章資料失敗",error.response.data);
             return rejectWithValue(error.response.data);
         }
     }
@@ -613,7 +613,7 @@ export const getSingleArticlesData = createAsyncThunk(
             //console.log("取得單一文章資料成功",getSingleArticlesDataRef.data);
             return getSingleArticlesDataRef.data.article;
         } catch (error) {
-            console.log("取得單一文章資料失敗",error.response.data);
+            //console.log("取得單一文章資料失敗",error.response.data);
             return rejectWithValue(error.response.data);
         }
     }

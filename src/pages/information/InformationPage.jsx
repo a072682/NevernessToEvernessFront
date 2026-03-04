@@ -147,11 +147,11 @@ function InformationPage (){
                     }
                 })
 
-                console.log("確認資料",result);
+                //console.log("確認資料",result);
 
                 setNewsData(result);
             } catch (error) {
-                console.log("取得所有文章失敗",error);
+                //console.log("取得所有文章失敗",error);
             }
         }
         useEffect(()=>{
